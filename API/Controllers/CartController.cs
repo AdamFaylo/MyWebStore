@@ -41,36 +41,36 @@ namespace MyProject.API.Controllers
                
         }
 
-        [HttpGet("{id:int}")]
-        public IActionResult GetCartByID(int id) {
-            var result = _cardsRepo.FindByCondition(c=>c.CartId == id).FirstOrDefault();
-            return Ok(result);
-        }
+        //[HttpGet("{id:int}")]
+        //public IActionResult GetCartByID(int id) {
+        //    var result = _cardsRepo.FindByCondition(c=>c.CartID == id).FirstOrDefault();
+        //    return Ok(result);
+        //}
 
-        [HttpPost]
-        public IActionResult CreateCart(Cart item)
-        {
-            try
-            {
-                if (item == null)
-                {
-                    return BadRequest();
-                }
-                var result = _cardsRepo.Create(item);
-                return Created("cart", result);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogCritical(ex, "An error occurred while creating the item.");
-                return StatusCode(500, new {
-                    Message = "An error occurred while creating the item.",
-                    ExceptionMessage = ex.Message,
-                    InnerExceptionMessage = ex.InnerException?.Message,
-                    StackTrace = ex.StackTrace
-                });  
-            }
+        //[HttpPost]
+        //public IActionResult CreateCart(Cart item)
+        //{
+        //    try
+        //    {
+        //        if (item == null)
+        //        {
+        //            return BadRequest();
+        //        }
+        //        var result = _cardsRepo.Create(item);
+        //        return Created("cart", result);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogCritical(ex, "An error occurred while creating the item.");
+        //        return StatusCode(500, new {
+        //            Message = "An error occurred while creating the item.",
+        //            ExceptionMessage = ex.Message,
+        //            InnerExceptionMessage = ex.InnerException?.Message,
+        //            StackTrace = ex.StackTrace
+        //        });  
+        //    }
             
-        }
+        //}
 
         //[HttpPut]
         //public IActionResult UpdateCart(Cart item)

@@ -53,7 +53,7 @@ namespace API.Controllers
         {
             try
             {
-                var result = _orderRepository.FindByCondition(o => o.ID == id).FirstOrDefault();
+                var result = _orderRepository.FindByCondition(o => o.OrderId == id).FirstOrDefault();
                 return Ok(result);
             }
             catch (Exception ex)
@@ -79,15 +79,14 @@ namespace API.Controllers
                 {
                     return BadRequest();
                 }
-                List<OrderItem> orderItems = new List<OrderItem>();
+              
 
                 var newOrderItem = new Order()
                 {
-                    ID = item.ID,
+                    OrderId = item.ID,
                     IsPaid = item.IsPaid,
                     CustomerID = item.CustomerID,
                     OrderDate = item.OrderDate,
-                    OrderItems = orderItems,
                     ShippingAddressID = item.ShippingAddressID,
                     
                 };
@@ -119,47 +118,19 @@ namespace API.Controllers
                 {
                     return BadRequest();
                 }
-                var current = _orderRepository.FindByCondition(o=> o.ID == item.ID).FirstOrDefault();
+                var current = _orderRepository.FindByCondition(o=> o.OrderId == item.ID).FirstOrDefault();
                 if (current == null)
                 {
                     return NoContent();
                 }
 
-                current.ID = item.ID;
+                current.OrderId = item.ID;
                 current.IsPaid = item.IsPaid;
                 current.CustomerID = item.CustomerID;
                 current.OrderDate = item.OrderDate;
-                current.OrderItems = new List<OrderItem>();
                 current.ShippingAddressID = item.ShippingAddressID;
                 current.CustomerID = item.CustomerID;
 
-                foreach (var orderItemID in item.OrderItems)
-                {
-                    if (current.OrderItems.Any(o => o.ID == orderItemID))
-                    {
-                        continue;
-                    }
-                    var newOrderItem = _orderItemRepo.FindByCondition(O=>O.ID == orderItemID).FirstOrDefault();
-                    if (newOrderItem == null)
-                    {
-                        continue;
-                    }
-                    current.OrderItems.Add(newOrderItem);
-                }
-
-                List<OrderItem> orderItemToRemove = new List<OrderItem>();
-                foreach (var orderItemID in current.OrderItems)
-                {
-                    if (item.OrderItems.Contains(orderItemID.ID))
-                    {
-                        continue;
-                    }
-                    orderItemToRemove.Add(orderItemID);
-                }
-                foreach (var orderItem in orderItemToRemove)
-                {
-                    current.OrderItems.Remove(orderItem);
-                }
                 _orderRepository.Update(current);
                 return NoContent();
             }
@@ -183,7 +154,8 @@ namespace API.Controllers
         {
             try
             {
-                var order = _orderRepository.FindByCondition(o => o.ID == id).FirstOrDefault();
+                var order = _orderRepository.FindByCondition(o => o.OrderId
+                == id).FirstOrDefault();
                 if (order == null)
                 {
                     return NoContent();

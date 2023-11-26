@@ -1,17 +1,18 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addItem, removeItem } from "../features/cartSlice";
 
 const Cart = () => {
   const cartItems = useSelector((state) => state.cart.items); 
   const dispatch = useDispatch();
 
   const handleAddItem = (item) => {
-    dispatch(addItem(item));
+    // should be dispatch(setUser(user here with new cart with new item after added with a server action AddItemToCart))
+  //  dispatch(addItem(item));
   };
 
   const handleRemoveItem = (itemId) => {
-    dispatch(removeItem({ id: itemId }));
+    // should be dispatch(setUser(user here with new cart with  item quantity decreased/removed after added with a server action DecreaseItemQuantity))
+   // dispatch(removeItem({ id: itemId }));
   };
 
   return (

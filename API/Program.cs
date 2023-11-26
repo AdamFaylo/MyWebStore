@@ -19,6 +19,7 @@ Log.Logger = new LoggerConfiguration()
 builder.Services.AddDbContext<MainContext>(o =>
 {
     o.UseSqlServer(builder.Configuration.GetConnectionString("MainDB"));
+    o.EnableSensitiveDataLogging();
 });
 
 //builder.Services.AddTransient<IGalleryImageRepository, GalleryImage>();

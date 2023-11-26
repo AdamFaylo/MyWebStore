@@ -14,7 +14,7 @@ import { FaPowerOff } from "react-icons/fa";
 import { RiUserLine } from "react-icons/ri";
 import "./navbar.css";
 
-function NavScrollExample() {
+function NavBarTop() {
   const isDark = useSelector((state) => state.theme.isDark);
   const { user } = useSelector((state) => state.user);
   const nav = useNavigate();
@@ -32,7 +32,6 @@ function NavScrollExample() {
             border: "1px solid white",
             alignItems: "center",
             background: "red",
-            haver:"blue",
           }}
           onClick={() => {
             Modal.confirm({
@@ -100,4 +99,4 @@ function NavScrollExample() {
   );
 }
 
-export default NavScrollExample;
+export default NavBarTop;

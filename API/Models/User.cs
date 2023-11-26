@@ -35,6 +35,6 @@ namespace MyProject.API.Models
         public DateTime LastLogin { get; set; }
         public List<Order>? Order { get; set; }
         public Cart? Cart { get; set; }
-        public List<OrderItem>? Cart1 { get; set; }
+
     }
 }

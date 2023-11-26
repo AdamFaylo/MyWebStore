@@ -36,7 +36,6 @@ namespace API.Controllers
             {
                 _logger.LogCritical(ex, "An error occurred while creating the item.");
 
-
                 return StatusCode(500, new
                 {
                     Message = "An error occurred while creating the item.",

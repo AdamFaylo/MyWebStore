@@ -15,31 +15,29 @@ const ProductItem = ({ data }) => {
 
   const iconStyles = { color: "#FF008A", fontSize: "20px" };
 
-  const handleToggleFavorite = (e) => {
+  // const handleToggleFavorite = (e) => {
+  //   e.stopPropagation();
+  //   const message = data.isFavorite ? "Removed" : "Added";
+  //   toast[data.isFavorite ? "error" : "success"](message, {
+  //     position: "top-center",
+  //     autoClose: 800,
+  //   });
+  //   dispatch(toggleFavorite(data.id));
+  // };
+
+  const handleAddToCart = (e) => {
     e.stopPropagation();
-    const message = data.isFavorite ? "Removed" : "Added";
-    toast[data.isFavorite ? "error" : "success"](message, {
-      position: "top-center",
-      autoClose: 800,
-    });
-    dispatch(toggleFavorite(data.id));
+
+    const message = data.cart ? "Remove" : "Added";
+    // should be dispatch(setUser(user here with new cart with new item after added with a server action AddItemToCart))
+    //dispatch(addItem());
   };
 
-  const toastSuccessOptions = {
-    position: "top-center",
-    autoClose: 800,
-  };
-
-  const toastErrorOptions = {
-    position: "top-center",
-    autoClose: 800,
-  };
- console.log(data.name)
   return (
     <>
       <div
         className="btn border-0"
-        onClick={() => {
+        onClick={(e) => {
           Swal.fire("Clicked");
           navigate(`/products/${data.id}`);
         }}
@@ -58,7 +56,7 @@ const ProductItem = ({ data }) => {
               <Card.Title>{data.name}</Card.Title>
               <p>{data.price}</p>
             </Card.Body>
-            <button className="btn border-0" onClick={handleToggleFavorite}>
+            <button className="btn border-0" onClick={handleAddToCart}>
               {data.isFavorite ? (
                 <FaHeart style={iconStyles} />
               ) : (

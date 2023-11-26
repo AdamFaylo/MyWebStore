@@ -228,12 +228,6 @@ namespace MyProject.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CartId"));
 
-                    b.Property<int>("CardCount")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CardTypeCount")
-                        .HasColumnType("int");
-
                     b.Property<int>("CartType")
                         .HasColumnType("int");
 
@@ -251,9 +245,13 @@ namespace MyProject.API.Migrations
                         new
                         {
                             CartId = 1,
-                            CardCount = 0,
-                            CardTypeCount = 0,
-                            CartType = 0,
+                            CartType = 1,
+                            UserID = 1
+                        },
+                        new
+                        {
+                            CartId = 2,
+                            CartType = 2,
                             UserID = 2
                         });
                 });
@@ -277,47 +275,47 @@ namespace MyProject.API.Migrations
                         new
                         {
                             ID = 1,
-                            Name = "SHOES"
+                            Name = "Shoes"
                         },
                         new
                         {
                             ID = 2,
-                            Name = "GARMENTS"
+                            Name = "Garments"
                         },
                         new
                         {
                             ID = 3,
-                            Name = "ACCESSORIES"
+                            Name = "Accessories"
                         },
                         new
                         {
                             ID = 4,
-                            Name = "SHOES"
+                            Name = "Shoes"
                         },
                         new
                         {
                             ID = 5,
-                            Name = "GARMENTS"
+                            Name = "Garments"
                         },
                         new
                         {
                             ID = 6,
-                            Name = "ACCESSORIES"
+                            Name = "Accessories"
                         },
                         new
                         {
                             ID = 7,
-                            Name = "SHOES"
+                            Name = "Shoes"
                         },
                         new
                         {
                             ID = 8,
-                            Name = "GARMENTS"
+                            Name = "Garments"
                         },
                         new
                         {
                             ID = 9,
-                            Name = "ACCESSORIES"
+                            Name = "Accessories"
                         });
                 });
 
@@ -756,11 +754,14 @@ namespace MyProject.API.Migrations
 
             modelBuilder.Entity("MyProject.API.Models.Order", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("OrderId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"));
+
+                    b.Property<int>("CartId")
+                        .HasColumnType("int");
 
                     b.Property<int>("CustomerID")
                         .HasColumnType("int");
@@ -777,7 +778,9 @@ namespace MyProject.API.Migrations
                     b.Property<int?>("UserID")
                         .HasColumnType("int");
 
-                    b.HasKey("ID");
+                    b.HasKey("OrderId");
+
+                    b.HasIndex("CartId");
 
                     b.HasIndex("CustomerID");
 
@@ -790,18 +793,20 @@ namespace MyProject.API.Migrations
                     b.HasData(
                         new
                         {
-                            ID = 1,
+                            OrderId = 1,
+                            CartId = 1,
                             CustomerID = 1,
                             IsPaid = true,
-                            OrderDate = new DateTime(2023, 11, 19, 21, 35, 0, 700, DateTimeKind.Local).AddTicks(9856),
+                            OrderDate = new DateTime(2023, 11, 24, 7, 34, 21, 830, DateTimeKind.Local).AddTicks(2703),
                             ShippingAddressID = 1
                         },
                         new
                         {
-                            ID = 2,
+                            OrderId = 2,
+                            CartId = 2,
                             CustomerID = 2,
                             IsPaid = false,
-                            OrderDate = new DateTime(2023, 11, 18, 21, 35, 0, 700, DateTimeKind.Local).AddTicks(9902),
+                            OrderDate = new DateTime(2023, 11, 23, 7, 34, 21, 830, DateTimeKind.Local).AddTicks(2751),
                             ShippingAddressID = 2
                         });
                 });
@@ -814,11 +819,14 @@ namespace MyProject.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<int>("OrderID")
+                    b.Property<int>("CartID")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("OrderItemID")
+                        .HasColumnType("int");
 
                     b.Property<int>("ProductID")
                         .HasColumnType("int");
@@ -826,16 +834,13 @@ namespace MyProject.API.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserID")
-                        .HasColumnType("int");
-
                     b.HasKey("ID");
 
-                    b.HasIndex("OrderID");
+                    b.HasIndex("CartID");
+
+                    b.HasIndex("OrderItemID");
 
                     b.HasIndex("ProductID");
-
-                    b.HasIndex("UserID");
 
                     b.ToTable("OrderItem");
 
@@ -843,16 +848,16 @@ namespace MyProject.API.Migrations
                         new
                         {
                             ID = 1,
-                            OrderID = 1,
-                            Price = 29.90m,
+                            CartID = 1,
+                            OrderId = 1,
                             ProductID = 1,
                             Quantity = 2
                         },
                         new
                         {
                             ID = 2,
-                            OrderID = 2,
-                            Price = 59.90m,
+                            CartID = 2,
+                            OrderId = 2,
                             ProductID = 2,
                             Quantity = 8
                         });
@@ -888,14 +893,14 @@ namespace MyProject.API.Migrations
                             ID = 1,
                             Amount = 29.90m,
                             OrderID = 1,
-                            PaymentDate = new DateTime(2023, 11, 19, 19, 35, 0, 700, DateTimeKind.Utc).AddTicks(9783)
+                            PaymentDate = new DateTime(2023, 11, 24, 5, 34, 21, 830, DateTimeKind.Utc).AddTicks(2634)
                         },
                         new
                         {
                             ID = 2,
                             Amount = 39.90m,
                             OrderID = 2,
-                            PaymentDate = new DateTime(2023, 11, 18, 19, 35, 0, 700, DateTimeKind.Utc).AddTicks(9791)
+                            PaymentDate = new DateTime(2023, 11, 23, 5, 34, 21, 830, DateTimeKind.Utc).AddTicks(2641)
                         });
                 });
 
@@ -1586,6 +1591,12 @@ namespace MyProject.API.Migrations
 
             modelBuilder.Entity("MyProject.API.Models.Order", b =>
                 {
+                    b.HasOne("MyProject.API.Models.Cart", "Cart")
+                        .WithMany()
+                        .HasForeignKey("CartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("MyProject.API.Models.Customer", "Customer")
                         .WithMany("Order")
                         .HasForeignKey("CustomerID")
@@ -1602,6 +1613,8 @@ namespace MyProject.API.Migrations
                         .WithMany("Order")
                         .HasForeignKey("UserID");
 
+                    b.Navigation("Cart");
+
                     b.Navigation("Customer");
 
                     b.Navigation("ShippingAddress");
@@ -1609,11 +1622,15 @@ namespace MyProject.API.Migrations
 
             modelBuilder.Entity("MyProject.API.Models.OrderItem", b =>
                 {
-                    b.HasOne("MyProject.API.Models.Order", "Order")
+                    b.HasOne("MyProject.API.Models.Cart", "Cart")
                         .WithMany("OrderItems")
-                        .HasForeignKey("OrderID")
+                        .HasForeignKey("CartID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("MyProject.API.Models.OrderItem", null)
+                        .WithMany("OrderItems")
+                        .HasForeignKey("OrderItemID");
 
                     b.HasOne("MyProject.API.Models.Product", "Product")
                         .WithMany()
@@ -1621,11 +1638,7 @@ namespace MyProject.API.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MyProject.API.Models.User", null)
-                        .WithMany("Cart1")
-                        .HasForeignKey("UserID");
-
-                    b.Navigation("Order");
+                    b.Navigation("Cart");
 
                     b.Navigation("Product");
                 });
@@ -1682,6 +1695,11 @@ namespace MyProject.API.Migrations
                     b.Navigation("Category");
                 });
 
+            modelBuilder.Entity("MyProject.API.Models.Cart", b =>
+                {
+                    b.Navigation("OrderItems");
+                });
+
             modelBuilder.Entity("MyProject.API.Models.Category", b =>
                 {
                     b.Navigation("SubCategories");
@@ -1699,10 +1717,13 @@ namespace MyProject.API.Migrations
 
             modelBuilder.Entity("MyProject.API.Models.Order", b =>
                 {
-                    b.Navigation("OrderItems");
-
                     b.Navigation("Payment")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("MyProject.API.Models.OrderItem", b =>
+                {
+                    b.Navigation("OrderItems");
                 });
 
             modelBuilder.Entity("MyProject.API.Models.Product", b =>
@@ -1727,8 +1748,6 @@ namespace MyProject.API.Migrations
             modelBuilder.Entity("MyProject.API.Models.User", b =>
                 {
                     b.Navigation("Cart");
-
-                    b.Navigation("Cart1");
 
                     b.Navigation("Order");
                 });

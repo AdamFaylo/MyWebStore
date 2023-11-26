@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using MyProject.API.Models;
 using MyProject.API.Models.DTO;
 using MyProject.API.Repositories.Abstract;
@@ -203,7 +202,7 @@ namespace MyProject.API.Controllers
                 {
                     Message = "An error occurred while creating the item.",
                     ExceptionMessage = ex.Message,
-                    InnerExceptionMessage = ex.InnerException?.Message, // Include inner exception message
+                    InnerExceptionMessage = ex.InnerException?.Message, 
                     StackTrace = ex.StackTrace
                 });
             }

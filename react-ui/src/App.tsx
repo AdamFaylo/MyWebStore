@@ -14,7 +14,7 @@ import useProducts from './hooks/useProducts';
 import { useEffect } from 'react';
 import { fetchUser } from './utils/api';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUser } from './features/user-slice';
+import { me, setUser } from './features/user-slice';
 import ErrorBoundary from './errors/ErrorBoundary ';
 import ErrorPage from './pages/ErrorPage';
 import LoginControle from './components/login/LoginControle';
@@ -27,6 +27,7 @@ import ProductDetails from './pages/ProductDetails';
 import NavBarTop from './components/nav/NavBarTop';
 
 
+
 function App() {
   const isDark = useSelector<RootState, boolean>((state)=> state.theme.isDark);
   const dispatch = useDispatch()
@@ -36,22 +37,15 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem("mywebsite_token");
     if (token) {
-      fetchUser()
-        .then(user => {
-          dispatch(setUser(user));
-        })
-        .catch(e => {
-          console.error("Error fetching user:", e);
-          localStorage.removeItem('mywebsite_token');
-        });
+      dispatch(me() as any)
     }
   }, [dispatch]);
   
   return (<>
     <div className={!isDark ? 'on' : 'off'} >
       <ErrorBoundary>
-        <NavBarTop/>
-    
+      <NavBarTop/>
+
         <Routes>
           <Route path="/" element={<Product />} errorElement={<ErrorPage />} />
           <Route path="/loginDeshboard" element={<AlreadyLogged><LoginDeshboard /></AlreadyLogged>} errorElement={<ErrorPage />} />

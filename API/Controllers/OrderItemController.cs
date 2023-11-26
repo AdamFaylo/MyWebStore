@@ -90,7 +90,8 @@ namespace API.Controllers
                 
                 current.ID = item.ID;
                 current.Quantity = item.Quantity;
-                current.Price = item.Price;
+                //current.CartID = item.CartID;
+                current.ProductID = item.ProductID;
 
                 _orderItemRepo.Update(current);
 

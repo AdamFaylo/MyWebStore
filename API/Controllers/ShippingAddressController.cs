@@ -125,11 +125,11 @@ namespace API.Controllers
 
                 foreach (int orderID in item.Order)
                 {
-                    if (current.Order.Any(s => s.ID == orderID))
+                    if (current.Order.Any(s => s.OrderId == orderID))
                     {
                         continue;
                     }
-                    var newSkill = _orderRepo.FindByCondition(s => s.ID == orderID).FirstOrDefault();
+                    var newSkill = _orderRepo.FindByCondition(s => s.OrderId == orderID).FirstOrDefault();
                     if (newSkill == null)
                     {
                         continue;
@@ -140,7 +140,7 @@ namespace API.Controllers
                 List<Order> orderToRemove = new List<Order>();
                 foreach (var order in current.Order)
                 {
-                    if (item.Order.Contains(order.ID))
+                    if (item.Order.Contains(order.OrderId))
                     {
                         continue;
                     }

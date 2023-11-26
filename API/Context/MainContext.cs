@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using MyProject.API.Models;
 using MyProject.API.Models.Enums;
-using System.Reflection.Metadata;
+
 
 namespace MyProject.API.Context
 {
@@ -13,7 +13,7 @@ namespace MyProject.API.Context
         {
         }
 
-        public DbSet<Cart> Cart{ get; set; }
+        public DbSet<Cart> Cart { get; set; }
         public DbSet<LogoImage> LogoImage { get; set; }
         public DbSet<Category> Category { get; set; }
         public DbSet<Color> Color { get; set; }
@@ -35,9 +35,9 @@ namespace MyProject.API.Context
 
             //User 
             modelBuilder.Entity<User>().HasData(
-             new User { ID = 1, FirstName = "Adam",LastName = "Faylo", EmailAddress = "adam@gmail.com",UserName = "adam", Password = "12346578", Type = UserType.Admin },
-             new User { ID = 2, FirstName = "Eran", LastName = "BenDahan" , EmailAddress = "eran@gmail.com",UserName = "eran",Password = "87654321", Type = UserType.Unknown },
-             new User { ID = 3, FirstName = "Roman",LastName = "Coco", EmailAddress = "roman@gmail.com",UserName = "rom", Password = "55555555", Type = UserType.Readonly }
+             new User { ID = 1, FirstName = "Adam", LastName = "Faylo", EmailAddress = "adam@gmail.com", UserName = "adam", Password = "12346578", Type = UserType.Admin },
+             new User { ID = 2, FirstName = "Eran", LastName = "BenDahan", EmailAddress = "eran@gmail.com", UserName = "eran", Password = "87654321", Type = UserType.Unknown },
+             new User { ID = 3, FirstName = "Roman", LastName = "Coco", EmailAddress = "roman@gmail.com", UserName = "rom", Password = "55555555", Type = UserType.Readonly }
                 );
 
             modelBuilder.Entity<User>()
@@ -46,9 +46,20 @@ namespace MyProject.API.Context
                     .HasForeignKey<Cart>(e => e.UserID)
                     .IsRequired();
 
+            modelBuilder.Entity<Cart>()
+                .HasKey(c => c.CartId);
+
+
+
+            modelBuilder.Entity<Product>()
+                .Property(p => p.AddedOn)
+                .HasDefaultValueSql("GETDATE()");
+
             modelBuilder.Entity<Cart>().HasData(
-                new Cart { CartId = 1,UserID = 2}
+                new Cart { CartId = 1, UserID = 1, CartType = 1 },
+                new Cart { CartId = 2, UserID = 2, CartType = 2 }
                 );
+
             //Logo
             modelBuilder.Entity<LogoImage>().HasData(
              new LogoImage { ID = 1, Logo = "https://i.imgur.com/OeC6gqG.jpg", Alt = "Logo vanes site" }
@@ -64,26 +75,29 @@ namespace MyProject.API.Context
              new Size { ID = 1, SizeName = "XS", ProductID = 1 },
              new Size { ID = 2, SizeName = "S", ProductID = 2 },
              new Size { ID = 3, SizeName = "M", ProductID = 3 }
-             //new Size { ID = 4, SizeName = "L", ProductID = 1 },
-             //new Size { ID = 5, SizeName = "XL", ProductID = 2 },
-             //new Size { ID = 6, SizeName = "32", ProductID = 2 },
-             //new Size { ID = 7, SizeName = "33", ProductID = 2 },
-             //new Size { ID = 8, SizeName = "34", ProductID = 2 },
-             //new Size { ID = 9, SizeName = "35", ProductID = 2 },
-             //new Size { ID = 10, SizeName = "36", ProductID = 2 },
-             //new Size { ID = 11, SizeName = "37", ProductID = 2 }
                 );
             //OrderItem
             modelBuilder.Entity<OrderItem>().HasData(
-             new OrderItem { ID = 1, Quantity = 2, Price = 29.90M, ProductID = 1, OrderID = 1 },
-             new OrderItem { ID = 2, Quantity = 8, Price = 59.90M, ProductID = 2, OrderID = 2 }
+             new OrderItem { ID = 1, Quantity = 2, ProductID = 1, CartID = 1, OrderId = 1 },
+             new OrderItem { ID = 2, Quantity = 8, ProductID = 2, CartID = 2, OrderId = 2 }
                 );
+
+
 
             //Orders -
             modelBuilder.Entity<Order>().HasData(
-             new Order { ID = 1, IsPaid = true, CustomerID = 1, OrderDate = DateTime.Now.AddDays(-1), ShippingAddressID = 1 },
-             new Order { ID = 2, IsPaid = false, CustomerID = 2, OrderDate = DateTime.Now.AddDays(-2), ShippingAddressID = 2 }
+             new Order { OrderId = 1, IsPaid = true, CustomerID = 1, OrderDate = DateTime.Now.AddDays(-1), CartId = 1, ShippingAddressID = 1, },
+             new Order { OrderId = 2, IsPaid = false, CustomerID = 2, OrderDate = DateTime.Now.AddDays(-2), CartId = 2, ShippingAddressID = 2, }
                 );
+            //modelBuilder.Entity<Order>()
+            //    .HasOne(o => o.Cart)          // An order has one cart
+            //    .WithMany(c => c.Orders)      // A cart can have many orders
+            //    .HasForeignKey(o => o.CartID) // Define the foreign key property
+            //    .IsRequired();
+
+            base.OnModelCreating(modelBuilder);
+
+            base.OnModelCreating(modelBuilder);
 
             //Customer -
             modelBuilder.Entity<Customer>().HasData(
@@ -100,17 +114,17 @@ namespace MyProject.API.Context
             //Category 
             modelBuilder.Entity<Category>().HasData(
              //MAN
-             new Category { ID = 1, Name = "SHOES" },
-             new Category { ID = 2, Name = "GARMENTS" },
-             new Category { ID = 3, Name = "ACCESSORIES" },
+             new Category { ID = 1, Name = "Shoes" },
+             new Category { ID = 2, Name = "Garments" },
+             new Category { ID = 3, Name = "Accessories" },
              //LADIES
-             new Category { ID = 4, Name = "SHOES" },
-             new Category { ID = 5, Name = "GARMENTS" },
-             new Category { ID = 6, Name = "ACCESSORIES" },
+             new Category { ID = 4, Name = "Shoes" },
+             new Category { ID = 5, Name = "Garments" },
+             new Category { ID = 6, Name = "Accessories" },
              //KIDS
-             new Category { ID = 7, Name = "SHOES" },
-             new Category { ID = 8, Name = "GARMENTS" },
-             new Category { ID = 9, Name = "ACCESSORIES" }
+             new Category { ID = 7, Name = "Shoes" },
+             new Category { ID = 8, Name = "Garments" },
+             new Category { ID = 9, Name = "Accessories" }
 
            );
             //SubCategory
@@ -124,7 +138,7 @@ namespace MyProject.API.Context
              new SubCategory { ID = 5, CategoryID = 4, SubCategoryName = "Sneakers" },
              new SubCategory { ID = 6, CategoryID = 5, SubCategoryName = "T-Shirts" },
              new SubCategory { ID = 7, CategoryID = 5, SubCategoryName = "Pants" },
-             new SubCategory { ID = 8, CategoryID = 6, SubCategoryName = "ACC" }, 
+             new SubCategory { ID = 8, CategoryID = 6, SubCategoryName = "ACC" },
              //--------------------------------------------------------------------------
              new SubCategory { ID = 9, CategoryID = 7, SubCategoryName = "Sneakers" },
              new SubCategory { ID = 10, CategoryID = 8, SubCategoryName = "T-Shirts" },
@@ -180,7 +194,7 @@ namespace MyProject.API.Context
                 new Product { ID = 31, DepartmentID = 3, SubCategoryID = 12, ProductName = "ACC001", Price = 299.90M, },
                 new Product { ID = 32, DepartmentID = 3, SubCategoryID = 12, ProductName = "ACC002", Price = 59.90M },
                 new Product { ID = 33, DepartmentID = 3, SubCategoryID = 12, ProductName = "ACC003", Price = 89.90M }
- 
+
 
                 );
 

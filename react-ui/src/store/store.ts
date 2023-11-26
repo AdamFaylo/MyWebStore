@@ -6,7 +6,6 @@ import orderReducer from "../features/order-slice";
 import logoReducer from "../features/logo-slice";
 import authSlice from "../features/logo-slice";
 import themeReducer from "../features/theme-slice";
-import cartReducer from "../features/cartSlice";
 
 const store = configureStore({
   reducer: {
@@ -17,7 +16,6 @@ const store = configureStore({
     logo: logoReducer,
     auth: authSlice,
     theme: themeReducer,
-    cart: cartReducer,
   },
 });
 

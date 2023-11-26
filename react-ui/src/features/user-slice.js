@@ -6,15 +6,19 @@ const userURL = "Login/GetToken";
 export const loginUser = createAsyncThunk(
   "user/loginUser",
   async (userCredentials) => {
-    try {
       const response = await api.post(userURL, userCredentials);
       console.log(response.data);
       return response.data;
-    } catch (error) {
-      throw error;
-    }
   }
 );
+
+export const me = createAsyncThunk(
+  "user/me",
+  async () => {
+    const user = await fetchUser()
+    return user
+  }
+)
 
 const userReducer = createSlice({
   name: "user",
@@ -22,7 +26,6 @@ const userReducer = createSlice({
     loading: false,
     user: null,
     error: null,
-    
   },
 
   reducers: {
@@ -38,6 +41,7 @@ const userReducer = createSlice({
 
   extraReducers: (builder) => {
     builder
+      // loginUser
       .addCase(loginUser.pending, (state) => {
         state.loading = true;
         state.user = null;
@@ -52,7 +56,25 @@ const userReducer = createSlice({
         state.loading = false;
         state.user = null;
         state.error = action.error.message; // Set the error message
+      })
+      // me
+      .addCase(me.pending, (state) => {
+        state.loading = true;
+        state.user = null;
+        state.error = null;
+      })
+      .addCase(me.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload;
+        state.error = null;
+      })
+      .addCase(me.rejected, (state, action) => {
+        state.loading = false;
+        state.user = null;
+        localStorage.removeItem('mywebsite_token');
+        state.error = action.error.message; // Set the error message
       });
+      
   },
 });
 

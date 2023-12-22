@@ -10,6 +10,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
 
 namespace MyProject.API.Controllers
 {
@@ -36,54 +37,61 @@ namespace MyProject.API.Controllers
                 return BadRequest();
             }
 
-            // Validate user's credentials and retrieve user object
-            User user = _userRepo.FindByCondition(u =>
-                u.EmailAddress == loginInfo.EmailAddress && u.Password == loginInfo.Password
-            ).FirstOrDefault();
-
-            if (user == null)
+            try
             {
-                return Unauthorized();
+                // Validate user's credentials and retrieve user object
+                User user = _userRepo.FindByCondition(u =>
+                    u.EmailAddress == loginInfo.EmailAddress && u.Password == loginInfo.Password
+                ).First();
+
+                if (user == null)
+                {
+                    return Unauthorized();
+                }
+
+                // Choose the appropriate secret key based on user type
+                var secretKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(
+                    user.Type == UserType.Unknown
+                        ? _config["Authentication:SecretAdmin"]
+                        : _config["Authentication:SecretUser"]
+                ));
+
+                // Create signing credentials
+                var creds = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
+
+                // Create claims for the token
+                var claims = new List<Claim>
+                {
+                    new Claim("sub", user.ID.ToString()),
+                    new Claim("usertype", user.Type.ToString())
+                    // You can add more claims here
+                };
+
+                // Get issuer and audience from configuration
+                string validAudience = _config["Authentication:Audience"];
+                string validIssuer = _config["Authentication:Issuer"];
+
+                // Create JWT token
+                var token = new JwtSecurityToken(
+                    validIssuer,
+                    validAudience,
+                    claims,
+                    DateTime.UtcNow,
+                    DateTime.UtcNow.AddDays(1),
+                    creds
+                );
+
+
+                // Write token as a string
+                var tokenStr = new JwtSecurityTokenHandler().WriteToken(token);
+
+                // Return token string
+                return Ok(tokenStr);
             }
-
-            // Choose the appropriate secret key based on user type
-            var secretKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(
-                user.Type == UserType.Unknown
-                    ? _config["Authentication:SecretAdmin"]
-                    : _config["Authentication:SecretUser"]
-            ));
-
-            // Create signing credentials
-            var creds = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
-
-            // Create claims for the token
-            var claims = new List<Claim>
-    {
-        new Claim("sub", user.ID.ToString()),
-        new Claim("usertype", user.Type.ToString())
-        // You can add more claims here
-    };
-
-            // Get issuer and audience from configuration
-            string validAudience = _config["Authentication:Audience"];
-            string validIssuer = _config["Authentication:Issuer"];
-
-            // Create JWT token
-            var token = new JwtSecurityToken(
-                validIssuer,
-                validAudience,
-                claims,
-                DateTime.UtcNow,
-                DateTime.UtcNow.AddDays(1),
-                creds
-            );
-
-
-            // Write token as a string
-            var tokenStr = new JwtSecurityTokenHandler().WriteToken(token);
-
-            // Return token string
-            return Ok(tokenStr);
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet]
@@ -96,7 +104,10 @@ namespace MyProject.API.Controllers
                 token = token.ToString().Split("Bearer ")[1];
                 var decodedToken = new JwtSecurityTokenHandler().ReadJwtToken(token);
                 var userId = decodedToken.Claims.First().Value;
-                var userQuery = _userRepo.FindByCondition(user => user.ID == int.Parse(userId));
+                var userQuery = _userRepo.FindByCondition(user => user.ID == int.Parse(userId)).Include(u => u.Cart)
+                    .ThenInclude(cart => cart.OrderItems)
+                    .ThenInclude(orderItems => orderItems.Product);
+
                 var user = userQuery.FirstOrDefault();
                 return Ok(user);
             }

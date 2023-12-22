@@ -10,13 +10,13 @@ const Favorites = () => {
 
   return (
     <>
-      {data && (
+      {/* {data && (
         <div className="card_grid">
           {data.map((d) => (
             <DataItem key={d.id} data={d} />
           ))}
         </div>
-      )}
+      )} */}
     </>
   );
 };

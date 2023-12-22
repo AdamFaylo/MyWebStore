@@ -1,20 +1,19 @@
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
-import Product from './pages/Product';
+import Product from './pages/Home';
 import LoginDeshboard from './components/login/LoginDeshboard';
 import About from './pages/About';
 import Protected from './pages/Protected';
 import BackOffice from './pages/BackOffice';
-import ProductList from './components/BackOfficeList';
-import ProductForm from './components/BackOfficeForm';
+import ProductList from './components/backoffice/BackOfficeList';
+import ProductForm from './components/backoffice/BackOfficeForm';
 import FooterCom from './components/footer/FooterCom';
 import Favorites from './pages/Favorites';
 import LoginTransition from './components/login/LoginTransition';
 import useProducts from './hooks/useProducts';
 import { useEffect } from 'react';
-import { fetchUser } from './utils/api';
 import { useDispatch, useSelector } from 'react-redux';
-import { me, setUser } from './features/user-slice';
+import { me } from './features/user-slice';
 import ErrorBoundary from './errors/ErrorBoundary ';
 import ErrorPage from './pages/ErrorPage';
 import LoginControle from './components/login/LoginControle';
@@ -25,7 +24,7 @@ import { RootState } from './store/store';
 import RegistrationForm from './components/login/RegisterForm';
 import ProductDetails from './pages/ProductDetails';
 import NavBarTop from './components/nav/NavBarTop';
-
+import Home from './pages/Home';
 
 
 function App() {
@@ -45,9 +44,9 @@ function App() {
     <div className={!isDark ? 'on' : 'off'} >
       <ErrorBoundary>
       <NavBarTop/>
-
         <Routes>
-          <Route path="/" element={<Product />} errorElement={<ErrorPage />} />
+          
+          <Route path="/" element={<Home />} errorElement={<ErrorPage />} />
           <Route path="/loginDeshboard" element={<AlreadyLogged><LoginDeshboard /></AlreadyLogged>} errorElement={<ErrorPage />} />
           <Route path="/login" element={<AlreadyLogged><LoginControle /></AlreadyLogged>} errorElement={<ErrorPage />} />
           <Route path="/registerFrom" element={<AlreadyLogged><RegistrationForm /></AlreadyLogged>} errorElement={<ErrorPage />} />
@@ -59,9 +58,8 @@ function App() {
           </Route>
 
           <Route path="/login_transition" element={<LoginTransition />} errorElement={<ErrorPage />} />
-
-          <Route path="/products/" element={<Product />} errorElement={<ErrorPage />} />
-          <Route path="/products/:gender/:category/:subcategory" element={<Product />} errorElement={<ErrorPage />} />
+          <Route path="/products/" element={<Home />} errorElement={<ErrorPage />} />
+          <Route path="/products/:gender/:category/:subcategory" element={<Home />} errorElement={<ErrorPage />} />
           <Route path="/products/:id" element={<ProductDetails/>} errorElement={<ErrorPage />} />
           <Route path="/favorites" element={<Protected><Favorites /></Protected>} errorElement={<ErrorPage />} />
           <Route path="/cart/" element={<Cart />} errorElement={<ErrorPage />} />

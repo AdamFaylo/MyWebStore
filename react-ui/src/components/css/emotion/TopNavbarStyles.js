@@ -6,5 +6,4 @@ export const navStyles = css`
 
 export const searchStyles = css`
 padding: 1rem;
-
 `;

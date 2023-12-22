@@ -12,7 +12,7 @@ using MyProject.API.Context;
 namespace MyProject.API.Migrations
 {
     [DbContext(typeof(MainContext))]
-    [Migration("20231125053422_initialseed")]
+    [Migration("20231221131235_initialseed")]
     partial class initialseed
     {
         /// <inheritdoc />
@@ -231,15 +231,15 @@ namespace MyProject.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CartId"));
 
-                    b.Property<int>("CartType")
+                    b.Property<int>("CartQuantity")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserID")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("CartId");
 
-                    b.HasIndex("UserID")
+                    b.HasIndex("UserId")
                         .IsUnique();
 
                     b.ToTable("Cart");
@@ -248,14 +248,14 @@ namespace MyProject.API.Migrations
                         new
                         {
                             CartId = 1,
-                            CartType = 1,
-                            UserID = 1
+                            CartQuantity = 1,
+                            UserId = 1
                         },
                         new
                         {
                             CartId = 2,
-                            CartType = 2,
-                            UserID = 2
+                            CartQuantity = 5,
+                            UserId = 2
                         });
                 });
 
@@ -751,7 +751,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 1,
                             Alt = "Logo vanes site",
-                            Logo = "https://i.imgur.com/OeC6gqG.jpg"
+                            Logo = "https://i.imgur.com/6jdrLVk.png"
                         });
                 });
 
@@ -800,7 +800,7 @@ namespace MyProject.API.Migrations
                             CartId = 1,
                             CustomerID = 1,
                             IsPaid = true,
-                            OrderDate = new DateTime(2023, 11, 24, 7, 34, 21, 830, DateTimeKind.Local).AddTicks(2703),
+                            OrderDate = new DateTime(2023, 12, 20, 15, 12, 34, 885, DateTimeKind.Local).AddTicks(7714),
                             ShippingAddressID = 1
                         },
                         new
@@ -809,7 +809,7 @@ namespace MyProject.API.Migrations
                             CartId = 2,
                             CustomerID = 2,
                             IsPaid = false,
-                            OrderDate = new DateTime(2023, 11, 23, 7, 34, 21, 830, DateTimeKind.Local).AddTicks(2751),
+                            OrderDate = new DateTime(2023, 12, 19, 15, 12, 34, 885, DateTimeKind.Local).AddTicks(7759),
                             ShippingAddressID = 2
                         });
                 });
@@ -825,12 +825,6 @@ namespace MyProject.API.Migrations
                     b.Property<int>("CartID")
                         .HasColumnType("int");
 
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("OrderItemID")
-                        .HasColumnType("int");
-
                     b.Property<int>("ProductID")
                         .HasColumnType("int");
 
@@ -841,8 +835,6 @@ namespace MyProject.API.Migrations
 
                     b.HasIndex("CartID");
 
-                    b.HasIndex("OrderItemID");
-
                     b.HasIndex("ProductID");
 
                     b.ToTable("OrderItem");
@@ -852,7 +844,6 @@ namespace MyProject.API.Migrations
                         {
                             ID = 1,
                             CartID = 1,
-                            OrderId = 1,
                             ProductID = 1,
                             Quantity = 2
                         },
@@ -860,7 +851,6 @@ namespace MyProject.API.Migrations
                         {
                             ID = 2,
                             CartID = 2,
-                            OrderId = 2,
                             ProductID = 2,
                             Quantity = 8
                         });
@@ -896,14 +886,14 @@ namespace MyProject.API.Migrations
                             ID = 1,
                             Amount = 29.90m,
                             OrderID = 1,
-                            PaymentDate = new DateTime(2023, 11, 24, 5, 34, 21, 830, DateTimeKind.Utc).AddTicks(2634)
+                            PaymentDate = new DateTime(2023, 12, 20, 13, 12, 34, 885, DateTimeKind.Utc).AddTicks(7654)
                         },
                         new
                         {
                             ID = 2,
                             Amount = 39.90m,
                             OrderID = 2,
-                            PaymentDate = new DateTime(2023, 11, 23, 5, 34, 21, 830, DateTimeKind.Utc).AddTicks(2641)
+                            PaymentDate = new DateTime(2023, 12, 19, 13, 12, 34, 885, DateTimeKind.Utc).AddTicks(7661)
                         });
                 });
 
@@ -1563,7 +1553,7 @@ namespace MyProject.API.Migrations
                 {
                     b.HasOne("MyProject.API.Models.User", "User")
                         .WithOne("Cart")
-                        .HasForeignKey("MyProject.API.Models.Cart", "UserID")
+                        .HasForeignKey("MyProject.API.Models.Cart", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1630,10 +1620,6 @@ namespace MyProject.API.Migrations
                         .HasForeignKey("CartID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("MyProject.API.Models.OrderItem", null)
-                        .WithMany("OrderItems")
-                        .HasForeignKey("OrderItemID");
 
                     b.HasOne("MyProject.API.Models.Product", "Product")
                         .WithMany()
@@ -1724,11 +1710,6 @@ namespace MyProject.API.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MyProject.API.Models.OrderItem", b =>
-                {
-                    b.Navigation("OrderItems");
-                });
-
             modelBuilder.Entity("MyProject.API.Models.Product", b =>
                 {
                     b.Navigation("Colors");
@@ -1750,7 +1731,8 @@ namespace MyProject.API.Migrations
 
             modelBuilder.Entity("MyProject.API.Models.User", b =>
                 {
-                    b.Navigation("Cart");
+                    b.Navigation("Cart")
+                        .IsRequired();
 
                     b.Navigation("Order");
                 });

@@ -1,50 +1,58 @@
 import React from "react";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
 import Card from "react-bootstrap/Card";
 import Stack from "react-bootstrap/Stack";
 import { useDispatch } from "react-redux";
-import { toggleFavorite } from "../../features/product-slice";
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { updateCart } from "../../features/user-slice";
+import { VscAdd } from "react-icons/vsc";
+import { VscChromeMinimize } from "react-icons/vsc";
 
 const ProductItem = ({ data }) => {
+  const BtnCart = {
+    marginBottom: "10px",
+  };
+
+  const styleBtnAddCart = {
+    background: "white",
+    color: "#0ccb36",
+    border: "2px solid #0ccb36",
+    borderRadius: "5px",
+    width: "32px",
+  };
+
+  const styleBtnRemoveCart = {
+    background: "white",
+    color: "red",
+    border: "2px solid red",
+    borderRadius: "5px",
+    width: "32px",
+  };
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const iconStyles = { color: "#FF008A", fontSize: "20px" };
-
-  // const handleToggleFavorite = (e) => {
-  //   e.stopPropagation();
-  //   const message = data.isFavorite ? "Removed" : "Added";
-  //   toast[data.isFavorite ? "error" : "success"](message, {
-  //     position: "top-center",
-  //     autoClose: 800,
-  //   });
-  //   dispatch(toggleFavorite(data.id));
-  // };
-
-  const handleAddToCart = (e) => {
+  const addToCart = (e) => {
     e.stopPropagation();
+    dispatch(updateCart({ itemId: data.id, add: true }));
+  };
 
-    const message = data.cart ? "Remove" : "Added";
-    // should be dispatch(setUser(user here with new cart with new item after added with a server action AddItemToCart))
-    //dispatch(addItem());
+  const removeFromCart = (e) => {
+    e.stopPropagation();
+    dispatch(updateCart({ itemId: data.id, add: false }));
   };
 
   return (
     <>
       <div
-        className="btn border-0"
+        className="btn"
         onClick={(e) => {
-          Swal.fire("Clicked");
           navigate(`/products/${data.id}`);
         }}
       >
-        <Stack direction="horizontal" gap={3}>
+        <Stack>
           <Card style={{ width: "19rem" }}>
-            {data.galleryImage.map((image) => (
+            {data.galleryImage?.map((image) => (
               <Card.Img
                 key={image.id}
                 variant="top"
@@ -53,16 +61,17 @@ const ProductItem = ({ data }) => {
               />
             ))}
             <Card.Body>
-              <Card.Title>{data.name}</Card.Title>
+              <Card.Title>{data.name || data.productName}</Card.Title>
               <p>{data.price}</p>
             </Card.Body>
-            <button className="btn border-0" onClick={handleAddToCart}>
-              {data.isFavorite ? (
-                <FaHeart style={iconStyles} />
-              ) : (
-                <FaRegHeart style={iconStyles} />
-              )}
-            </button>
+            <div style={BtnCart}>
+              <button style={styleBtnAddCart} onClick={addToCart}>
+                <VscAdd />
+              </button>
+              <button style={styleBtnRemoveCart} onClick={removeFromCart}>
+                <VscChromeMinimize />
+              </button>
+            </div>
           </Card>
         </Stack>
       </div>

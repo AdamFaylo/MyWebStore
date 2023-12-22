@@ -1,12 +1,13 @@
-import React from "react";
-import { PiShoppingCartSimpleBold } from "react-icons/pi";
 
-import { useState } from "react";
+import { PiShoppingCartSimpleBold } from "react-icons/pi";
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 const CartTaggle = () => {
-  const [itemsInCart, setItemsinCart] = useState(3);
+
+  const quantity = useSelector<RootState,number>(state => state.user.cartTotalQuantity)
 
   const Rounded = styled.span`
   border-radius: 60%;
@@ -26,18 +27,15 @@ const CartTaggle = () => {
       <Link to="/cart">
         <button
           style={{
-            border_radius: "50%",
+            borderRadius: "5px",
             position: "relative",
             height:"34px",
             width: "34px",
             padding:"6px",
-            marginLeft: "5px",
-            marginRight: "5px",
-            borderRadius:"5px",
             border: "1px solid #c3bebe",
           }}
         >
-          <Rounded>{itemsInCart}</Rounded>
+          <Rounded>{quantity}</Rounded>
           <PiShoppingCartSimpleBold style={{ fontSize: "18px", display: "grid" }} />
         </button> 
       </Link>

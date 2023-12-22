@@ -4,22 +4,28 @@ import responsiveness from "../css/emotion/responsiveness ";
 export const containerStyles = css`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  ustify-content: center;
   max-width: 80%;
   margin: 0 auto;
-
 `;
 export const cardGridStyles = css`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: -6px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 2fr));
+  gap: 6px;
   width: 100%;
 
   ${responsiveness.tablet} {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 46px;
   }
   ${responsiveness.mobile} {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 82px;
+
   }
 `;
+
+// mobile: 480,
+// mini-tablet: 768,
+// max-tablet: 768,
+// desktop: 1024,

@@ -1,7 +1,7 @@
 import { Badge, Button, Card, Group, Image, Text } from "@mantine/core";
 import classes from "../css/CardProductItem.module.css";
 
-const CardProductItem = () => {
+const CartProductItem = () => {
   return (
     <div className={classes.card_container}>
       <Card withBorder radius="md" className={classes.card}>
@@ -51,4 +51,4 @@ const CardProductItem = () => {
   );
 };
 
-export default CardProductItem;
+export default CartProductItem;

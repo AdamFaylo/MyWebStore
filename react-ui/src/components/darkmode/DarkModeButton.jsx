@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleDark } from "../features/theme-slice";
+import { toggleDark } from "../../features/theme-slice";
 import { PiSunDimBold } from "react-icons/pi";
 import { LuMoon } from "react-icons/lu";
 

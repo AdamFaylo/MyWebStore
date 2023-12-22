@@ -7,7 +7,7 @@ const SidePanel = () => {
       <ListGroup.Item as={Link} to="User">
         User
       </ListGroup.Item>
-      <ListGroup.Item as={Link} to="Product">
+      <ListGroup.Item as={Link} to="Products">
         Product
       </ListGroup.Item>
       <ListGroup.Item as={Link} to="BoxSize">

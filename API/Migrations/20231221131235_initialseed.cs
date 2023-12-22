@@ -275,15 +275,15 @@ namespace MyProject.API.Migrations
                 {
                     CartId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CartType = table.Column<int>(type: "int", nullable: false),
-                    UserID = table.Column<int>(type: "int", nullable: false)
+                    CartQuantity = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cart", x => x.CartId);
                     table.ForeignKey(
-                        name: "FK_Cart_User_UserID",
-                        column: x => x.UserID,
+                        name: "FK_Cart_User_UserId",
+                        column: x => x.UserId,
                         principalTable: "User",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
@@ -408,9 +408,7 @@ namespace MyProject.API.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     CartID = table.Column<int>(type: "int", nullable: false),
-                    OrderId = table.Column<int>(type: "int", nullable: false),
-                    ProductID = table.Column<int>(type: "int", nullable: false),
-                    OrderItemID = table.Column<int>(type: "int", nullable: true)
+                    ProductID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -421,11 +419,6 @@ namespace MyProject.API.Migrations
                         principalTable: "Cart",
                         principalColumn: "CartId",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_OrderItem_OrderItem_OrderItemID",
-                        column: x => x.OrderItemID,
-                        principalTable: "OrderItem",
-                        principalColumn: "ID");
                     table.ForeignKey(
                         name: "FK_OrderItem_Product_ProductID",
                         column: x => x.ProductID,
@@ -513,7 +506,7 @@ namespace MyProject.API.Migrations
             migrationBuilder.InsertData(
                 table: "LogoImage",
                 columns: new[] { "ID", "Alt", "Logo" },
-                values: new object[] { 1, "Logo vanes site", "https://i.imgur.com/OeC6gqG.jpg" });
+                values: new object[] { 1, "Logo vanes site", "https://i.imgur.com/6jdrLVk.png" });
 
             migrationBuilder.InsertData(
                 table: "ShippingAddress",
@@ -536,11 +529,11 @@ namespace MyProject.API.Migrations
 
             migrationBuilder.InsertData(
                 table: "Cart",
-                columns: new[] { "CartId", "CartType", "UserID" },
+                columns: new[] { "CartId", "CartQuantity", "UserId" },
                 values: new object[,]
                 {
                     { 1, 1, 1 },
-                    { 2, 2, 2 }
+                    { 2, 5, 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -567,8 +560,8 @@ namespace MyProject.API.Migrations
                 columns: new[] { "OrderId", "CartId", "CustomerID", "IsPaid", "OrderDate", "ShippingAddressID", "UserID" },
                 values: new object[,]
                 {
-                    { 1, 1, 1, true, new DateTime(2023, 11, 24, 7, 34, 21, 830, DateTimeKind.Local).AddTicks(2703), 1, null },
-                    { 2, 2, 2, false, new DateTime(2023, 11, 23, 7, 34, 21, 830, DateTimeKind.Local).AddTicks(2751), 2, null }
+                    { 1, 1, 1, true, new DateTime(2023, 12, 20, 15, 12, 34, 885, DateTimeKind.Local).AddTicks(7714), 1, null },
+                    { 2, 2, 2, false, new DateTime(2023, 12, 19, 15, 12, 34, 885, DateTimeKind.Local).AddTicks(7759), 2, null }
                 });
 
             migrationBuilder.InsertData(
@@ -663,11 +656,11 @@ namespace MyProject.API.Migrations
 
             migrationBuilder.InsertData(
                 table: "OrderItem",
-                columns: new[] { "ID", "CartID", "OrderId", "OrderItemID", "ProductID", "Quantity" },
+                columns: new[] { "ID", "CartID", "ProductID", "Quantity" },
                 values: new object[,]
                 {
-                    { 1, 1, 1, null, 1, 2 },
-                    { 2, 2, 2, null, 2, 8 }
+                    { 1, 1, 1, 2 },
+                    { 2, 2, 2, 8 }
                 });
 
             migrationBuilder.InsertData(
@@ -675,8 +668,8 @@ namespace MyProject.API.Migrations
                 columns: new[] { "ID", "Amount", "OrderID", "PaymentDate" },
                 values: new object[,]
                 {
-                    { 1, 29.90m, 1, new DateTime(2023, 11, 24, 5, 34, 21, 830, DateTimeKind.Utc).AddTicks(2634) },
-                    { 2, 39.90m, 2, new DateTime(2023, 11, 23, 5, 34, 21, 830, DateTimeKind.Utc).AddTicks(2641) }
+                    { 1, 29.90m, 1, new DateTime(2023, 12, 20, 13, 12, 34, 885, DateTimeKind.Utc).AddTicks(7654) },
+                    { 2, 39.90m, 2, new DateTime(2023, 12, 19, 13, 12, 34, 885, DateTimeKind.Utc).AddTicks(7661) }
                 });
 
             migrationBuilder.InsertData(
@@ -729,9 +722,9 @@ namespace MyProject.API.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cart_UserID",
+                name: "IX_Cart_UserId",
                 table: "Cart",
-                column: "UserID",
+                column: "UserId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -743,11 +736,6 @@ namespace MyProject.API.Migrations
                 name: "IX_OrderItem_CartID",
                 table: "OrderItem",
                 column: "CartID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OrderItem_OrderItemID",
-                table: "OrderItem",
-                column: "OrderItemID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderItem_ProductID",

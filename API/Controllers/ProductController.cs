@@ -36,8 +36,6 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        //[Authorize]
-        //[Route("GetAllProduct")]
         public IActionResult GetAllProduct()
         {
             try
@@ -61,7 +59,7 @@ namespace API.Controllers
         }
 
         [HttpGet("{id:int}")]
-      
+
         public IActionResult GetByIDProduct(int id)
         {
             try
@@ -83,7 +81,6 @@ namespace API.Controllers
             }
 
         }
-
         [HttpPost]
         public IActionResult CreateProduct(ProductDTO item)
         {
@@ -105,7 +102,7 @@ namespace API.Controllers
 
                 var newItem = new Product()
                 {
-                    ID = item.ID,
+                  
                     ProductName = item.Name,
                     Price = item.Price,
                     SubCategoryID = item.DepartmentID,
@@ -130,73 +127,39 @@ namespace API.Controllers
             }
         }
 
-        [HttpPut]
-        public IActionResult Update(ProductDTO item)
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, [FromBody] ProductDTO productDto)
         {
+            if (productDto == null || id != productDto.ID)
+            {
+                return BadRequest("Invalid product data.");
+            }
+
+            var product = _productRepo.FindByCondition(p => p.ID == id).FirstOrDefault();
+            if (product == null)
+            {
+                return NotFound($"Product with ID {id} not found.");
+            }
+
+            // Update product properties here
+            product.ProductName = productDto.Name;
+            product.Price = productDto.Price;
+            // ... additional property updates ...
+
             try
             {
-                if (item == null)
-                {
-                    return BadRequest();
-                }
-
-                var current = _productRepo.FindByCondition(p => p.ID == item.ID).FirstOrDefault();
-                if (current == null)
-                {
-                    return NotFound();
-                }
-                current.ID = item.ID;
-                current.ProductName = item.Name;
-                current.Colors = new List<Color>();
-                current.GalleryImage = new List<GalleryImage>();
-                current.Size = new List<Size>();
-
-
-                //foreach (int colorID in item.Colors)
-                //{
-                //    if (current.Colors.Any(s => s.ID == colorID))
-                //    {
-                //        continue;
-                //    }
-                //    var newColors = _colorsRepo.FindByCondition(s => s.ID == colorID).FirstOrDefault();
-                //    if (newColors == null)
-                //    {
-                //        continue;
-                //    }
-                //    current.Colors.Add(newColors);
-                //}
-
-                //List<Color> colorsToRemove = new List<Color>();
-                //foreach (var color in current.Colors)
-                //{
-                //    if (item.Colors.Contains(color.ID))
-                //    {
-                //        continue;
-                //    }
-                //    colorsToRemove.Add(color);
-                //}
-                //foreach (var color in colorsToRemove)
-                //{
-                //    current.Colors.Remove(color);
-                //}
-
-                _productRepo.Update(current);
-
+                _productRepo.Update(product);
+                _productRepo.Save();
                 return NoContent();
             }
             catch (Exception ex)
             {
-                _logger.LogCritical(ex, "An error occurred while creating the item.");
-
-                return StatusCode(500, new
-                {
-                    Message = "An error occurred while creating the item.",
-                    ExceptionMessage = ex.Message,
-                    InnerExceptionMessage = ex.InnerException?.Message, // Include inner exception message
-                    StackTrace = ex.StackTrace
-                });
+                _logger.LogError(ex, "Error updating product with ID {ProductId}", product.ID);
+                return StatusCode(500, "An error occurred while updating the product.");
             }
         }
+
+
 
         [HttpDelete("{id:int}")]
         public IActionResult DeleteProduct(int id)

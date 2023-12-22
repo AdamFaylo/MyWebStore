@@ -7,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Provider } from 'react-redux';
 import store from './store/store'
 import { MantineProvider } from '@mantine/core';
-import CardProductItem from './components/cart/CardProductItem';
+import CardProductItem from './components/cart/CartProductItem';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );

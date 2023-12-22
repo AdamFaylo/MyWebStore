@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MyProject.API.Models;
+using MyProject.API.Models.DTO;
 using MyProject.API.Repositories.Abstract;
 
 namespace MyProject.API.Controllers
@@ -10,76 +13,73 @@ namespace MyProject.API.Controllers
     {
         private readonly ILogger _logger;
         private readonly ICartRepository _cardsRepo;
+        private readonly IOrderItemRepository _orderItemRpository;
 
         public CartController(
             ICartRepository _cardsRepo,
-            ILogger _logger
+            IOrderItemRepository _orderItemRpository
             )
         {
-            this._logger = _logger ?? throw new ArgumentNullException(nameof(_logger));
+            this._orderItemRpository = _orderItemRpository ?? throw new ArgumentNullException(nameof(_orderItemRpository));
             this._cardsRepo = _cardsRepo ?? throw new ArgumentNullException(nameof (_cardsRepo));
         }
-        [HttpGet]
-        public IActionResult GetCarts()
+  
+
+        [HttpPut]
+        [Route("update")]
+        public IActionResult UpdateCart(OrderItemDTO updateDTO)
         {
-            try
+            // Find the cart using the provided CartId
+            var cart = _cardsRepo.FindByCondition(cart => cart.CartId == updateDTO.CartId)
+                .Include(c => c.OrderItems) // Include OrderItems for eager loading
+                .FirstOrDefault();
+
+            if (cart == null)
             {
-                var result = _cardsRepo.FindAll().ToList();
-                return Ok(result);
+                return NotFound("Cart not found");
             }
-            catch (Exception ex)
+
+            // Find the OrderItem for the given ProductID in the cart
+            var orderItem = cart.OrderItems.FirstOrDefault(item => item.ProductID == updateDTO.ProductID);
+
+            if (updateDTO.Quantity == 0)
             {
-                _logger.LogCritical(ex, "");
-                return StatusCode(500, new
+                // If Quantity is 0, remove the orderItem from the cart
+                if (orderItem != null)
                 {
-                    Message = "An error occurred while creating the item.",
-                    ExceptionMessage = ex.Message,
-                    InnerExceptionMessage = ex.InnerException?.Message, 
-                    StackTrace = ex.StackTrace
-                });
+                    cart.OrderItems.Remove(orderItem);
+                    
+                }
             }
-               
+            else
+            {
+                if (orderItem == null)
+                {
+                    // If OrderItem doesn't exist, create a new one
+                    orderItem = new OrderItem()
+                    {
+                        ProductID = updateDTO.ProductID,
+                        Quantity = updateDTO.Quantity
+                    };
+                    cart.OrderItems.Add(orderItem);
+                    _orderItemRpository.Create(orderItem); // You may need to implement a Create method
+                }
+                else
+                {
+                    // Update the quantity of the existing orderItem
+                    orderItem.Quantity = updateDTO.Quantity;
+                }
+            }
+
+            _orderItemRpository.Save(); // Save changes to OrderItems
+            _cardsRepo.Save(); // Save changes to the cart
+            // Find the cart using the provided CartId
+            var updatedCart = _cardsRepo.FindByCondition(c => c.CartId == updateDTO.CartId)
+                .Include(c => c.OrderItems)
+                .ThenInclude(orderItems => orderItems.Product)
+                .FirstOrDefault();
+
+            return Ok(updatedCart);
         }
-
-        //[HttpGet("{id:int}")]
-        //public IActionResult GetCartByID(int id) {
-        //    var result = _cardsRepo.FindByCondition(c=>c.CartID == id).FirstOrDefault();
-        //    return Ok(result);
-        //}
-
-        //[HttpPost]
-        //public IActionResult CreateCart(Cart item)
-        //{
-        //    try
-        //    {
-        //        if (item == null)
-        //        {
-        //            return BadRequest();
-        //        }
-        //        var result = _cardsRepo.Create(item);
-        //        return Created("cart", result);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogCritical(ex, "An error occurred while creating the item.");
-        //        return StatusCode(500, new {
-        //            Message = "An error occurred while creating the item.",
-        //            ExceptionMessage = ex.Message,
-        //            InnerExceptionMessage = ex.InnerException?.Message,
-        //            StackTrace = ex.StackTrace
-        //        });  
-        //    }
-            
-        //}
-
-        //[HttpPut]
-        //public IActionResult UpdateCart(Cart item)
-        //{
-        //    if (item == null)
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //}
     }
 }

@@ -4,6 +4,7 @@ import { registerUser } from "../../features/auth-slice"; // Import your registe
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { FormContainer, OverlayContainer } from "./LoginFromStyle";
+import Swal from "sweetalert2";
 
 function RegistrationForm() {
   const dispatch = useDispatch();
@@ -24,21 +25,32 @@ function RegistrationForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Dispatch the registerUser action with the form data
       await dispatch(registerUser(formData));
-      // Registration was successful; you can handle this as needed.
-      console.log("Registration successful!");
+
+      Swal.fire({
+        title: "Registration successful!",
+        icon: "success",
+        confirmButtonText: "Cool",
+      }).then((result) => {
+        result.isConfirmed && window.location.reload();
+      });
     } catch (error) {
-      // Registration failed; you can handle this, e.g., show an error message.
+      Swal.error({
+        icon: "error",
+        title: "Oops... There was an error!",
+        text: "Something went wrong!",
+        
+      }).then((result) => {
+        result.isConfirmed && window.location.reload();
+      });
       console.error("Registration error:", error.message);
     }
   };
-
   return (
     <OverlayContainer>
       <FormContainer>
         <h2>Register</h2>
-        <Form onSubmit={handleSubmit}>
+        <Form inline onSubmit={handleSubmit}>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>First name:</Form.Label>
             <Form.Control

@@ -1,35 +1,39 @@
 /** @jsxImportSource @emotion/react */
 import { useSelector } from "react-redux";
 import { containerStyles, cardGridStyles } from "./ProductListStyles";
-import DataItem from "./ProductItem";
+import ProductItem from "./ProductItem";
 import { useParams } from "react-router-dom";
 import { useMemo } from "react";
+import SortPriceComponent from "../sort/SortPriceComponent";
+import PaginationComponent from "../pagination/PaginationComponent";
 
-const ProductItem = () => {
- 
-  const {gender,category,subcategory} = useParams()
-  const data = useSelector((state) => state.data.filtered);
+const ProductList = () => {
+  const { gender, category, subcategory } = useParams();
+  const data = useSelector((state) => state.data.searchResults);
   const status = useSelector((state) => state.data.status);
-  console.log(data);
   const error = useSelector((state) => state.data.error);
-
   const departments = useSelector((state) => state.departments.data);
+
   const items = useMemo(() => {
-    if(!departments || !gender || !category) return data
+    if (!departments || !gender || !category) return data;
     try {
-      const itemsForGender = departments.find(d => d.name === gender).categories
-      console.log(itemsForGender)  
-      const itemsForSubCategory = itemsForGender.find(categoryItems => categoryItems.name === category).subcategories
-      const itemInSubCategory = itemsForSubCategory.find(subCategoryItems => subCategoryItems.name === subcategory).products
-      return itemInSubCategory;
-    }catch(e) {  console.log(e);  return []}
-
-
-  },[departments,gender,category])
-
+      const itemsForGender = departments.find(
+        (d) => d.name === gender
+      )?.categories;
+      const itemsForCategory = itemsForGender?.find(
+        (cat) => cat.name === category
+      )?.subcategories;
+      const itemsInSubCategory = itemsForCategory?.find(
+        (subCat) => subCat.name === subcategory
+      )?.products;
+      return itemsInSubCategory || [];
+    } catch (e) {
+      console.error(e);
+      return [];
+    }
+  }, [departments, gender, category, subcategory, data]);
 
   if (status === "loading") {
-    
     return <div>Loading...</div>;
   }
 
@@ -37,18 +41,18 @@ const ProductItem = () => {
     return <div>Error: {error}</div>;
   }
   return (
-    <>
-      <div css={containerStyles}>
-        {items && (
-          <div className="card_grid" css={cardGridStyles}>
-            {items .map((d) => (
-              <DataItem key={d.id} data={d} />
-            ))}
-          </div>
-        )}
+    <div css={containerStyles}>
+      <SortPriceComponent />
+      <div css={cardGridStyles}>
+        {items &&
+          items
+            .slice(0, 8)
+            .map((item) => <ProductItem key={item.id} data={item} />)}
       </div>
-    </>
+      {/* Add the Pagination component here */}
+      <PaginationComponent />
+    </div>
   );
 };
 
-export default ProductItem;
+export default ProductList;

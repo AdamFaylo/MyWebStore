@@ -17,6 +17,16 @@ const store = configureStore({
     auth: authSlice,
     theme: themeReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+  getDefaultMiddleware({
+    serializableCheck: {
+      // Ignore state and actions that are non-serializable
+      ignoredActions: ['yourNonSerializableAction'],
+      ignoredPaths: ['some.nested.nonSerializableField'],
+      // Increase warning threshold
+      warnAfter: 100, // Default is 32ms
+    },
+  }),
 });
 
 export type RootState = ReturnType<typeof store.getState>

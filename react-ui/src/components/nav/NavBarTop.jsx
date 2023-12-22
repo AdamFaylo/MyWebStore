@@ -7,14 +7,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logOut } from "../../features/user-slice";
 import DropDown from "./DropDown";
-import Search from "../product/ProductSearch";
+import Search from "../search/SearchProduct";
 import CartTaggle from "../cart/CartTaggle";
-import DarkModeButton from "../DarkModeButton";
+import DarkModeButton from "../darkmode/DarkModeButton";
 import { FaPowerOff } from "react-icons/fa";
 import { RiUserLine } from "react-icons/ri";
 import "./navbar.css";
+import LogoComponents from "../logo/LogoComponents";
 
 function NavBarTop() {
+  const styleBtnNavbar = {
+    display: "flex",
+    gap: "0.5rem",
+    width: "200px",
+    width: "8rem",
+  };
+
   const isDark = useSelector((state) => state.theme.isDark);
   const { user } = useSelector((state) => state.user);
   const nav = useNavigate();
@@ -27,7 +35,7 @@ function NavBarTop() {
             display: "grid",
             justifyContent: "center",
             height: "34px",
-            width:"34px",
+            width: "34px",
             borderRadius: "5px",
             border: "1px solid white",
             alignItems: "center",
@@ -58,7 +66,7 @@ function NavBarTop() {
             display: "grid",
             justifyContent: "center",
             height: "34px",
-            width:"34px",
+            width: "34px",
             borderRadius: "5px",
             border: "1px solid green",
             alignItems: "center",
@@ -74,28 +82,32 @@ function NavBarTop() {
     );
   }, [user]);
   return (
+    <Navbar expand="lg" className={!isDark ? "light" : "dark"}>
+      <Container fluid>
+        <Navbar.Brand href="/">
+          <LogoComponents />
+        </Navbar.Brand>
 
-      <Navbar expand="lg" className={!isDark ? "light" : "dark"}>
-        <Container fluid>
-          <Navbar.Brand href="#">Navbar scroll</Navbar.Brand>
-          <Navbar.Toggle aria-controls="navbarScroll" />
-          <Navbar.Collapse id="navbarScroll">
-            <Nav
-              className="me-auto my-2 my-lg-0"
-              style={{ maxHeight: "100px" }}
-              navbarScroll
-            >
-              <Nav.Link href="/">Home</Nav.Link>
-              <DropDown />
-              <Nav.Link href="/about">About</Nav.Link>
-            </Nav>
-            <Search />
+        <Navbar.Toggle aria-controls="navbarScroll" />
+        <Navbar.Collapse id="navbarScroll">
+          <Nav
+            className="me-auto my-2 my-lg-0"
+            style={{ maxHeight: "100px" }}
+            navbarScroll
+          >
+            <Nav.Link href="/">Home</Nav.Link>
+            <DropDown />
+            <Nav.Link href="/about">About</Nav.Link>
+          </Nav>
+          <Search />
+          <div style={styleBtnNavbar}>
             <DarkModeButton />
             <CartTaggle />
             <AuthButton />
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+          </div>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 }
 

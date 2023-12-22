@@ -1,11 +1,16 @@
 // src/LoginFormStyles.js
 import styled from '@emotion/styled';
 
+export const Container = styled.div`
+  display: grid;
+  justify-items: center;
+`;
+
 export const OverlayContainer = styled.div`
   display: grid;
   align-content: center;
   height: 84vh;
-  width: 100%; 
+  width: 30rem; 
   border-radios: solid 1px black;
 `;
 

@@ -33,44 +33,43 @@ namespace MyProject.API.Context
         {
             base.OnModelCreating(modelBuilder);
 
+
+            // Carts
+
+            //  add a car for each user that i seeded
+
             //User 
             modelBuilder.Entity<User>().HasData(
              new User { ID = 1, FirstName = "Adam", LastName = "Faylo", EmailAddress = "adam@gmail.com", UserName = "adam", Password = "12346578", Type = UserType.Admin },
              new User { ID = 2, FirstName = "Eran", LastName = "BenDahan", EmailAddress = "eran@gmail.com", UserName = "eran", Password = "87654321", Type = UserType.Unknown },
-             new User { ID = 3, FirstName = "Roman", LastName = "Coco", EmailAddress = "roman@gmail.com", UserName = "rom", Password = "55555555", Type = UserType.Readonly }
+             new User { ID = 3, FirstName = "Roman", LastName = "Coco", EmailAddress = "roman@gmail.com", UserName = "rom", Password = "55555555", Type = UserType.Readonly}
                 );
 
             modelBuilder.Entity<User>()
                     .HasOne(e => e.Cart)
                     .WithOne(e => e.User)
-                    .HasForeignKey<Cart>(e => e.UserID)
+                    .HasForeignKey<Cart>(e => e.UserId)
                     .IsRequired();
-
-            modelBuilder.Entity<Cart>()
-                .HasKey(c => c.CartId);
-
-
 
             modelBuilder.Entity<Product>()
                 .Property(p => p.AddedOn)
                 .HasDefaultValueSql("GETDATE()");
 
             modelBuilder.Entity<Cart>().HasData(
-                new Cart { CartId = 1, UserID = 1, CartType = 1 },
-                new Cart { CartId = 2, UserID = 2, CartType = 2 }
+                new Cart { CartId = 1, UserId = 1,CartQuantity = 1 },
+                new Cart { CartId = 2, UserId = 2, CartQuantity = 5 }
                 );
 
             //Logo
             modelBuilder.Entity<LogoImage>().HasData(
-             new LogoImage { ID = 1, Logo = "https://i.imgur.com/OeC6gqG.jpg", Alt = "Logo vanes site" }
-
+             new LogoImage { ID = 1, Logo = "https://i.imgur.com/VcU01l9.png", Alt = "Logo vanes site" }
                 );
             //Payment
             modelBuilder.Entity<Payment>().HasData(
              new Payment { ID = 1, Amount = 29.90m, PaymentDate = DateTime.UtcNow.AddDays(-1), OrderID = 1 },
              new Payment { ID = 2, Amount = 39.90m, PaymentDate = DateTime.UtcNow.AddDays(-2), OrderID = 2 }
                 );
-            //Sizes -
+            //Sizes 
             modelBuilder.Entity<Size>().HasData(
              new Size { ID = 1, SizeName = "XS", ProductID = 1 },
              new Size { ID = 2, SizeName = "S", ProductID = 2 },
@@ -78,13 +77,10 @@ namespace MyProject.API.Context
                 );
             //OrderItem
             modelBuilder.Entity<OrderItem>().HasData(
-             new OrderItem { ID = 1, Quantity = 2, ProductID = 1, CartID = 1, OrderId = 1 },
-             new OrderItem { ID = 2, Quantity = 8, ProductID = 2, CartID = 2, OrderId = 2 }
+             new OrderItem { ID = 1, Quantity = 2, ProductID = 1, CartID = 1 },
+             new OrderItem { ID = 2, Quantity = 8, ProductID = 2, CartID = 2 }
                 );
-
-
-
-            //Orders -
+            //Orders 
             modelBuilder.Entity<Order>().HasData(
              new Order { OrderId = 1, IsPaid = true, CustomerID = 1, OrderDate = DateTime.Now.AddDays(-1), CartId = 1, ShippingAddressID = 1, },
              new Order { OrderId = 2, IsPaid = false, CustomerID = 2, OrderDate = DateTime.Now.AddDays(-2), CartId = 2, ShippingAddressID = 2, }
@@ -99,13 +95,13 @@ namespace MyProject.API.Context
 
             base.OnModelCreating(modelBuilder);
 
-            //Customer -
+            //Customer
             modelBuilder.Entity<Customer>().HasData(
              new Customer { ID = 1, FirstName = "Adam", LastName = "Faylo", Mail = "ed.mil.86@gmail.com" },
              new Customer { ID = 2, FirstName = "Ray", LastName = "Faylo", Mail = "ray.faylo@gmail.com" }
            );
 
-            //Types -
+            //Types 
             modelBuilder.Entity<Department>().HasData(
              new Department { ID = 1, Name = "Man" },
              new Department { ID = 2, Name = "Ladies" },
@@ -151,7 +147,7 @@ namespace MyProject.API.Context
                 .Property(p => p.AddedOn)
                 .HasDefaultValueSql("getDate()");
 
-            // //Product - 
+            //Product 
             modelBuilder.Entity<Product>().HasData(
 
                 //--------------------------------------------------MAN--------------------------------------------------------//

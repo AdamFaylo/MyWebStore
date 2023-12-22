@@ -1,8 +1,28 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 
 const ProductDetails = () => {
+  const styleDetailsImg = {
+    borderRadius: "15px",
+    height: "40rem",
+  };
+  const styleCardDetails = {
+    display: "grid",
+    justifyItems: "center",
+  };
+
+  const containerCardDetails = {
+    display: "grid",
+    justifyItems: "center",
+    marginTop: "5rem",
+  };
+
+  const navigate = useNavigate();
+  const handle = () => {
+    navigate("/");
+  };
+
   const { id } = useParams();
   const numberId = parseInt(id);
   //console.log("this is" + numberId);
@@ -19,33 +39,24 @@ const ProductDetails = () => {
   //console.log(product);
   return (
     <>
-      <div
-        style={{
-          display: "grid",
-          justifyItems: "center",
-        }}
-      >
+      <div style={containerCardDetails}>
         <h3>Details product</h3>
-        <div
-          style={{
-            position: "absolute",
-            right: "842px",
-            top: "116px",
-          }}
-        >
-          <h3>{product.productName}</h3>
-          <div>{product.price}</div>
+        <button className="btn btn-primary" onClick={handle}>
+          Come back
+        </button>
+        <div style={styleCardDetails}>
+          <img style={styleDetailsImg} src={product.galleryImage[0].imageURL} />
+          <div
+            style={{
+              position: "relative",
+              right: "207",
+              top: "91px",
+            }}
+          >
+            <h3>{product.productName}</h3>
+            <div>{product.price}</div>
+          </div>
         </div>
-        <img
-          style={{
-            border: "solid red 1px",
-            borderRadius: "15px",
-            height: "40rem"
-        
-          }}
-          src={product.galleryImage[0].imageURL}
-        />
-        {/* Render other product details here */}
       </div>
     </>
   );

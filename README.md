@@ -87,8 +87,10 @@ Permission exists for Backoffice,\
 Ability to dive into all products while being able to: add, extend and delete,\
 Another option is to make a purchase on the website.
 
-   ```Admin@gmail.com```
-  ```12345678```
+  ``` 
+  Admin@gmail.com
+  12345678
+  ```
   
 
 ### Logged-In Users:
@@ -134,7 +136,7 @@ User action You can choose and the product is sent to the shopping cart,\
    2. Build and run the solution.
    3. Now when the database was created with your connection string we will need to manually apply the migrations.
    4. Open a terminal in the *api-server* folder and run the following command:
-    ``` bash
+    ```Powershell
     dotnet ef database update
     ```
    5. You are ready to run the solution.

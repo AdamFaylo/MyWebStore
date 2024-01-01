@@ -83,10 +83,10 @@ The project was created as a project task for [ReactJS]
 ## 💁 How It Works
 <a name="how-it-works"/>
 
-### Admin/:
+### Logged-In Admin:
 Permission exists for Backoffice,\
 Ability to dive into all products while being able to: add, extend and delete,\
-Another option is to make a purchase on the website,\
+Another option is to make a purchase on the website.
 
 
 ### Logged-In Users:
@@ -94,7 +94,7 @@ Can do the same things as a Guest,\
 view a listing's details,\
 create/update their listings,\
 chat with other users,\
-access their profile page.
+access their profile page.????
 
 
 ## 🔨 Features

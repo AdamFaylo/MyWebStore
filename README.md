@@ -1,51 +1,136 @@
-# Project Summary: React and .NET Entity Framework
+# MarketMingle
 
-## Overview
-Welcome to the project summary for my exciting web application that utilizes the power of React for the front end and .NET Entity Framework for the backend. This project showcases my journey as I bring together these technologies to create a feature-rich and dynamic web application.
+> A React project with a .NET backend.
 
-## Key Features
-- **Front-End with React:** The project leverages React to create a modern and responsive user interface. React's component-based architecture makes it easy to manage and maintain the application's frontend.
+## Table of Contents
+* [General Information](#general-information)
+* [Built With](#built-with)
+* [How It Works](#how-it-works)
+* [Features](#features)
+* [Screenshots](#screenshots)
+* [Setup](#setup)
 
-- **Back-End with .NET Entity Framework:** .NET Entity Framework is the backbone of this project, providing robust database management and efficient data operations. It enables seamless data access and manipulation.
+## ℹ️ General Information
+<a name="general-information"/>
 
-- **Database Integration:** I've successfully integrated .NET Entity Framework with the project, enabling database operations such as Create, Read, Update, and Delete (CRUD). This ensures data integrity and reliability.
+MarketMingle is a project designed to connect buyers with sellers. It aims to solve [specific problems] and serves the purpose of [its intended use].
+The project was created as a project assignment for [ReactJS - октомври 2023](https://softuni.bg/trainings/4238/reactjs-october-2023).
 
-- **User Authentication:** The application includes user authentication features, ensuring secure access and data protection.
 
-- **Responsive Design:** The user interface is designed to be responsive, providing an optimal experience on various devices and screen sizes.
+## ⚒️ Built With
+<a name="built-with"/>
 
-## Technology Stack
-- **Front-End:** React, Bootstrap, Emotion for styling.
-- **Back-End:** .NET Entity Framework, C#.
-- **Authentication:** [Specify authentication method used, e.g., JWT, OAuth].
-- **Database:** [Specify your database engine, e.g., SQL Server, PostgreSQL].
-- **Additional Libraries:** SweetAlert2 for user-friendly alerts.
+### The following NuGet packages are used in the backend project:
 
-## Getting Started
-To get started with the project, follow these steps:
+- ASP.NET Core: 8.0
+- AutoMapper: 12.0.1
+- AutoMapper.Extensions.Microsoft.DependencyInjection: 12.0.1
+- Microsoft.AspNetCore.Authentication.JwtBearer: 8.0.0
+- Microsoft.AspNetCore.Identity.EntityFrameworkCore: 8.0.0
+- Microsoft.AspNetCore.OpenApi: 8.0.0
+- Microsoft.AspNetCore.SignalR: 1.1.0
+- Microsoft.EntityFrameworkCore: 8.0.0
+- Microsoft.EntityFrameworkCore.Analyzers: 8.0.0
+- Microsoft.EntityFrameworkCore.Design: 8.0.0
+- Microsoft.EntityFrameworkCore.SqlServer: 8.0.0
+- Microsoft.EntityFrameworkCore.Tools: 8.0.0
+- MimeTypesMap: 1.0.8
+- Swashbuckle.AspNetCore: 6.5.0
 
-1. Clone this repository to your local machine.
-2. Install the necessary dependencies for both the frontend and backend.
-3. Configure your database connection settings.
-4. Start the application.
+### The following packages are used in the frontend project: 
+- @fortawesome/fontawesome-svg-core - 6.4.2
+- @fortawesome/free-brands-svg-icons - 6.4.2
+- @fortawesome/free-regular-svg-icons - 6.4.2
+- @fortawesome/free-solid-svg-icons - 6.4.2
+- @fortawesome/react-fontawesome - 0.2.0
+- @microsoft/signalr - 8.0.0
+- axios - 1.6.1
+- js-cookie - 3.0.5
+- jwt-decode - 4.0.0
+- react - 18.2.0
+- react-dom - 18.2.0
+- react-paginate - 8.2.0
+- react-router-dom - 6.18.0
+- react-tag-input-component - 2.0.2
+- typeface-raleway - 1.1.13
 
-Detailed setup instructions can be found in the project's documentation.
 
-## Usage
-Once the project is up and running, you can:
+## 💁 How It Works
+<a name="how-it-works"/>
 
-- [List some key functionalities or actions users can perform]
-- [Provide example commands or code snippets for common tasks]
+### Guests:
+Can view the homepage,\
+browse all available listings,\
+login/register,\
+read doctor profiles.
 
-## Contributions
-Contributions are welcome! If you'd like to contribute to this project, please refer to the [Contributing Guidelines](CONTRIBUTING.md) for details on how to get involved.
 
-## License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
+### Logged-In Users:
+Can do the same things as a Guest,\
+view a listing's details,\
+create/update their listings,\
+chat with other users,\
+access their profile page.
 
-## Contact
-If you have questions or need assistance, feel free to reach out to me at [Your Email Address].
 
----
+## 🔨 Features
+<a name="features"/>
 
-Thank you for exploring my React and .NET Entity Framework project. I hope this summary provides you with valuable insights into the technology stack and features of the application. Feel free to explore the code, offer feedback, or get in touch if you have any questions or suggestions. Happy coding!
+- CRUD operations for listings
+- Uploading multiple images as files
+- Chat functionality
+- Dark/Light theme
+- Responsive design
+- Client-side validations
+- Client-side search
+- Client-side pagination
+- JWT authentication
+  
+  
+## 📷 Screenshots
+<a name="screenshots"/>
+
+![SS1](./images/image6.png)
+![SS2](./images/image5.png)
+![SS3](./images/image4.png)
+![SS4](./images/image3.png)
+![SS5](./images/image2.png)
+![SS6](./images/image1.png)
+
+
+## ⚙️ Setup
+<a name="setup"/>
+
+### Backend
+1. **Clone the Repository**
+2. **Open a terminal in the *api-server* folder and run the following commands:**
+   ``` bash
+   dotnet user-secrets init
+   dotnet user-secrets set "JWTKey:ValidIssuer" "https://localhost:5001"
+   dotnet user-secrets set "JWTKey:ValidAudience" "https://localhost:5001"
+   dotnet user-secrets set "JWTKey:TokenExpiryTimeInHour" "10"
+   dotnet user-secrets set "JWTKey:Secret" "{YOUR SECRET}"
+   dotnet user-secrets set "ConnectionStrings:DatabaseConnection" "Server={YOUR SERVER NAME};Database=MarketMingle;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;"
+   dotnet user-secrets set "CorsOrigins:AllowedOrigins" "https://localhost:5173"
+   ```
+  *Please change the values in **{ }** with your own.*
+  
+3. **Run Backend:**
+   1. Open the solution in Visual Studio or your preferred IDE.
+   2. Build and run the solution.
+   3. Now when the database was created with your connection string we will need to manually apply the migrations.
+   4. Open a terminal in the *api-server* folder and run the following command:
+    ``` bash
+    dotnet ef database update
+    ```
+   5. You are ready to run the solution.
+
+  
+### Frontend     
+1. **Open a terminal in the *react-client* folder and run the following commands:**
+   ```bash
+   npm install
+   npm run dev
+   ```
+### Notes
+- Make sure the the Backend API url is *https://localhost:5001* and the Frontend URL is *https://localhost:5173* because of some hardcoded values in the code. :(

@@ -1,5 +1,4 @@
-# MarketMingle
-
+# AdamFaylo
 > A React project with a .NET backend.
 
 ## Table of Contents
@@ -90,11 +89,9 @@ Another option is to make a purchase on the website.
 
 
 ### Logged-In Users:
-Can do the same things as a Guest,\
-view a listing's details,\
-create/update their listings,\
-chat with other users,\
-access their profile page.????
+limited abilities,\
+User action You can choose and the product is sent to the shopping cart,\
+It is very important to note: there is an ability to send the product to the shopping cart only with logged in or registered.
 
 
 ## 🔨 Features

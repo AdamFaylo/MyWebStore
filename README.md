@@ -30,10 +30,10 @@ The project was created as a project task for [ReactJS]
 
 
 ### The following packages are used in the frontend project: 
+- @fontsource/roboto": "^5.0.8,
 - @emotion/css": "^11.11.2,
 - @emotion/react": "^11.11.1,
 - @emotion/styled": "^11.11.0,
-- @fontsource/roboto": "^5.0.8,
 - @mantine/carousel": "^6.0.20,
 - @mantine/core": "^6.0.20,
 - @mantine/dates": "^6.0.20,
@@ -118,30 +118,14 @@ User action You can choose and the product is sent to the shopping cart,\
 <a name="screenshots"/>
 
 ![SS1](https://i.imgur.com/bgWaa1P.png)
-![SS2](./images/image5.png)
-![SS3](./images/image4.png)
-![SS4](./images/image3.png)
-![SS5](./images/image2.png)
-![SS6](./images/image1.png)
+![SS1](https://i.imgur.com/bgWaa1P.png)
+![SS1](https://i.imgur.com/bgWaa1P.png)
+
 
 
 ## ⚙️ Setup
 <a name="setup"/>
 
-### Backend
-1. **Clone the Repository**
-2. **Open a terminal in the *api-server* folder and run the following commands:**
-   ``` bash
-   dotnet user-secrets init
-   dotnet user-secrets set "JWTKey:ValidIssuer" "https://localhost:5001"
-   dotnet user-secrets set "JWTKey:ValidAudience" "https://localhost:5001"
-   dotnet user-secrets set "JWTKey:TokenExpiryTimeInHour" "10"
-   dotnet user-secrets set "JWTKey:Secret" "{YOUR SECRET}"
-   dotnet user-secrets set "ConnectionStrings:DatabaseConnection" "Server={YOUR SERVER NAME};Database=MarketMingle;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;"
-   dotnet user-secrets set "CorsOrigins:AllowedOrigins" "https://localhost:5173"
-   ```
-  *Please change the values in **{ }** with your own.*
-  
 3. **Run Backend:**
    1. Open the solution in Visual Studio or your preferred IDE.
    2. Build and run the solution.
@@ -155,9 +139,8 @@ User action You can choose and the product is sent to the shopping cart,\
   
 ### Frontend     
 1. **Open a terminal in the *react-client* folder and run the following commands:**
-   ```bash
-   npm install
-   npm run dev
+   ```Powershell
+   npm i
+   npm start
    ```
-### Notes
-- Make sure the the Backend API url is *https://localhost:5001* and the Frontend URL is *https://localhost:5173* because of some hardcoded values in the code. :(
+

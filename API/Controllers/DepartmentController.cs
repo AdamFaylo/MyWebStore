@@ -15,7 +15,7 @@ namespace API.Controllers
 
         public DepartmentController(
             IDepartmentRepository _departmentRepo,
-            
+
             ILogger<DepartmentController> _logger
             )
         {
@@ -53,7 +53,7 @@ namespace API.Controllers
                                     {
                                         id = p.ID,
                                         name = p.ProductName,
-                                        price =p.Price,
+                                        price = p.Price,
                                         departmentID = p.DepartmentID,
                                         color = p.Colors,
                                         galleryImage = p.GalleryImage,
@@ -106,7 +106,7 @@ namespace API.Controllers
                 {
                     ID = item.ID,
                     Name = item.Name,
-                    Products = new List<Product>()   
+                    Products = new List<Product>()
                 };
 
                 var result = _departmentRepo.Create(newOrderItem);
@@ -135,7 +135,7 @@ namespace API.Controllers
             {
                 _logger.LogCritical($"{ex.Message}", ex);
                 return StatusCode(500);
-            } 
+            }
         }
 
         [HttpDelete("{id:int}")]

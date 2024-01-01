@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import api,{fetchUser} from "../utils/api";
+import api, { fetchUser } from "../utils/api";
 import Swal from "sweetalert2";
 
 const userURL = "Login/GetToken";
@@ -14,45 +14,46 @@ export const loginUser = createAsyncThunk(
 
 export const updateCart = createAsyncThunk(
   "user/updateCart",
-  async ({itemId, add },thunkAPI) => {
-    const updateURL = "https://localhost:7182/api/Cart/update"
-    let {user} = thunkAPI.getState()
-    console.log(user)
-    let itemQuantity = user.user.cart.orderItems.find(item => item.product.id === itemId)?.quantity ?? 0
-    if(add) {
-      itemQuantity += 1
+  async ({ itemId, add }, thunkAPI) => {
+    const updateURL = "https://localhost:7182/api/Cart/update";
+    let { user } = thunkAPI.getState();
+    console.log(user);
+    let itemQuantity =
+      user.user.cart.orderItems.find((item) => item.product.id === itemId)
+        ?.quantity ?? 0;
+    if (add) {
+      itemQuantity += 1;
     } else {
-      if(!itemQuantity)  {
-        throw new Error("cannot remove item, item not present in cart")
+      if (!itemQuantity) {
+        throw new Error("cannot remove item, item not present in cart");
       }
-      itemQuantity -= 1
+      itemQuantity -= 1;
     }
-    if(itemQuantity <0) {
-      itemQuantity = 0
+    if (itemQuantity < 0) {
+      itemQuantity = 0;
     }
     const response = await api.put(updateURL, {
       cartId: user.user.cart.cartId,
       productId: itemId,
-      quantity: itemQuantity 
+      quantity: itemQuantity,
     });
     return {
-      newCart: response.data ,// new cart\
-      newQuantity: itemQuantity
-    }
+      newCart: response.data, // new cart\
+      newQuantity: itemQuantity,
+    };
   }
-)
-
+);
 
 function calcTotalCartPrice(cart) {
   return cart.orderItems.reduce((price, orderItem) => {
-      return price + (orderItem.quantity * orderItem.product.price)
-  }, 0)
+    return price + orderItem.quantity * orderItem.product.price;
+  }, 0);
 }
 
 function calcTotalCartItems(cart) {
   return cart.orderItems.reduce((items, orderItem) => {
-      return items + orderItem.quantity
-  }, 0)
+    return items + orderItem.quantity;
+  }, 0);
 }
 
 export const me = createAsyncThunk("user/me", async () => {
@@ -66,7 +67,7 @@ const userReducer = createSlice({
     loading: false,
     user: null,
     error: null,
-    cartItems: [], 
+    cartItems: [],
     cartTotalQuantity: 0,
     cartTotalPrice: 0,
   },
@@ -78,7 +79,7 @@ const userReducer = createSlice({
     logOut: (state) => {
       state.user = null;
       localStorage.removeItem("mywebsite_token");
-    }
+    },
   },
 
   extraReducers: (builder) => {
@@ -93,8 +94,8 @@ const userReducer = createSlice({
         state.loading = false;
         state.user = action.payload;
 
-        state.cartTotalPrice = calcTotalCartPrice(state.user.cart)
-        state.cartTotalQuantity = calcTotalCartItems(state.user.cart)
+        state.cartTotalPrice = calcTotalCartPrice(state.user.cart);
+        state.cartTotalQuantity = calcTotalCartItems(state.user.cart);
 
         state.error = null;
       })
@@ -112,9 +113,9 @@ const userReducer = createSlice({
       .addCase(me.fulfilled, (state, action) => {
         state.loading = false;
         state.user = action.payload;
-        
-        state.cartTotalPrice = calcTotalCartPrice(state.user.cart)
-        state.cartTotalQuantity = calcTotalCartItems(state.user.cart)
+
+        state.cartTotalPrice = calcTotalCartPrice(state.user.cart);
+        state.cartTotalQuantity = calcTotalCartItems(state.user.cart);
 
         state.error = null;
       })
@@ -133,29 +134,30 @@ const userReducer = createSlice({
         state.loading = false;
         state.user = {
           ...state.user,
-          cart: action.payload.newCart
-        }
-        
-        state.cartTotalPrice = calcTotalCartPrice(state.user.cart)
-        state.cartTotalQuantity = calcTotalCartItems(state.user.cart)
+          cart: action.payload.newCart,
+        };
 
-        if(!action.payload.newQuantity) {
+        state.cartTotalPrice = calcTotalCartPrice(state.user.cart);
+        state.cartTotalQuantity = calcTotalCartItems(state.user.cart);
+
+        if (!action.payload.newQuantity) {
           Swal.fire({
             icon: "success",
             title: "Product Removed from cart",
             showConfirmButton: false,
             timer: 1500,
           });
-        }
-        else  {
+        } else {
           Swal.fire({
             icon: "success",
-            title: "Product added to cart, current quantity " + action.payload.newQuantity,
+            title:
+              "Product added to cart, current quantity " +
+              action.payload.newQuantity,
             showConfirmButton: false,
             timer: 1500,
           });
-        }        
-       
+        }
+
         state.error = null;
       })
       .addCase(updateCart.rejected, (state, action) => {
@@ -167,7 +169,7 @@ const userReducer = createSlice({
           timer: 1500,
         });
         state.error = action.error.message; // Set the error message
-      })
+      });
   },
 });
 

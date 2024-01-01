@@ -29,57 +29,66 @@ namespace MyProject.API.Controllers
         [Route("update")]
         public IActionResult UpdateCart(OrderItemDTO updateDTO)
         {
-            // Find the cart using the provided CartId
-            var cart = _cardsRepo.FindByCondition(cart => cart.CartId == updateDTO.CartId)
-                .Include(c => c.OrderItems) // Include OrderItems for eager loading
-                .FirstOrDefault();
-
-            if (cart == null)
+            try
             {
-                return NotFound("Cart not found");
-            }
+                // Find the cart using the provided CartId
+                var cart = _cardsRepo.FindByCondition(cart => cart.CartId == updateDTO.CartId)
+                    .Include(c => c.OrderItems) // Include OrderItems for eager loading
+                    .FirstOrDefault();
 
-            // Find the OrderItem for the given ProductID in the cart
-            var orderItem = cart.OrderItems.FirstOrDefault(item => item.ProductID == updateDTO.ProductID);
-
-            if (updateDTO.Quantity == 0)
-            {
-                // If Quantity is 0, remove the orderItem from the cart
-                if (orderItem != null)
+                if (cart == null)
                 {
-                    cart.OrderItems.Remove(orderItem);
-                    
+                    return NotFound("Cart not found");
                 }
-            }
-            else
-            {
-                if (orderItem == null)
+
+                // Find the OrderItem for the given ProductID in the cart
+                var orderItem = cart.OrderItems.FirstOrDefault(item => item.ProductID == updateDTO.ProductID);
+
+                if (updateDTO.Quantity == 0)
                 {
-                    // If OrderItem doesn't exist, create a new one
-                    orderItem = new OrderItem()
+                    // If Quantity is 0, remove the orderItem from the cart
+                    if (orderItem != null)
                     {
-                        ProductID = updateDTO.ProductID,
-                        Quantity = updateDTO.Quantity
-                    };
-                    cart.OrderItems.Add(orderItem);
-                    _orderItemRpository.Create(orderItem); // You may need to implement a Create method
+                        cart.OrderItems.Remove(orderItem);
+
+                    }
                 }
                 else
                 {
-                    // Update the quantity of the existing orderItem
-                    orderItem.Quantity = updateDTO.Quantity;
+                    if (orderItem == null)
+                    {
+                        // If OrderItem doesn't exist, create a new one
+                        orderItem = new OrderItem()
+                        {
+                            ProductID = updateDTO.ProductID,
+                            Quantity = updateDTO.Quantity
+                        };
+                        cart.OrderItems.Add(orderItem);
+                        _orderItemRpository.Create(orderItem); // You may need to implement a Create method
+                    }
+                    else
+                    {
+                        // Update the quantity of the existing orderItem
+                        orderItem.Quantity = updateDTO.Quantity;
+                    }
                 }
+
+                _orderItemRpository.Save(); // Save changes to OrderItems
+                _cardsRepo.Save(); // Save changes to the cart
+                                   // Find the cart using the provided CartId
+                var updatedCart = _cardsRepo.FindByCondition(c => c.CartId == updateDTO.CartId)
+                    .Include(c => c.OrderItems)
+                    .ThenInclude(orderItems => orderItems.Product)
+                    .FirstOrDefault();
+
+                return Ok(updatedCart);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while deleting the cart.");
+                return StatusCode(500, "An error occurred while deleting the cart.");
             }
 
-            _orderItemRpository.Save(); // Save changes to OrderItems
-            _cardsRepo.Save(); // Save changes to the cart
-            // Find the cart using the provided CartId
-            var updatedCart = _cardsRepo.FindByCondition(c => c.CartId == updateDTO.CartId)
-                .Include(c => c.OrderItems)
-                .ThenInclude(orderItems => orderItems.Product)
-                .FirstOrDefault();
-
-            return Ok(updatedCart);
         }
     }
 }

@@ -506,7 +506,7 @@ namespace MyProject.API.Migrations
             migrationBuilder.InsertData(
                 table: "LogoImage",
                 columns: new[] { "ID", "Alt", "Logo" },
-                values: new object[] { 1, "Logo vanes site", "https://i.imgur.com/6jdrLVk.png" });
+                values: new object[] { 1, "Logo vanes site", "https://i.imgur.com/VcU01l9.png" });
 
             migrationBuilder.InsertData(
                 table: "ShippingAddress",
@@ -560,8 +560,8 @@ namespace MyProject.API.Migrations
                 columns: new[] { "OrderId", "CartId", "CustomerID", "IsPaid", "OrderDate", "ShippingAddressID", "UserID" },
                 values: new object[,]
                 {
-                    { 1, 1, 1, true, new DateTime(2023, 12, 20, 15, 12, 34, 885, DateTimeKind.Local).AddTicks(7714), 1, null },
-                    { 2, 2, 2, false, new DateTime(2023, 12, 19, 15, 12, 34, 885, DateTimeKind.Local).AddTicks(7759), 2, null }
+                    { 1, 1, 1, true, new DateTime(2023, 12, 23, 19, 26, 9, 409, DateTimeKind.Local).AddTicks(245), 1, null },
+                    { 2, 2, 2, false, new DateTime(2023, 12, 22, 19, 26, 9, 409, DateTimeKind.Local).AddTicks(288), 2, null }
                 });
 
             migrationBuilder.InsertData(
@@ -668,8 +668,8 @@ namespace MyProject.API.Migrations
                 columns: new[] { "ID", "Amount", "OrderID", "PaymentDate" },
                 values: new object[,]
                 {
-                    { 1, 29.90m, 1, new DateTime(2023, 12, 20, 13, 12, 34, 885, DateTimeKind.Utc).AddTicks(7654) },
-                    { 2, 39.90m, 2, new DateTime(2023, 12, 19, 13, 12, 34, 885, DateTimeKind.Utc).AddTicks(7661) }
+                    { 1, 29.90m, 1, new DateTime(2023, 12, 23, 17, 26, 9, 409, DateTimeKind.Utc).AddTicks(159) },
+                    { 2, 39.90m, 2, new DateTime(2023, 12, 22, 17, 26, 9, 409, DateTimeKind.Utc).AddTicks(167) }
                 });
 
             migrationBuilder.InsertData(

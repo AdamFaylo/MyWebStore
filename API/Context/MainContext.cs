@@ -40,9 +40,9 @@ namespace MyProject.API.Context
 
             //User 
             modelBuilder.Entity<User>().HasData(
-             new User { ID = 1, FirstName = "Adam", LastName = "Faylo", EmailAddress = "adam@gmail.com", UserName = "adam", Password = "12346578", Type = UserType.Admin },
-             new User { ID = 2, FirstName = "Eran", LastName = "BenDahan", EmailAddress = "eran@gmail.com", UserName = "eran", Password = "87654321", Type = UserType.Unknown },
-             new User { ID = 3, FirstName = "Roman", LastName = "Coco", EmailAddress = "roman@gmail.com", UserName = "rom", Password = "55555555", Type = UserType.Readonly}
+             new User { ID = 1, FirstName = "Adam", LastName = "Faylo", EmailAddress = "Admin@gmail.com", UserName = "adam", Password = "12345678", Type = UserType.Admin },
+             new User { ID = 2, FirstName = "Eran", LastName = "BenDahan", EmailAddress = "User@gmail.com", UserName = "eran", Password = "87654321", Type = UserType.Unknown },
+             new User { ID = 3, FirstName = "Roman", LastName = "Coco", EmailAddress = "roman@gmail.com", UserName = "rom", Password = "55555555", Type = UserType.Readonly }
                 );
 
             modelBuilder.Entity<User>()
@@ -56,13 +56,13 @@ namespace MyProject.API.Context
                 .HasDefaultValueSql("GETDATE()");
 
             modelBuilder.Entity<Cart>().HasData(
-                new Cart { CartId = 1, UserId = 1,CartQuantity = 1 },
+                new Cart { CartId = 1, UserId = 1, CartQuantity = 1 },
                 new Cart { CartId = 2, UserId = 2, CartQuantity = 5 }
                 );
 
             //Logo
             modelBuilder.Entity<LogoImage>().HasData(
-             new LogoImage { ID = 1, Logo = "https://i.imgur.com/VcU01l9.png", Alt = "Logo vanes site" }
+             new LogoImage { ID = 1, Logo = "https://i.imgur.com/6jdrLVk.png", Alt = "Logo vanes site" }
                 );
             //Payment
             modelBuilder.Entity<Payment>().HasData(
@@ -85,11 +85,6 @@ namespace MyProject.API.Context
              new Order { OrderId = 1, IsPaid = true, CustomerID = 1, OrderDate = DateTime.Now.AddDays(-1), CartId = 1, ShippingAddressID = 1, },
              new Order { OrderId = 2, IsPaid = false, CustomerID = 2, OrderDate = DateTime.Now.AddDays(-2), CartId = 2, ShippingAddressID = 2, }
                 );
-            //modelBuilder.Entity<Order>()
-            //    .HasOne(o => o.Cart)          // An order has one cart
-            //    .WithMany(c => c.Orders)      // A cart can have many orders
-            //    .HasForeignKey(o => o.CartID) // Define the foreign key property
-            //    .IsRequired();
 
             base.OnModelCreating(modelBuilder);
 
@@ -147,49 +142,55 @@ namespace MyProject.API.Context
                 .Property(p => p.AddedOn)
                 .HasDefaultValueSql("getDate()");
 
+            // modelBuilder.Entity<Product>()
+            //.HasOne(p => p.Department)
+            //.WithMany() // You can specify the navigation property on Department here if needed
+            //.HasForeignKey(p => p.DepartmentID)
+            //.IsRequired();
+
             //Product 
             modelBuilder.Entity<Product>().HasData(
 
                 //--------------------------------------------------MAN--------------------------------------------------------//
-                new Product { ID = 1, DepartmentID = 1, SubCategoryID = 1, ProductName = "Sneakers001", Price = 299.90M },
-                new Product { ID = 2, DepartmentID = 1, SubCategoryID = 1, ProductName = "Sneakers002", Price = 359.90M },
-                new Product { ID = 3, DepartmentID = 1, SubCategoryID = 1, ProductName = "Sneakers003", Price = 59.90M },
-                new Product { ID = 4, DepartmentID = 1, SubCategoryID = 2, ProductName = "T-Shirts001", Price = 89.90M },
-                new Product { ID = 5, DepartmentID = 1, SubCategoryID = 2, ProductName = "T-Shirts002", Price = 29.90M },
-                new Product { ID = 6, DepartmentID = 1, SubCategoryID = 2, ProductName = "T-Shirts003", Price = 29.90M },
-                new Product { ID = 7, DepartmentID = 1, SubCategoryID = 3, ProductName = "Pants001", Price = 29.90M },
-                new Product { ID = 8, DepartmentID = 1, SubCategoryID = 3, ProductName = "Pants002", Price = 29.90M },
-                new Product { ID = 9, DepartmentID = 1, SubCategoryID = 3, ProductName = "Pants003", Price = 29.90M },
-                new Product { ID = 10, DepartmentID = 1, SubCategoryID = 4, ProductName = "ACC001", Price = 299.90M },
-                new Product { ID = 11, DepartmentID = 1, SubCategoryID = 4, ProductName = "ACC002", Price = 59.90M },
-                new Product { ID = 12, DepartmentID = 1, SubCategoryID = 4, ProductName = "ACC003", Price = 89.90M },
+                new Product { ID = 1, DepartmentID = 1, SubCategoryID = 1, ProductName = "Sneakers001", Price = 299.90M, Description = "Lorem, ipsum dolor sit amet consectetur adipisicing " },
+                new Product { ID = 2, DepartmentID = 1, SubCategoryID = 1, ProductName = "Sneakers002", Price = 359.90M, Description = "Lorem, ipsum dolor sit amet consectetur adipisicing " },
+                new Product { ID = 3, DepartmentID = 1, SubCategoryID = 1, ProductName = "Sneakers003", Price = 59.90M, Description = "Lorem, ipsum dolor sit amet consectetur adipisicing " },
+                new Product { ID = 4, DepartmentID = 1, SubCategoryID = 2, ProductName = "T-Shirts001", Price = 89.90M, Description = "Lorem, ipsum dolor sit amet consectetur adipisicing " },
+                new Product { ID = 5, DepartmentID = 1, SubCategoryID = 2, ProductName = "T-Shirts002", Price = 29.90M, Description = "Lorem, ipsum dolor sit amet consectetur adipisicing " },
+                new Product { ID = 6, DepartmentID = 1, SubCategoryID = 2, ProductName = "T-Shirts003", Price = 29.90M, Description = "Lorem, ipsum dolor sit amet consectetur adipisicing " },
+                new Product { ID = 7, DepartmentID = 1, SubCategoryID = 3, ProductName = "Pants001", Price = 29.90M, Description = "Lorem, ipsum dolor sit amet consectetur adipisicing " },
+                new Product { ID = 8, DepartmentID = 1, SubCategoryID = 3, ProductName = "Pants002", Price = 29.90M, Description = "Lorem, ipsum dolor sit amet consectetur adipisicing " },
+                new Product { ID = 9, DepartmentID = 1, SubCategoryID = 3, ProductName = "Pants003", Price = 29.90M, Description = "Lorem, ipsum dolor sit amet consectetur adipisicing " },
+                new Product { ID = 10, DepartmentID = 1, SubCategoryID = 4, ProductName = "ACC001", Price = 299.90M, Description = "Lorem, ipsum dolor sit amet consectetur adipisicing " },
+                new Product { ID = 11, DepartmentID = 1, SubCategoryID = 4, ProductName = "ACC002", Price = 59.90M, Description = "Lorem, ipsum dolor sit amet consectetur adipisicing " },
+                new Product { ID = 12, DepartmentID = 1, SubCategoryID = 4, ProductName = "ACC003", Price = 89.90M, Description = "Lorem, ipsum dolor sit amet consectetur adipisicing " },
 
                 //--------------------------------------------------LADIES--------------------------------------------------------//
 
-                new Product { ID = 13, DepartmentID = 2, SubCategoryID = 5, ProductName = "Sneakers001", Price = 299.90M, },
-                new Product { ID = 14, DepartmentID = 2, SubCategoryID = 5, ProductName = "Sneakers002", Price = 359.90M },
-                new Product { ID = 15, DepartmentID = 2, SubCategoryID = 5, ProductName = "Sneakers003", Price = 59.90M },
-                new Product { ID = 16, DepartmentID = 2, SubCategoryID = 6, ProductName = "T-Shirts001", Price = 89.90M },
-                new Product { ID = 17, DepartmentID = 2, SubCategoryID = 6, ProductName = "T-Shirts002", Price = 29.90M },
-                new Product { ID = 18, DepartmentID = 2, SubCategoryID = 6, ProductName = "T-Shirts003", Price = 29.90M },
-                new Product { ID = 19, DepartmentID = 2, SubCategoryID = 7, ProductName = "Pants001", Price = 29.90M },
-                new Product { ID = 20, DepartmentID = 2, SubCategoryID = 7, ProductName = "Pants002", Price = 29.90M },
-                new Product { ID = 21, DepartmentID = 2, SubCategoryID = 7, ProductName = "Pants003", Price = 29.90M },
-                new Product { ID = 22, DepartmentID = 2, SubCategoryID = 8, ProductName = "ACC", Price = 29.90M },
-                new Product { ID = 23, DepartmentID = 2, SubCategoryID = 8, ProductName = "ACC", Price = 29.90M },
-                new Product { ID = 24, DepartmentID = 2, SubCategoryID = 8, ProductName = "ACC", Price = 29.90M },
+                new Product { ID = 13, DepartmentID = 2, SubCategoryID = 5, ProductName = "Sneakers001", Price = 299.90M, Description = "Lorem, ipsum dolor sit amet consectetur adipisicing " },
+                new Product { ID = 14, DepartmentID = 2, SubCategoryID = 5, ProductName = "Sneakers002", Price = 359.90M, Description = "Lorem, ipsum dolor sit amet consectetur adipisicing " },
+                new Product { ID = 15, DepartmentID = 2, SubCategoryID = 5, ProductName = "Sneakers003", Price = 59.90M, Description = "Lorem, ipsum dolor sit amet consectetur adipisicing " },
+                new Product { ID = 16, DepartmentID = 2, SubCategoryID = 6, ProductName = "T-Shirts001", Price = 89.90M, Description = "Lorem, ipsum dolor sit amet consectetur adipisicing " },
+                new Product { ID = 17, DepartmentID = 2, SubCategoryID = 6, ProductName = "T-Shirts002", Price = 29.90M, Description = "Lorem, ipsum dolor sit amet consectetur adipisicing " },
+                new Product { ID = 18, DepartmentID = 2, SubCategoryID = 6, ProductName = "T-Shirts003", Price = 29.90M, Description = "Lorem, ipsum dolor sit amet consectetur adipisicing " },
+                new Product { ID = 19, DepartmentID = 2, SubCategoryID = 7, ProductName = "Pants001", Price = 29.90M, Description = "Lorem, ipsum dolor sit amet consectetur adipisicing " },
+                new Product { ID = 20, DepartmentID = 2, SubCategoryID = 7, ProductName = "Pants002", Price = 29.90M, Description = "Lorem, ipsum dolor sit amet consectetur adipisicing " },
+                new Product { ID = 21, DepartmentID = 2, SubCategoryID = 7, ProductName = "Pants003", Price = 29.90M, Description = "Lorem, ipsum dolor sit amet consectetur adipisicing " },
+                new Product { ID = 22, DepartmentID = 2, SubCategoryID = 8, ProductName = "ACC", Price = 29.90M, Description = "Lorem, ipsum dolor sit amet consectetur adipisicing " },
+                new Product { ID = 23, DepartmentID = 2, SubCategoryID = 8, ProductName = "ACC", Price = 29.90M, Description = "Lorem, ipsum dolor sit amet consectetur adipisicing " },
+                new Product { ID = 24, DepartmentID = 2, SubCategoryID = 8, ProductName = "ACC", Price = 29.90M, Description = "Lorem, ipsum dolor sit amet consectetur adipisicing " },
 
 
                 //--------------------------------------------------KIDS--------------------------------------------------------//
-                new Product { ID = 25, DepartmentID = 3, SubCategoryID = 9, ProductName = "Sneakers001", Price = 299.90M, },
-                new Product { ID = 26, DepartmentID = 3, SubCategoryID = 9, ProductName = "Sneakers002", Price = 359.90M },
-                new Product { ID = 27, DepartmentID = 3, SubCategoryID = 9, ProductName = "Sneakers003", Price = 59.90M },
-                new Product { ID = 28, DepartmentID = 3, SubCategoryID = 10, ProductName = "T-Shirts001", Price = 89.90M },
-                new Product { ID = 29, DepartmentID = 3, SubCategoryID = 10, ProductName = "T-Shirts002", Price = 29.90M },
-                new Product { ID = 30, DepartmentID = 3, SubCategoryID = 10, ProductName = "T-Shirts003", Price = 29.90M },
-                new Product { ID = 31, DepartmentID = 3, SubCategoryID = 12, ProductName = "ACC001", Price = 299.90M, },
-                new Product { ID = 32, DepartmentID = 3, SubCategoryID = 12, ProductName = "ACC002", Price = 59.90M },
-                new Product { ID = 33, DepartmentID = 3, SubCategoryID = 12, ProductName = "ACC003", Price = 89.90M }
+                new Product { ID = 25, DepartmentID = 3, SubCategoryID = 9, ProductName = "Sneakers001", Price = 299.90M, Description = "Lorem, ipsum dolor sit amet consectetur adipisicing " },
+                new Product { ID = 26, DepartmentID = 3, SubCategoryID = 9, ProductName = "Sneakers002", Price = 359.90M, Description = "Lorem, ipsum dolor sit amet consectetur adipisicing " },
+                new Product { ID = 27, DepartmentID = 3, SubCategoryID = 9, ProductName = "Sneakers003", Price = 59.90M, Description = "Lorem, ipsum dolor sit amet consectetur adipisicing " },
+                new Product { ID = 28, DepartmentID = 3, SubCategoryID = 10, ProductName = "T-Shirts001", Price = 89.90M, Description = "Lorem, ipsum dolor sit amet consectetur adipisicing " },
+                new Product { ID = 29, DepartmentID = 3, SubCategoryID = 10, ProductName = "T-Shirts002", Price = 29.90M, Description = "Lorem, ipsum dolor sit amet consectetur adipisicing " },
+                new Product { ID = 30, DepartmentID = 3, SubCategoryID = 10, ProductName = "T-Shirts003", Price = 29.90M, Description = "Lorem, ipsum dolor sit amet consectetur adipisicing " },
+                new Product { ID = 31, DepartmentID = 3, SubCategoryID = 12, ProductName = "ACC001", Price = 299.90M, Description = "Lorem, ipsum dolor sit amet consectetur adipisicing " },
+                new Product { ID = 32, DepartmentID = 3, SubCategoryID = 12, ProductName = "ACC002", Price = 59.90M, Description = "Lorem, ipsum dolor sit amet consectetur adipisicing " },
+                new Product { ID = 33, DepartmentID = 3, SubCategoryID = 12, ProductName = "ACC003", Price = 89.90M, Description = "Lorem, ipsum dolor sit amet consectetur adipisicing " }
 
 
                 );
@@ -215,54 +216,54 @@ namespace MyProject.API.Context
             modelBuilder.Entity<GalleryImage>().HasData(
 
               //------------------------------------------------MAN-------------------------------------------------------//
-              //-------------------Shoes-------------------//
-              new GalleryImage { ID = 1, ProductID = 1, ImageURL = "https://i.imgur.com/x3U6jKx.jpg", Alt = "man", Title = "shoes for man" },
-              new GalleryImage { ID = 2, ProductID = 2, ImageURL = "https://i.imgur.com/LnQGteX.jpg", Alt = "man", Title = "shoes for man" },
-              new GalleryImage { ID = 3, ProductID = 3, ImageURL = "https://i.imgur.com/v3SN2Vo.jpg", Alt = "man", Title = "shoes for man" },
-              //--------------------T-SHIRTS----------------------//
-              new GalleryImage { ID = 4, ProductID = 4, ImageURL = "https://i.imgur.com/CVmmzhU.jpg", Alt = "man", Title = "shoes for man" },
-              new GalleryImage { ID = 5, ProductID = 5, ImageURL = "https://i.imgur.com/LGfzcug.jpg", Alt = "man", Title = "shoes for man" },
-              new GalleryImage { ID = 6, ProductID = 6, ImageURL = "https://i.imgur.com/P3XGF8p.jpg", Alt = "man", Title = "shoes for man" },
+              //-------------------Shoes-------------------//*
+              new GalleryImage { ID = 1, ProductID = 1, ImageURL = "https://i.imgur.com/kFFe4rc.png", Alt = "man", Title = "shoes for man" },
+              new GalleryImage { ID = 2, ProductID = 2, ImageURL = "https://i.imgur.com/FSzo30R.png", Alt = "man", Title = "shoes for man" },
+              new GalleryImage { ID = 3, ProductID = 3, ImageURL = "https://i.imgur.com/OrJ3uxz.png", Alt = "man", Title = "shoes for man" },
+              //--------------------T-SHIRTS----------------------//*
+              new GalleryImage { ID = 4, ProductID = 4, ImageURL = "https://i.imgur.com/FMyHAER.png", Alt = "man", Title = "T-SHIRTS for man" },
+              new GalleryImage { ID = 5, ProductID = 5, ImageURL = "https://i.imgur.com/1vvkkun.png", Alt = "man", Title = "T-SHIRTS for man" },
+              new GalleryImage { ID = 6, ProductID = 6, ImageURL = "https://i.imgur.com/Q2Omp1q.png", Alt = "man", Title = "T-SHIRTS for man" },
               //-------------------trousers----------------//
-              new GalleryImage { ID = 7, ProductID = 7, ImageURL = "https://i.imgur.com/oPlSrbz.jpg", Alt = "man", Title = "shoes pastel color for man" },
-              new GalleryImage { ID = 8, ProductID = 8, ImageURL = "https://i.imgur.com/0oZ7MrE.jpg", Alt = "man", Title = "shoes pink for man" },
-              new GalleryImage { ID = 9, ProductID = 9, ImageURL = "https://i.imgur.com/UczdMkv.jpg", Alt = "man", Title = "shoes pink for man" },
+              new GalleryImage { ID = 7, ProductID = 7, ImageURL = "https://i.imgur.com/oPlSrbz.jpg", Alt = "man", Title = "trousers for man" },
+              new GalleryImage { ID = 8, ProductID = 8, ImageURL = "https://i.imgur.com/0oZ7MrE.jpg", Alt = "man", Title = "trousers for man" },
+              new GalleryImage { ID = 9, ProductID = 9, ImageURL = "https://i.imgur.com/UczdMkv.jpg", Alt = "man", Title = "trousers for man" },
               //---------------------acc-----------------//
-              new GalleryImage { ID = 10, ProductID = 10, ImageURL = "https://i.imgur.com/qpalZ7J.jpg", Alt = "man", Title = "shoes for man" },
-              new GalleryImage { ID = 11, ProductID = 11, ImageURL = "https://i.imgur.com/Qd0hKEe.jpg", Alt = "man", Title = "shoes for man" },
-              new GalleryImage { ID = 12, ProductID = 12, ImageURL = "https://i.imgur.com/vPXZfwu.jpg", Alt = "man", Title = "shoes for man" },
+              new GalleryImage { ID = 10, ProductID = 10, ImageURL = "https://i.imgur.com/qpalZ7J.jpg", Alt = "man", Title = "acc for man" }, 
+              new GalleryImage { ID = 11, ProductID = 11, ImageURL = "https://i.imgur.com/Qd0hKEe.jpg", Alt = "man", Title = "acc for man" },
+              new GalleryImage { ID = 12, ProductID = 12, ImageURL = "https://i.imgur.com/vPXZfwu.jpg", Alt = "man", Title = "acc for man" },
 
               //--------------------------------------------------LADIES--------------------------------------------------------//
-              //-------------------Shoes-------------------//
-              new GalleryImage { ID = 13, ProductID = 13, ImageURL = "https://i.imgur.com/A4b2kSN.jpg", Alt = "woman_shoes", Title = "shoes pastel color for woman" },
-              new GalleryImage { ID = 14, ProductID = 14, ImageURL = "https://i.imgur.com/z1zF5F0.jpg", Alt = "woman_shoes", Title = "shoes pink for woman" },
-              new GalleryImage { ID = 15, ProductID = 15, ImageURL = "https://i.imgur.com/GYkO0dn.jpg", Alt = "woman_shoes", Title = "shoes pink for woman" },
-              //-------------------T-SHIRTS-----------------//
-              new GalleryImage { ID = 16, ProductID = 16, ImageURL = "https://i.imgur.com/yKIuCZN.jpg", Alt = "woman", Title = "T-SHIRT for woman" },
-              new GalleryImage { ID = 17, ProductID = 17, ImageURL = "https://i.imgur.com/rgMPyCg.jpg", Alt = "woman", Title = "T-SHIRT for woman" },
-              new GalleryImage { ID = 18, ProductID = 18, ImageURL = "https://i.imgur.com/IkeJGoS.jpg", Alt = "woman", Title = "T-SHIRT for woman" },
+              //-------------------Shoes-------------------//*
+              new GalleryImage { ID = 13, ProductID = 13, ImageURL = "https://i.imgur.com/HpT7xCj.png", Alt = "woman_shoes", Title = "shoes pastel color for woman" },
+              new GalleryImage { ID = 14, ProductID = 14, ImageURL = "https://i.imgur.com/48fArMF.png", Alt = "woman_shoes", Title = "shoes pink for woman" },
+              new GalleryImage { ID = 15, ProductID = 15, ImageURL = "https://i.imgur.com/SuXlbYo.png", Alt = "woman_shoes", Title = "shoes pink for woman" },
+              //-------------------T-SHIRTS-----------------//*
+              new GalleryImage { ID = 16, ProductID = 16, ImageURL = "https://i.imgur.com/nA84c5Y.png", Alt = "woman", Title = "T-SHIRT for woman" },
+              new GalleryImage { ID = 17, ProductID = 17, ImageURL = "https://i.imgur.com/KLI84On.png", Alt = "woman", Title = "T-SHIRT for woman" },
+              new GalleryImage { ID = 18, ProductID = 18, ImageURL = "https://i.imgur.com/N3Hw655.png", Alt = "woman", Title = "T-SHIRT for woman" },
               //--------------------trousers---------------//
               new GalleryImage { ID = 19, ProductID = 19, ImageURL = "https://i.imgur.com/NhR4kFB.jpg", Alt = "woman_trousers", Title = "trousers for woman" },
               new GalleryImage { ID = 20, ProductID = 20, ImageURL = "https://i.imgur.com/4xStoKp.jpg", Alt = "woman_trousers", Title = "trousers for woman" },
               new GalleryImage { ID = 21, ProductID = 21, ImageURL = "https://i.imgur.com/n3TMOZI.jpg", Alt = "woman_trousers", Title = "trousers for woman" },
               //-------------------acc----------------//
               new GalleryImage { ID = 22, ProductID = 22, ImageURL = "https://i.imgur.com/KuAG5Ae.jpg", Alt = "woman_acc", Title = "acc for woman" },
-              new GalleryImage { ID = 23, ProductID = 23, ImageURL = "https://i.imgur.com/5Mp82QF.jpg", Alt = "woman_acc", Title = "acc pink for woman" },
-              new GalleryImage { ID = 24, ProductID = 24, ImageURL = "https://i.imgur.com/VvOHI60.jpg", Alt = "woman_acc", Title = "acc pink for woman" },
+              new GalleryImage { ID = 23, ProductID = 23, ImageURL = "https://i.imgur.com/5Mp82QF.jpg", Alt = "woman_acc", Title = "acc for woman" },
+              new GalleryImage { ID = 24, ProductID = 24, ImageURL = "https://i.imgur.com/VvOHI60.jpg", Alt = "woman_acc", Title = "acc for woman" },
 
               //------------------------------------------------KIDS-------------------------------------------------------//
-              new GalleryImage { ID = 25, ProductID = 25, ImageURL = "https://i.imgur.com/mtgc2Kl.jpg", Alt = "kids", Title = "shoes for kids" },
-              new GalleryImage { ID = 26, ProductID = 26, ImageURL = "https://i.imgur.com/IMMWY3v.jpg", Alt = "kids", Title = "shoes for kids" },
-              new GalleryImage { ID = 27, ProductID = 27, ImageURL = "https://i.imgur.com/bFZSTKa.jpg", Alt = "kids", Title = "shoes for kids" },
-              //------------------T-SHIRTS------------------//
-              new GalleryImage { ID = 28, ProductID = 28, ImageURL = "https://i.imgur.com/VXSGhtq.jpg", Alt = "kids", Title = "shoes for kids" },
-              new GalleryImage { ID = 29, ProductID = 29, ImageURL = "https://i.imgur.com/ugyS15L.jpg", Alt = "kids", Title = "shoes for kids" },
-              new GalleryImage { ID = 30, ProductID = 30, ImageURL = "https://i.imgur.com/FcuvIH4.jpg", Alt = "kids", Title = "shoes for kids" },
-              //-------------------ACC------------------//
-              new GalleryImage { ID = 31, ProductID = 31, ImageURL = "https://i.imgur.com/hFBMhA1.jpg", Alt = "kids", Title = "shoes for kids" },
-              new GalleryImage { ID = 32, ProductID = 32, ImageURL = "https://i.imgur.com/OeC6gqG.jpg", Alt = "kids", Title = "shoes for kids" },
-              new GalleryImage { ID = 33, ProductID = 33, ImageURL = "https://i.imgur.com/P0vlF79.jpg", Alt = "kids", Title = "shoes for kids" }
-              //------------------------------------------//
+              new GalleryImage { ID = 25, ProductID = 25, ImageURL = "https://i.imgur.com/wylMcYn.png", Alt = "kids", Title = "shoes for kids" },
+              new GalleryImage { ID = 26, ProductID = 26, ImageURL = "https://i.imgur.com/ydaUz58.png", Alt = "kids", Title = "shoes for kids" },
+              new GalleryImage { ID = 27, ProductID = 27, ImageURL = "https://i.imgur.com/WeiJljO.png", Alt = "kids", Title = "shoes for kids" },
+              //------------------T-SHIRTS------------------//*
+              new GalleryImage { ID = 28, ProductID = 28, ImageURL = "https://i.imgur.com/pBhxbGl.png", Alt = "kids", Title = "T-SHIRT for kids" },
+              new GalleryImage { ID = 29, ProductID = 29, ImageURL = "https://i.imgur.com/UJeZ4jX.png", Alt = "kids", Title = "T-SHIRT for kids" },
+              new GalleryImage { ID = 30, ProductID = 30, ImageURL = "https://i.imgur.com/pBhxbGl.png", Alt = "kids", Title = "T-SHIRT for kids" },
+              //-------------------ACC------------------//*
+              new GalleryImage { ID = 31, ProductID = 31, ImageURL = "https://i.imgur.com/5sEKFeH.png", Alt = "kids", Title = "acc for kids" },
+              new GalleryImage { ID = 32, ProductID = 32, ImageURL = "https://i.imgur.com/iaP5xXB.png", Alt = "kids", Title = "acc for kids" },
+              new GalleryImage { ID = 33, ProductID = 33, ImageURL = "https://i.imgur.com/BxlFtRr.png", Alt = "kids", Title = "acc for kids" }
+              //------------------------------------------//*
 
 
            );

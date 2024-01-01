@@ -9,7 +9,7 @@ const AlreadyLogged = ({ children }) => {
 
   if (user) {
     // user is  logged already -> navivate to profile page
-    return <Navigate to="/cart" />;
+    return <Navigate to="/" />;
   }
 
   return <>{children}</>;

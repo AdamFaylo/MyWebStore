@@ -15,7 +15,7 @@ const ProductDetails = () => {
   const containerCardDetails = {
     display: "grid",
     justifyItems: "center",
-    marginTop: "5rem",
+    height: "50rem",
   };
 
   const navigate = useNavigate();
@@ -45,7 +45,7 @@ const ProductDetails = () => {
           Come back
         </button>
         <div style={styleCardDetails}>
-          <img style={styleDetailsImg} src={product.galleryImage[0].imageURL} />
+          <img style={styleDetailsImg} src={product.galleryImage[0].imageURL} alt={product.productName} />
           <div
             style={{
               position: "relative",

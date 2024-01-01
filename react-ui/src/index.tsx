@@ -7,23 +7,18 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Provider } from 'react-redux';
 import store from './store/store'
 import { MantineProvider } from '@mantine/core';
-import CardProductItem from './components/cart/CartProductItem';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
 root.render(
-
-  // <div>
-  //   <CardProductItem/>
-  // </div>
   <BrowserRouter>
     <MantineProvider >
       <Provider store={store}>
         <App />
       </Provider>
     </MantineProvider>
-  </BrowserRouter>
+  </BrowserRouter >
 );
 
 // If you want to start measuring performance in your app, pass a function

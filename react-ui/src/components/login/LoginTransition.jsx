@@ -27,7 +27,7 @@ export default function LoginTransition() {
                 nav("/backoffice")
             }else {
                 alert("Not admin, but hello " + user.serName)
-                nav("/favorites")
+                nav("/")
             }
         }).catch(e => {
             alert(e.message)

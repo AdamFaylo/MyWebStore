@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MyProject.API.Models;
 using MyProject.API.Models.DTO;
+using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -13,6 +14,7 @@ namespace API.Models.DTO
         public int SubCategoryID { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
+        public string Description { get; set; }
         public List<string>? Colors { get; set; }
         public List<GalleryImageDTO> GalleryImage { get; set; }
         public List<string>? Size { get; set; }

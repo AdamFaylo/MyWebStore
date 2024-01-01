@@ -8,11 +8,11 @@ const LogoComponents = () => {
 
   useEffect(() => {
     dispatch(fetchLogo());
-    // If fetchLogo is stable and doesn't change, you can omit it from dependencies
+   
   }, [dispatch]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.toString()}</p>; // Make sure error is a string
+  if (loading) return <h3>Loading...</h3>;
+  if (error) return <h3>Error: {error.toString()}</h3>;
 
   return (
     <div>

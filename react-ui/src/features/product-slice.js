@@ -8,7 +8,7 @@ const productURL = "https://localhost:7182/api/product";
 // // Async thunk for fetching paginated data
 export const fetchPaginationData = createAsyncThunk(
  "data/fetchPaginationData",
- async ({ page = 1, limit = 0 }, { rejectWithValue }) => {
+ async ({ page = 2, limit = 10 }, { rejectWithValue }) => {
    try {
      const response = await axios.get(`${productURL}?page=${page}&limit=${limit}`);
     return response.data;

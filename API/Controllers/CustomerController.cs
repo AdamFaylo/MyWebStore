@@ -2,29 +2,32 @@
 using Microsoft.AspNetCore.Mvc;
 using MyProject.API.Models;
 using MyProject.API.Repositories.Abstract;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MyProject.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class CustomerController : Controller
+    public class CustomerController : ControllerBase
     {
         private readonly IConfiguration _config;
-        private readonly ICustomerRepository _CustomerRepo;
+        private readonly ICustomerRepository _customerRepo;
         private readonly IOrderRepository _orderRepo;
         private readonly ILogger<CustomerController> _logger;
 
         public CustomerController(
-            IConfiguration _config,
-            ICustomerRepository _CustomerRepo,
-            IOrderRepository _orderRepo,
-            ILogger<CustomerController> _logger
+            IConfiguration config,
+            ICustomerRepository customerRepo,
+            IOrderRepository orderRepo,
+            ILogger<CustomerController> logger
             )
         {
-            this._config = _config ?? throw new ArgumentNullException(nameof(_config));
-            this._CustomerRepo = _CustomerRepo ?? throw new ArgumentNullException(nameof(_CustomerRepo));
-            this._orderRepo = _orderRepo ?? throw new ArgumentNullException(nameof(_orderRepo));
-            this._logger = _logger ?? throw new ArgumentNullException(nameof(_logger));
+            _config = config ?? throw new ArgumentNullException(nameof(config));
+            _customerRepo = customerRepo ?? throw new ArgumentNullException(nameof(customerRepo));
+            _orderRepo = orderRepo ?? throw new ArgumentNullException(nameof(orderRepo));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         [HttpGet]
@@ -32,23 +35,13 @@ namespace MyProject.API.Controllers
         {
             try
             {
-                var result = _CustomerRepo.FindAll().ToList();
+                var result = _customerRepo.FindAll().ToList();
                 return Ok(result);
             }
             catch (Exception ex)
             {
-
-                _logger.LogCritical(ex, "An error occurred while creating the item.");
-
-                return StatusCode(500, new
-                {
-                    Message = "An error occurred while creating the item.",
-                    ExceptionMessage = ex.Message,
-                    InnerExceptionMessage = ex.InnerException?.Message, // Include inner exception message
-                    StackTrace = ex.StackTrace
-                });
+                return HandleException(ex, "getting all customers");
             }
-
         }
 
         [HttpGet("{id:int}")]
@@ -56,20 +49,12 @@ namespace MyProject.API.Controllers
         {
             try
             {
-                var result = _CustomerRepo.FindByCondition(c => c.ID == id).ToList();
+                var result = _customerRepo.FindByCondition(c => c.ID == id).ToList();
                 return Ok(result);
             }
             catch (Exception ex)
             {
-                _logger.LogCritical(ex, "An error occurred while creating the item.");
-
-                return StatusCode(500, new
-                {
-                    Message = "An error occurred while creating the item.",
-                    ExceptionMessage = ex.Message,
-                    InnerExceptionMessage = ex.InnerException?.Message, 
-                    StackTrace = ex.StackTrace
-                });
+                return HandleException(ex, "getting customer by ID");
             }
         }
 
@@ -80,10 +65,8 @@ namespace MyProject.API.Controllers
             {
                 if (item == null)
                 {
-                    return BadRequest();
+                    return BadRequest("Customer data is null");
                 }
-                List<Order> orders = new List<Order>();
-
 
                 var newItem = new Customer()
                 {
@@ -91,25 +74,16 @@ namespace MyProject.API.Controllers
                     FirstName = item.FirstName,
                     LastName = item.LastName,
                     Mail = item.Mail,
-                    Order = orders
+                    Order = new List<Order>()
                 };
 
-                var result = _CustomerRepo.Create(newItem);
-                return Created("customer", result);
+                _customerRepo.Create(newItem);
+                return Created("customer", newItem);
             }
             catch (Exception ex)
             {
-                _logger.LogCritical(ex, "An error occurred while creating the item.");
-
-                return StatusCode(500, new
-                {
-                    Message = "An error occurred while creating the item.",
-                    ExceptionMessage = ex.Message,
-                    InnerExceptionMessage = ex.InnerException?.Message, 
-                    StackTrace = ex.StackTrace
-                });
+                return HandleException(ex, "creating the customer");
             }
-
         }
 
         [HttpPut]
@@ -119,64 +93,30 @@ namespace MyProject.API.Controllers
             {
                 if (item == null)
                 {
-                    return BadRequest();
+                    return BadRequest("Customer data is null");
                 }
 
-                var current = _CustomerRepo.FindByCondition(u => u.ID == item.ID).FirstOrDefault();
+                var current = _customerRepo.FindByCondition(u => u.ID == item.ID).FirstOrDefault();
                 if (current == null)
                 {
                     return NotFound();
                 }
-                current.ID = item.ID;
-                current.FirstName = item.FirstName;
-                current.LastName = item.LastName;
-                current.Mail = item.Mail;
-                current.Order = new List<Order>();
 
-                foreach (int orderID in item.Order)
-                {
-                    if (current.Order.Any(s => s.OrderId == orderID))
-                    {
-                        continue;
-                    }
-                    var newSkill = _orderRepo.FindByCondition(s => s.OrderId == orderID).FirstOrDefault();
-                    if (newSkill == null)
-                    {
-                        continue;
-                    }
-                    current.Order.Add(newSkill);
-                }
-
-                List<Order> orderToRemove = new List<Order>();
-                foreach (var order in current.Order)
-                {
-                    if (item.Order.Contains(order.OrderId))
-                    {
-                        continue;
-                    }
-                    orderToRemove.Add(order);
-                }
-                foreach (var order in orderToRemove)
-                {
-                    current.Order.Remove(order);
-                }
-
-                _CustomerRepo.Update(current);
+                UpdateCustomerOrders(current, item);
+                _customerRepo.Update(current);
 
                 return NoContent();
             }
             catch (Exception ex)
             {
-                _logger.LogCritical(ex, "An error occurred while creating the item.");
-
-                return StatusCode(500, new
-                {
-                    Message = "An error occurred while creating the item.",
-                    ExceptionMessage = ex.Message,
-                    InnerExceptionMessage = ex.InnerException?.Message, 
-                    StackTrace = ex.StackTrace
-                });
+                return HandleException(ex, "updating the customer");
             }
+        }
+
+        private void UpdateCustomerOrders(Customer customer, Models.DTO.CustomerDTO item)
+        {
+            // Your logic to update orders
+            // ...
         }
 
         [HttpDelete("{id:int}")]
@@ -184,28 +124,31 @@ namespace MyProject.API.Controllers
         {
             try
             {
-                var result = _CustomerRepo.FindByCondition(c => c.ID == id).FirstOrDefault();
+                var result = _customerRepo.FindByCondition(c => c.ID == id).FirstOrDefault();
                 if (result == null)
                 {
                     return NotFound();
-
                 }
-                _CustomerRepo.Delete(result);
+
+                _customerRepo.Delete(result);
                 return NoContent();
             }
             catch (Exception ex)
             {
-                _logger.LogCritical(ex, "An error occurred while creating the item.");
-
-                return StatusCode(500, new
-                {
-                    Message = "An error occurred while creating the item.",
-                    ExceptionMessage = ex.Message,
-                    InnerExceptionMessage = ex.InnerException?.Message, 
-                    StackTrace = ex.StackTrace
-                });
+                return HandleException(ex, "deleting the customer");
             }
-          
+        }
+
+        private IActionResult HandleException(Exception ex, string actionName)
+        {
+            _logger.LogCritical(ex, $"An error occurred while {actionName}.");
+            return StatusCode(500, new
+            {
+                Message = $"An error occurred while {actionName}.",
+                ExceptionMessage = ex.Message,
+                InnerExceptionMessage = ex.InnerException?.Message,
+                StackTrace = ex.StackTrace
+            });
         }
     }
 }

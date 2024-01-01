@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MyProject.API.Models;
 using MyProject.API.Repositories.Abstract;
 
 namespace MyProject.API.Controllers
@@ -41,6 +42,27 @@ namespace MyProject.API.Controllers
 
             }
 
+        }
+
+        [HttpPut]
+        public IActionResult UpdateImage(LogoImage item)
+        {
+            try
+            {
+                if (item == null)
+                {
+                    NoContent();
+                }
+
+                var result = _logoImageRepo.Update(item);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical($"{ex.Message}", ex);
+                return StatusCode(500, new { });
+            }
         }
     }
 }

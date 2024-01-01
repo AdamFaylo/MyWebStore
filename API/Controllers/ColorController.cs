@@ -1,10 +1,10 @@
 ﻿using API.Models.DTO;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using MyProject.API.Models;
 using MyProject.API.Repositories.Abstract;
-using System.Drawing;
+using System;
+using System.Linq;
+using Microsoft.Extensions.Logging;
 
 namespace API.Controllers
 {
@@ -16,12 +16,12 @@ namespace API.Controllers
         private readonly IColorsRepository _colorsRepo;
 
         public ColorController(
-            IColorsRepository _colorsRepo,
-            ILogger<ColorController> _logger
+            IColorsRepository colorsRepo,
+            ILogger<ColorController> logger
             )
         {
-            this._logger = _logger ?? throw new ArgumentNullException(nameof(_logger));
-            this._colorsRepo = _colorsRepo ?? throw new ArgumentNullException(nameof(_colorsRepo));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _colorsRepo = colorsRepo ?? throw new ArgumentNullException(nameof(colorsRepo));
         }
 
         [HttpGet]
@@ -34,17 +34,9 @@ namespace API.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogCritical(ex, "An error occurred while creating the item.");
-
-                return StatusCode(500, new
-                {
-                    Message = "An error occurred while creating the item.",
-                    ExceptionMessage = ex.Message,
-                    InnerExceptionMessage = ex.InnerException?.Message, // Include inner exception message
-                    StackTrace = ex.StackTrace
-                });
+                _logger.LogError(ex, "An error occurred while fetching all colors.");
+                return StatusCode(500, "An error occurred while fetching all colors.");
             }
-
         }
 
         [HttpGet("{id:int}")]
@@ -53,22 +45,17 @@ namespace API.Controllers
             try
             {
                 var result = _colorsRepo.FindByCondition(c => c.ID == id).FirstOrDefault();
+                if (result == null)
+                {
+                    return NotFound();
+                }
                 return Ok(result);
             }
             catch (Exception ex)
             {
-                _logger.LogCritical(ex, "An error occurred while creating the item.");
-
-
-                return StatusCode(500, new
-                {
-                    Message = "An error occurred while creating the item.",
-                    ExceptionMessage = ex.Message,
-                    InnerExceptionMessage = ex.InnerException?.Message, // Include inner exception message
-                    StackTrace = ex.StackTrace
-                });
+                _logger.LogError(ex, "An error occurred while fetching the color.");
+                return StatusCode(500, "An error occurred while fetching the color.");
             }
-
         }
 
         [HttpPost]
@@ -78,29 +65,22 @@ namespace API.Controllers
             {
                 if (color == null)
                 {
-                    return BadRequest("Invalid item data.");
+                    return BadRequest("Color data is required.");
                 }
-                var newItem = new MyProject.API.Models.Color()
-                {
 
+                var newItem = new MyProject.API.Models.Color
+                {
                     Name = color.Name,
-                    ProductID = color.ProductID,
+                    ProductID = color.ProductID
                 };
+
                 var createdItem = _colorsRepo.Create(newItem);
-                return Created("user", createdItem);
+                return CreatedAtAction(nameof(GetByID), new { id = createdItem.Id }, createdItem);
             }
             catch (Exception ex)
             {
-                _logger.LogCritical(ex, "An error occurred while creating the item.");
-
-
-                return StatusCode(500, new
-                {
-                    Message = "An error occurred while creating the item.",
-                    ExceptionMessage = ex.Message,
-                    InnerExceptionMessage = ex.InnerException?.Message, // Include inner exception message
-                    StackTrace = ex.StackTrace
-                });
+                _logger.LogError(ex, "An error occurred while creating the color.");
+                return StatusCode(500, "An error occurred while creating the color.");
             }
         }
 
@@ -111,31 +91,26 @@ namespace API.Controllers
             {
                 if (item == null)
                 {
-                    return BadRequest();
+                    return BadRequest("Color data is required.");
                 }
-                var current = _colorsRepo.FindByCondition(p => p.ID == item.ID).FirstOrDefault();
-                if (current == null)
+
+                var currentColor = _colorsRepo.FindByCondition(c => c.ID == item.ID).FirstOrDefault();
+                if (currentColor == null)
                 {
                     return NotFound();
                 }
 
-                var updateSize = _colorsRepo.Update(current);
-                return Ok(updateSize);
+                currentColor.Name = item.Name;
+                // Update other properties as needed
+
+                _colorsRepo.Update(currentColor);
+                return Ok(currentColor);
             }
             catch (Exception ex)
             {
-                _logger.LogCritical(ex, "An error occurred while creating the item.");
-
-
-                return StatusCode(500, new
-                {
-                    Message = "An error occurred while creating the item.",
-                    ExceptionMessage = ex.Message,
-                    InnerExceptionMessage = ex.InnerException?.Message, // Include inner exception message
-                    StackTrace = ex.StackTrace
-                });
+                _logger.LogError(ex, "An error occurred while updating the color.");
+                return StatusCode(500, "An error occurred while updating the color.");
             }
-
         }
 
         [HttpDelete("{id:int}")]
@@ -143,25 +118,19 @@ namespace API.Controllers
         {
             try
             {
-                var color = _colorsRepo.FindByCondition(_ => _.ID == id).FirstOrDefault();
+                var color = _colorsRepo.FindByCondition(c => c.ID == id).FirstOrDefault();
                 if (color == null)
                 {
-                    return NoContent();
+                    return NotFound();
                 }
+
                 _colorsRepo.Delete(color);
                 return NoContent();
             }
             catch (Exception ex)
             {
-                _logger.LogCritical(ex, "An error occurred while creating the item.");
-
-                return StatusCode(500, new
-                {
-                    Message = "An error occurred while creating the item.",
-                    ExceptionMessage = ex.Message,
-                    InnerExceptionMessage = ex.InnerException?.Message, // Include inner exception message
-                    StackTrace = ex.StackTrace
-                });
+                _logger.LogError(ex, "An error occurred while deleting the color.");
+                return StatusCode(500, "An error occurred while deleting the color.");
             }
         }
     }

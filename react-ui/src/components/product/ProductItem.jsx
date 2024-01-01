@@ -62,12 +62,15 @@ const ProductItem = ({ data }) => {
             ))}
             <Card.Body>
               <Card.Title>{data.name || data.productName}</Card.Title>
-              <p>{data.price}</p>
+              <p>{data.price + " " + "$"}</p>
+              <p>{data.description}</p>
             </Card.Body>
+            
             <div style={BtnCart}>
               <button style={styleBtnAddCart} onClick={addToCart}>
                 <VscAdd />
               </button>
+              
               <button style={styleBtnRemoveCart} onClick={removeFromCart}>
                 <VscChromeMinimize />
               </button>

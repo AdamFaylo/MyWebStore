@@ -12,8 +12,8 @@ using MyProject.API.Context;
 namespace MyProject.API.Migrations
 {
     [DbContext(typeof(MainContext))]
-    [Migration("20231221131235_initialseed")]
-    partial class initialseed
+    [Migration("20240101060102_initialseed11")]
+    partial class initialseed11
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -737,9 +737,11 @@ namespace MyProject.API.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<string>("Alt")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Logo")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
@@ -800,7 +802,7 @@ namespace MyProject.API.Migrations
                             CartId = 1,
                             CustomerID = 1,
                             IsPaid = true,
-                            OrderDate = new DateTime(2023, 12, 20, 15, 12, 34, 885, DateTimeKind.Local).AddTicks(7714),
+                            OrderDate = new DateTime(2023, 12, 31, 8, 1, 1, 769, DateTimeKind.Local).AddTicks(3324),
                             ShippingAddressID = 1
                         },
                         new
@@ -809,7 +811,7 @@ namespace MyProject.API.Migrations
                             CartId = 2,
                             CustomerID = 2,
                             IsPaid = false,
-                            OrderDate = new DateTime(2023, 12, 19, 15, 12, 34, 885, DateTimeKind.Local).AddTicks(7759),
+                            OrderDate = new DateTime(2023, 12, 30, 8, 1, 1, 769, DateTimeKind.Local).AddTicks(3363),
                             ShippingAddressID = 2
                         });
                 });
@@ -886,14 +888,14 @@ namespace MyProject.API.Migrations
                             ID = 1,
                             Amount = 29.90m,
                             OrderID = 1,
-                            PaymentDate = new DateTime(2023, 12, 20, 13, 12, 34, 885, DateTimeKind.Utc).AddTicks(7654)
+                            PaymentDate = new DateTime(2023, 12, 31, 6, 1, 1, 769, DateTimeKind.Utc).AddTicks(3265)
                         },
                         new
                         {
                             ID = 2,
                             Amount = 39.90m,
                             OrderID = 2,
-                            PaymentDate = new DateTime(2023, 12, 19, 13, 12, 34, 885, DateTimeKind.Utc).AddTicks(7661)
+                            PaymentDate = new DateTime(2023, 12, 30, 6, 1, 1, 769, DateTimeKind.Utc).AddTicks(3272)
                         });
                 });
 
@@ -913,10 +915,15 @@ namespace MyProject.API.Migrations
                     b.Property<int>("DepartmentID")
                         .HasColumnType("int");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ProductName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SubCategoryID")
@@ -936,6 +943,7 @@ namespace MyProject.API.Migrations
                             ID = 1,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 1,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 299.90m,
                             ProductName = "Sneakers001",
                             SubCategoryID = 1
@@ -945,6 +953,7 @@ namespace MyProject.API.Migrations
                             ID = 2,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 1,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 359.90m,
                             ProductName = "Sneakers002",
                             SubCategoryID = 1
@@ -954,6 +963,7 @@ namespace MyProject.API.Migrations
                             ID = 3,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 1,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 59.90m,
                             ProductName = "Sneakers003",
                             SubCategoryID = 1
@@ -963,6 +973,7 @@ namespace MyProject.API.Migrations
                             ID = 4,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 1,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 89.90m,
                             ProductName = "T-Shirts001",
                             SubCategoryID = 2
@@ -972,6 +983,7 @@ namespace MyProject.API.Migrations
                             ID = 5,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 1,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
                             ProductName = "T-Shirts002",
                             SubCategoryID = 2
@@ -981,6 +993,7 @@ namespace MyProject.API.Migrations
                             ID = 6,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 1,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
                             ProductName = "T-Shirts003",
                             SubCategoryID = 2
@@ -990,6 +1003,7 @@ namespace MyProject.API.Migrations
                             ID = 7,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 1,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
                             ProductName = "Pants001",
                             SubCategoryID = 3
@@ -999,6 +1013,7 @@ namespace MyProject.API.Migrations
                             ID = 8,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 1,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
                             ProductName = "Pants002",
                             SubCategoryID = 3
@@ -1008,6 +1023,7 @@ namespace MyProject.API.Migrations
                             ID = 9,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 1,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
                             ProductName = "Pants003",
                             SubCategoryID = 3
@@ -1017,6 +1033,7 @@ namespace MyProject.API.Migrations
                             ID = 10,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 1,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 299.90m,
                             ProductName = "ACC001",
                             SubCategoryID = 4
@@ -1026,6 +1043,7 @@ namespace MyProject.API.Migrations
                             ID = 11,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 1,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 59.90m,
                             ProductName = "ACC002",
                             SubCategoryID = 4
@@ -1035,6 +1053,7 @@ namespace MyProject.API.Migrations
                             ID = 12,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 1,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 89.90m,
                             ProductName = "ACC003",
                             SubCategoryID = 4
@@ -1044,6 +1063,7 @@ namespace MyProject.API.Migrations
                             ID = 13,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 2,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 299.90m,
                             ProductName = "Sneakers001",
                             SubCategoryID = 5
@@ -1053,6 +1073,7 @@ namespace MyProject.API.Migrations
                             ID = 14,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 2,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 359.90m,
                             ProductName = "Sneakers002",
                             SubCategoryID = 5
@@ -1062,6 +1083,7 @@ namespace MyProject.API.Migrations
                             ID = 15,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 2,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 59.90m,
                             ProductName = "Sneakers003",
                             SubCategoryID = 5
@@ -1071,6 +1093,7 @@ namespace MyProject.API.Migrations
                             ID = 16,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 2,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 89.90m,
                             ProductName = "T-Shirts001",
                             SubCategoryID = 6
@@ -1080,6 +1103,7 @@ namespace MyProject.API.Migrations
                             ID = 17,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 2,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
                             ProductName = "T-Shirts002",
                             SubCategoryID = 6
@@ -1089,6 +1113,7 @@ namespace MyProject.API.Migrations
                             ID = 18,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 2,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
                             ProductName = "T-Shirts003",
                             SubCategoryID = 6
@@ -1098,6 +1123,7 @@ namespace MyProject.API.Migrations
                             ID = 19,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 2,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
                             ProductName = "Pants001",
                             SubCategoryID = 7
@@ -1107,6 +1133,7 @@ namespace MyProject.API.Migrations
                             ID = 20,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 2,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
                             ProductName = "Pants002",
                             SubCategoryID = 7
@@ -1116,6 +1143,7 @@ namespace MyProject.API.Migrations
                             ID = 21,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 2,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
                             ProductName = "Pants003",
                             SubCategoryID = 7
@@ -1125,6 +1153,7 @@ namespace MyProject.API.Migrations
                             ID = 22,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 2,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
                             ProductName = "ACC",
                             SubCategoryID = 8
@@ -1134,6 +1163,7 @@ namespace MyProject.API.Migrations
                             ID = 23,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 2,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
                             ProductName = "ACC",
                             SubCategoryID = 8
@@ -1143,6 +1173,7 @@ namespace MyProject.API.Migrations
                             ID = 24,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 2,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
                             ProductName = "ACC",
                             SubCategoryID = 8
@@ -1152,6 +1183,7 @@ namespace MyProject.API.Migrations
                             ID = 25,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 3,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 299.90m,
                             ProductName = "Sneakers001",
                             SubCategoryID = 9
@@ -1161,6 +1193,7 @@ namespace MyProject.API.Migrations
                             ID = 26,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 3,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 359.90m,
                             ProductName = "Sneakers002",
                             SubCategoryID = 9
@@ -1170,6 +1203,7 @@ namespace MyProject.API.Migrations
                             ID = 27,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 3,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 59.90m,
                             ProductName = "Sneakers003",
                             SubCategoryID = 9
@@ -1179,6 +1213,7 @@ namespace MyProject.API.Migrations
                             ID = 28,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 3,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 89.90m,
                             ProductName = "T-Shirts001",
                             SubCategoryID = 10
@@ -1188,6 +1223,7 @@ namespace MyProject.API.Migrations
                             ID = 29,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 3,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
                             ProductName = "T-Shirts002",
                             SubCategoryID = 10
@@ -1197,6 +1233,7 @@ namespace MyProject.API.Migrations
                             ID = 30,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 3,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
                             ProductName = "T-Shirts003",
                             SubCategoryID = 10
@@ -1206,6 +1243,7 @@ namespace MyProject.API.Migrations
                             ID = 31,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 3,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 299.90m,
                             ProductName = "ACC001",
                             SubCategoryID = 12
@@ -1215,6 +1253,7 @@ namespace MyProject.API.Migrations
                             ID = 32,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 3,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 59.90m,
                             ProductName = "ACC002",
                             SubCategoryID = 12
@@ -1224,6 +1263,7 @@ namespace MyProject.API.Migrations
                             ID = 33,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 3,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 89.90m,
                             ProductName = "ACC003",
                             SubCategoryID = 12
@@ -1466,18 +1506,18 @@ namespace MyProject.API.Migrations
                         new
                         {
                             ID = 1,
-                            EmailAddress = "adam@gmail.com",
+                            EmailAddress = "Admin@gmail.com",
                             FirstName = "Adam",
                             LastLogin = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LastName = "Faylo",
-                            Password = "12346578",
+                            Password = "12345678",
                             Type = 999,
                             UserName = "adam"
                         },
                         new
                         {
                             ID = 2,
-                            EmailAddress = "eran@gmail.com",
+                            EmailAddress = "User@gmail.com",
                             FirstName = "Eran",
                             LastLogin = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LastName = "BenDahan",

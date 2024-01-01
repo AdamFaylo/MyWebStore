@@ -14,7 +14,7 @@ const SearchProduct = () => {
   };
 
   return (
-    <Form inline style={{ padding: "3.5px", marginRight: "5px" }}>
+    <Form inline="true" style={{ padding: "3.5px", marginRight: "5px" }}>
       <Form.Control
         type="search"
         placeholder="Search"

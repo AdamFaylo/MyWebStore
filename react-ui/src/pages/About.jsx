@@ -4,7 +4,7 @@ import AboutComponents from '../components/about/AboutComponents'
 const About = () => {
   return (
     <div>
-     <AboutComponents/>
+     <AboutComponents />
     </div>
   )
 }

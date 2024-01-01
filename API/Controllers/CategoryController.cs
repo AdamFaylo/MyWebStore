@@ -3,29 +3,26 @@ using MyProject.API.Models;
 using MyProject.API.Models.DTO;
 using MyProject.API.Repositories.Abstract;
 
+
 namespace MyProject.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]/[action]")]
     public class CategoryController : Controller
     {
-        private readonly IConfiguration _config;
         private readonly ICategoryRepository _categoryRepo;
-        private readonly ILogger<CategoryController> _logger;
         private readonly ISubCategoryRepository _subCategoryRepo;
+        private readonly ILogger<CategoryController> _logger;
 
         public CategoryController(
-            IConfiguration _config,
-            ICategoryRepository _categoryRepo,
-            ISubCategoryRepository _subCategoryRepo,
-            ILogger<CategoryController> _logger
-            )
+            ICategoryRepository categoryRepo,
+            ISubCategoryRepository subCategoryRepo,
+            ILogger<CategoryController> logger
+        )
         {
-            this._categoryRepo = _categoryRepo ?? throw new ArgumentNullException(nameof(_categoryRepo));
-            this._logger = _logger ?? throw new ArgumentNullException(nameof(_logger));
-            this._subCategoryRepo = _subCategoryRepo ?? throw new ArgumentNullException(nameof(_subCategoryRepo));
-            this._config = _config ?? throw new ArgumentNullException(nameof(_config));
-
+            _categoryRepo = categoryRepo ?? throw new ArgumentNullException(nameof(categoryRepo));
+            _subCategoryRepo = subCategoryRepo ?? throw new ArgumentNullException(nameof(subCategoryRepo));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         [HttpGet]
@@ -33,24 +30,14 @@ namespace MyProject.API.Controllers
         {
             try
             {
-
-                var result = _categoryRepo.FindAll().ToList();
-                return Ok(result);
+                var categories = _categoryRepo.FindAll().ToList();
+                return Ok(categories);
             }
             catch (Exception ex)
             {
-                _logger.LogCritical(ex, "An error occurred while creating the item.");
-
-
-                return StatusCode(500, new
-                {
-                    Message = "An error occurred while creating the item.",
-                    ExceptionMessage = ex.Message,
-                    InnerExceptionMessage = ex.InnerException?.Message, // Include inner exception message
-                    StackTrace = ex.StackTrace
-                });
+                _logger.LogError(ex, "An error occurred while fetching all categories.");
+                return StatusCode(500, "An error occurred while fetching all categories.");
             }
-
         }
 
         [HttpGet("{id:int}")]
@@ -58,23 +45,18 @@ namespace MyProject.API.Controllers
         {
             try
             {
-                var result = _categoryRepo.FindByCondition(c => c.ID == id).ToList();
-                return Ok(result);
+                var category = _categoryRepo.FindByCondition(c => c.ID == id).FirstOrDefault();
+                if (category == null)
+                {
+                    return NotFound();
+                }
+                return Ok(category);
             }
             catch (Exception ex)
             {
-                _logger.LogCritical(ex, "An error occurred while creating the item.");
-
-
-                return StatusCode(500, new
-                {
-                    Message = "An error occurred while creating the item.",
-                    ExceptionMessage = ex.Message,
-                    InnerExceptionMessage = ex.InnerException?.Message, // Include inner exception message
-                    StackTrace = ex.StackTrace
-                });
+                _logger.LogError(ex, "An error occurred while fetching the category.");
+                return StatusCode(500, "An error occurred while fetching the category.");
             }
-
         }
 
         [HttpPost]
@@ -84,99 +66,51 @@ namespace MyProject.API.Controllers
             {
                 if (item == null)
                 {
-                    return BadRequest();
+                    return BadRequest("Category data is required.");
                 }
-                List<SubCategory> subCategories = new List<SubCategory>();
-      
 
-                var newItem = new Category()
+                var newCategory = new Category
                 {
-                    ID = item.ID,
-                    Name = item.Name,
-                    SubCategories = subCategories
+                    Name = item.Name
+                    // SubCategories can be assigned here if necessary
                 };
 
-                var result = _categoryRepo.Create(newItem);
-                return Created("user", result);
+                _categoryRepo.Create(newCategory);
+                return CreatedAtAction(nameof(GetByID), new { id = newCategory.ID }, newCategory);
             }
             catch (Exception ex)
             {
-                _logger.LogCritical(ex, "An error occurred while creating the item.");
-
-
-                return StatusCode(500, new
-                {
-                    Message = "An error occurred while creating the item.",
-                    ExceptionMessage = ex.Message,
-                    InnerExceptionMessage = ex.InnerException?.Message, // Include inner exception message
-                    StackTrace = ex.StackTrace
-                });
+                _logger.LogError(ex, "An error occurred while creating the category.");
+                return StatusCode(500, "An error occurred while creating the category.");
             }
         }
 
         [HttpPut]
-        public IActionResult UpdateCategory(Models.DTO.CategoryDTO item)
+        public IActionResult UpdateCategory(CategoryDTO item)
         {
             try
             {
                 if (item == null)
                 {
-                    return BadRequest();
+                    return BadRequest("Category data is required.");
                 }
 
-                var current = _categoryRepo.FindByCondition(u => u.ID == item.ID).FirstOrDefault();
-                if (current == null)
+                var category = _categoryRepo.FindByCondition(c => c.ID == item.ID).FirstOrDefault();
+                if (category == null)
                 {
                     return NotFound();
                 }
-                current.ID = item.ID;
-                current.Name = item.Name;
-                current.SubCategories = new List<SubCategory>();
 
-                foreach (int subCategoriesID in item.SubCategories)
-                {
-                    if (current.SubCategories.Any(s => s.ID == subCategoriesID))
-                    {
-                        continue;
-                    }
-                    var newSubCategory = _subCategoryRepo.FindByCondition(s => s.ID == subCategoriesID).FirstOrDefault();
-                    if (newSubCategory == null)
-                    {
-                        continue;
-                    }
-                    current.SubCategories.Add(newSubCategory);
-                }
+                category.Name = item.Name;
+                // Update subcategories here if necessary
 
-                List<SubCategory> subCategoryToRemove = new List<SubCategory>();
-                foreach (var subCategory in current.SubCategories)
-                {
-                    if (item.SubCategories.Contains(subCategory.ID))
-                    {
-                        continue;
-                    }
-                    subCategoryToRemove.Add(subCategory);
-                }
-                foreach (var order in subCategoryToRemove)
-                {
-                    current.SubCategories.Remove(order);
-                }
-
-                _categoryRepo.Update(current);
-
+                _categoryRepo.Update(category);
                 return NoContent();
             }
             catch (Exception ex)
             {
-                _logger.LogCritical(ex, "An error occurred while creating the item.");
-
-
-                return StatusCode(500, new
-                {
-                    Message = "An error occurred while creating the item.",
-                    ExceptionMessage = ex.Message,
-                    InnerExceptionMessage = ex.InnerException?.Message, // Include inner exception message
-                    StackTrace = ex.StackTrace
-                });
+                _logger.LogError(ex, "An error occurred while updating the category.");
+                return StatusCode(500, "An error occurred while updating the category.");
             }
         }
 
@@ -185,26 +119,19 @@ namespace MyProject.API.Controllers
         {
             try
             {
-                var result = _categoryRepo.FindByCondition(c => c.ID == id).FirstOrDefault();
-                if (result == null)
+                var category = _categoryRepo.FindByCondition(c => c.ID == id).FirstOrDefault();
+                if (category == null)
                 {
                     return NotFound();
                 }
-                _categoryRepo.Delete(result);
+
+                _categoryRepo.Delete(category);
                 return NoContent();
             }
             catch (Exception ex)
             {
-                _logger.LogCritical(ex, "An error occurred while creating the item.");
-
-
-                return StatusCode(500, new
-                {
-                    Message = "An error occurred while creating the item.",
-                    ExceptionMessage = ex.Message,
-                    InnerExceptionMessage = ex.InnerException?.Message, 
-                    StackTrace = ex.StackTrace
-                });
+                _logger.LogError(ex, "An error occurred while deleting the category.");
+                return StatusCode(500, "An error occurred while deleting the category.");
             }
         }
     }

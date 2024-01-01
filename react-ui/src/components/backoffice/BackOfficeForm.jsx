@@ -1,172 +1,305 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
-import api from "../../utils/api";
+import { useNavigate, useParams } from "react-router-dom";
+import api from "../../utils/api"; // Ensure correct import path
 
 const BackOfficeForm = () => {
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState("");
-  const [addOn, setAddOn] = useState("");
-  const [galleryImage, setGalleryImage] = useState("");
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const isEditMode = Boolean(id);
+
+  const [product, setProduct] = useState({
+    productName: "",
+    price: "",
+    description: "",
+    addedOn: "",
+    galleryImage: "",
+    galleryImageTitle: "",
+    galleryImageAlt: "",
+    galleryImageName: "",
+    departmentID: 0,
+    subCategoryID: 0,
+  });
 
   const [feedback, setFeedback] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  const [nameError, setNameError] = useState("");
-  const [priceError, setPriceError] = useState("");
-  const [addOnError, setAddOnError] = useState("");
-  const [galleryImageError, setGalleryImageError] = useState("");
+  useEffect(() => {
+    if (isEditMode) {
+      setLoading(true);
+      api
+        .get(`product/${id}`)
+        .then((response) => {
+          const {
+            productName,
+            price,
+            description,
+            addedOn,
+            galleryImage,
+            departmentID,
+            subCategoryID,
+          } = response.data;
+          setProduct({
+            ...product,
+            productName,
+            price: price.toString(),
+            description,
+            addedOn: new Date(addedOn).toISOString().split("T")[0],
+            galleryImage: galleryImage[0] ? galleryImage[0].imageURL : "",
+            galleryImageTitle: galleryImage[0] ? galleryImage[0].title : "",
+            galleryImageAlt: galleryImage[0] ? galleryImage[0].alt : "",
+            galleryImageName: galleryImage[0] ? galleryImage[0].name : "",
+            departmentID,
+            subCategoryID,
+          });
+        })
+        .catch((error) => {
+          console.error("Error fetching product:", error);
+        })
+        .finally(() => setLoading(false));
+    }
+  }, [id, isEditMode, product]);
 
+  const validateForm = () => {
+    const errors = {
+      productNameError: "",
+      priceError: "",
+      descriptionError: "",
+      addedOnError: "",
+      galleryImageError: "",
+    };
 
-  const handleReset = (e) => {
-    e.preventDefault();
+    if (!product.productName.trim()) {
+      errors.productNameError = "Name is required";
+    }
 
-    setName("");
-    setPrice("");
-    setAddOn("");
-    setGalleryImage("");
+    if (!product.price.trim()) {
+      errors.priceError = "Price is required";
+    }
 
-    setFeedback(null);
-    setNameError("");
-    setPriceError("");
-    setAddOnError("");
-    setGalleryImageError("");
+    if (!product.description.trim()) {
+      errors.descriptionError = "Description is required";
+    }
 
+    if (!product.addedOn.trim()) {
+      errors.addedOnError = "Add-On is required";
+    }
+
+    if (!product.galleryImage.trim()) {
+      errors.galleryImageError = "Gallery Image is required";
+    }
+
+    return errors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    let isValid = true;
-
-    if (name.trim() === "") {
-      setNameError("Name is required");
-      isValid = false;
-    } else {
-      setNameError("");
+    const errors = validateForm();
+    if (
+      errors.productNameError ||
+      errors.priceError ||
+      errors.descriptionError ||
+      errors.addedOnError ||
+      errors.galleryImageError
+    ) {
+      setFeedback({ type: "danger", message: "Please fill in all required fields" });
+      return;
     }
 
-    if (price.trim() === "") {
-      setPriceError("Price is required");
-      isValid = false;
-    } else {
-      setPriceError("");
+    setLoading(true);
+
+    const token = localStorage.getItem("mywebsite_token");
+
+    const productData = {
+      Name: product.productName,
+      price: parseFloat(product.price),
+      description: product.description,
+      addedOn: product.addedOn,
+      galleryImage: [
+        {
+          imageURL: product.galleryImage,
+          title: product.galleryImageTitle,
+          alt: product.galleryImageAlt,
+          name: product.galleryImageName,
+        },
+      ],
+      departmentID: product.departmentID,
+      subCategoryID: product.subCategoryID,
+    };
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    try {
+      const response = isEditMode
+        ? await api.put(`product?id=${id}`, productData, config)
+        : await api.post("product", productData, config);
+
+      setFeedback({
+        type: "success",
+        message: `Product ${isEditMode ? "updated" : "added"} successfully!`,
+      });
+      navigate("/backoffice/products/"); // Redirect to product list
+    } catch (error) {
+      console.error(error);
+      setFeedback({ type: "danger", message: "An error occurred!" });
+    } finally {
+      setLoading(false);
     }
+  };
 
-    if (addOn.trim() === "") {
-      setAddOnError("AD is required");
-      isValid = false;
-    } else {
-      setAddOnError("");
-    }
+  const handleReset = () => {
+    setProduct({
+      productName: "",
+      price: "",
+      description: "",
+      addedOn: "",
+      galleryImage: "",
+      galleryImageTitle: "",
+      galleryImageAlt: "",
+      galleryImageName: "",
+      departmentID: 0,
+      subCategoryID: 0,
+    });
 
-    if (galleryImage.trim() === "") {
-      setGalleryImageError("GalleryImage is required");
-      isValid = false;
-    } else {
-      setGalleryImageError("");
-    }
-
-
-
-    if (isValid) {
-      const newItem = {
-        department: 1,
-        departmentID: 1,
-        orderID: 1,
-        name,
-        price,
-        addOn,
-      };
-
-      console.log(newItem);
-
-      api
-        .post("product", newItem)
-        .then((res) => {
-          res.data;
-          console.log(res.data);
-          setFeedback({
-            type: "success",
-            message: "Product added successfully!",
-          });
-          
-          // Optionally reset the form here
-        })
-        .catch((ex) => {
-          console.error(ex);
-          setFeedback({ type: "danger", message: "An error occurred!" });
-        });
-    }
+    setFeedback(null);
   };
 
   return (
-    <>
-      <h2>Product form add / edit</h2>
+    <div inline="true">
+      <h2>{isEditMode ? "Edit Product" : "Add New Product"}</h2>
       <Form onSubmit={handleSubmit}>
-
-      <Form.Group>
-          <Form.Label>GalleryImage</Form.Label>
-          <Form.Control
-            type="url"
-            value={galleryImage}
-            required
-            onChange={(e) => setGalleryImage(e.target.value)}
-            isInvalid={galleryImageError !== ""}
-          />
-          <Form.Control.Feedback type="invalid">
-            {galleryImageError}
-          </Form.Control.Feedback>
-        </Form.Group>
-
-        <Form.Group>
+        {/* Form Group for Product Name */}
+        <Form.Group controlId="name">
           <Form.Label>Name</Form.Label>
           <Form.Control
             type="text"
-            value={name}
-            required
-            onChange={(e) => setName(e.target.value)}
-            isInvalid={nameError !== ""}
+            value={product.productName}
+            onChange={(e) =>
+              setProduct({ ...product, productName: e.target.value })
+            }
+            isInvalid={feedback && feedback.type === "danger" && feedback.message.includes("Name")}
           />
           <Form.Control.Feedback type="invalid">
-            {nameError}
+            {feedback && feedback.type === "danger" && feedback.message.includes("Name") && feedback.message}
           </Form.Control.Feedback>
         </Form.Group>
 
-        <Form.Group>
+        {/* Form Group for Price */}
+        <Form.Group controlId="price">
           <Form.Label>Price</Form.Label>
           <Form.Control
             type="text"
-            value={price}
-            required
-            onChange={(e) => setPrice(e.target.value)}
-            isInvalid={priceError !== ""}
+            value={product.price}
+            onChange={(e) =>
+              setProduct({ ...product, price: e.target.value })
+            }
+            isInvalid={feedback && feedback.type === "danger" && feedback.message.includes("Price")}
           />
           <Form.Control.Feedback type="invalid">
-            {priceError}
+            {feedback && feedback.type === "danger" && feedback.message.includes("Price") && feedback.message}
           </Form.Control.Feedback>
         </Form.Group>
 
-        <Form.Group>
-          <Form.Label>AddOn</Form.Label>
+        {/* Form Group for Description */}
+        <Form.Group controlId="description">
+          <Form.Label>Description</Form.Label>
           <Form.Control
-            type="time"
-            value={addOn}
-            required
-            onChange={(e) => setAddOn(e.target.value)}
-            isInvalid={addOnError !== ""}
+            type="text"
+            value={product.description}
+            onChange={(e) =>
+              setProduct({ ...product, description: e.target.value })
+            }
+            isInvalid={feedback && feedback.type === "danger" && feedback.message.includes("Description")}
           />
           <Form.Control.Feedback type="invalid">
-            {addOnError}
+            {feedback && feedback.type === "danger" && feedback.message.includes("Description") && feedback.message}
           </Form.Control.Feedback>
         </Form.Group>
 
-        <Button variant="primary" type="submit" onClick={handleSubmit}>
-          Save
+        {/* Form Group for Added On */}
+        <Form.Group controlId="addOn">
+          <Form.Label>Add-On</Form.Label>
+          <Form.Control
+            type="date"
+            value={product.addedOn}
+            onChange={(e) =>
+              setProduct({ ...product, addedOn: e.target.value })
+            }
+            isInvalid={feedback && feedback.type === "danger" && feedback.message.includes("Add-On")}
+          />
+          <Form.Control.Feedback type="invalid">
+            {feedback && feedback.type === "danger" && feedback.message.includes("Add-On") && feedback.message}
+          </Form.Control.Feedback>
+        </Form.Group>
+
+        {/* Form Groups for Gallery Image */}
+        <Form.Group controlId="galleryImage">
+          <Form.Label>Gallery Image URL</Form.Label>
+          <Form.Control
+            type="text"
+            value={product.galleryImage}
+            onChange={(e) =>
+              setProduct({ ...product, galleryImage: e.target.value })
+            }
+            isInvalid={feedback && feedback.type === "danger" && feedback.message.includes("Gallery Image")}
+          />
+          <Form.Control.Feedback type="invalid">
+            {feedback && feedback.type === "danger" && feedback.message.includes("Gallery Image") && feedback.message}
+          </Form.Control.Feedback>
+        </Form.Group>
+
+        {/* Form Group for Gallery Image Title */}
+        <Form.Group controlId="galleryImageTitle">
+          <Form.Label>Gallery Image Title</Form.Label>
+          <Form.Control
+            type="text"
+            value={product.galleryImageTitle}
+            onChange={(e) =>
+              setProduct({ ...product, galleryImageTitle: e.target.value })
+            }
+          />
+        </Form.Group>
+
+        {/* Form Group for Gallery Image Alt Text */}
+        <Form.Group controlId="galleryImageAlt">
+          <Form.Label>Gallery Image Alt Text</Form.Label>
+          <Form.Control
+            type="text"
+            value={product.galleryImageAlt}
+            onChange={(e) =>
+              setProduct({ ...product, galleryImageAlt: e.target.value })
+            }
+          />
+        </Form.Group>
+
+        {/* Form Group for Gallery Image Name */}
+        <Form.Group controlId="galleryImageName">
+          <Form.Label>Gallery Image Name</Form.Label>
+          <Form.Control
+            type="text"
+            value={product.galleryImageName}
+            onChange={(e) =>
+              setProduct({ ...product, galleryImageName: e.target.value })
+            }
+          />
+        </Form.Group>
+
+        {/* Buttons for Submit and Reset */}
+        <Button variant="primary" type="submit" disabled={loading}>
+          {isEditMode ? "Update" : "Save"}
         </Button>
-        <Button variant="secondary" type="reset" onClick={handleReset}>
+        <Button variant="secondary" type="button" onClick={handleReset}>
           Cancel
         </Button>
       </Form>
-    </>
+      {feedback && (
+        <div className={`alert alert-${feedback.type}`}>{feedback.message}</div>
+      )}
+    </div>
   );
 };
 

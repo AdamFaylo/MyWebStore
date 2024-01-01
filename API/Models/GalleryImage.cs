@@ -11,10 +11,9 @@ namespace MyProject.API.Models
         [StringLength(255)]
         public string? Title { get; set; }
 
-        //[StringLength(2000)]
         public string? ImageURL { get; set; }       
         public string? Alt { get; set; }
-        public Product? Product { get; set; }
+        public Product Product { get; set; }
         public int ProductID { get; set; }
     }
 }

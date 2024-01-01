@@ -106,7 +106,8 @@ namespace MyProject.API.Controllers
                 var userId = decodedToken.Claims.First().Value;
                 var userQuery = _userRepo.FindByCondition(user => user.ID == int.Parse(userId)).Include(u => u.Cart)
                     .ThenInclude(cart => cart.OrderItems)
-                    .ThenInclude(orderItems => orderItems.Product);
+                    .ThenInclude(orderItems => orderItems.Product)
+                    .ThenInclude(item => item.GalleryImage);
 
                 var user = userQuery.FirstOrDefault();
                 return Ok(user);

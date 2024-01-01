@@ -4,6 +4,7 @@ namespace MyProject.API.Repositories.Abstract
 {
     public interface ISubCategoryRepository : IRepositoryBase<SubCategory>
     {
+       
     }
 
 }

@@ -6,6 +6,7 @@ export const containerStyles = css`
   flex-direction: column;
   ustify-content: center;
   max-width: 80%;
+
   margin: 0 auto;
 `;
 export const cardGridStyles = css`
@@ -24,8 +25,3 @@ export const cardGridStyles = css`
 
   }
 `;
-
-// mobile: 480,
-// mini-tablet: 768,
-// max-tablet: 768,
-// desktop: 1024,

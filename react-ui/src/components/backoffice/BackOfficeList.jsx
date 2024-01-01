@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import api from "../../utils/api";
 import { Button, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { IoTrashOutline } from "react-icons/io5";
+import { HiOutlinePencilSquare } from "react-icons/hi2";
+import { FaPlus } from "react-icons/fa6";
 
 const BackOfficeList = () => {
   const [items, setItems] = useState([]);
@@ -9,27 +12,24 @@ const BackOfficeList = () => {
   useEffect(() => {
     api
       .get("product")
-      .then((result) => {
-        setItems(result.data);
-      })
+      .then((result) => setItems(result.data))
       .catch((ex) => console.error(ex));
   }, []);
 
   const handleDelete = (id) => {
     api
       .delete(`product/${id}`)
-      .then(() => {
-        // Remove the item from the list without needing to reload from the server
-        setItems(items.filter((item) => item.id !== id));
-      })
+      .then(() => setItems(items.filter((item) => item.id !== id)))
       .catch((ex) => console.error(ex));
   };
+
   return (
     <>
       <h3>ProductList</h3>
-      <Button variant="primary" as={Link} to="new">
-        Add New [+]
+      <Button variant="outline-success" as={Link} to="/backoffice/products/new">
+        <FaPlus /> Add new product
       </Button>
+      <br />
       <Table striped bordered>
         <thead>
           <tr>
@@ -41,7 +41,7 @@ const BackOfficeList = () => {
           </tr>
         </thead>
         <tbody>
-          {items.slice(0,5).map((p) => (
+          {items.map((p) => (
             <tr key={p.id}>
               <td>{p.id}</td>
               <td>
@@ -54,12 +54,27 @@ const BackOfficeList = () => {
               <td>{p.productName}</td>
               <td>{p.price}</td>
               <td>{new Date(p.addedOn).toLocaleDateString()}</td>
-              <td>
-                <Button variant="info" as={Link} to={`edit/${p.id}`}>
-                  Edit
+              <td
+                style={{
+                  display: "flex",
+                  gap: "1rem",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: "7rem",
+                }}
+              >
+                <Button
+                  variant="outline-warning"
+                  as={Link}
+                  to={`/backoffice/products/edit/${p.id}`}
+                >
+                  <HiOutlinePencilSquare />
                 </Button>
-                <Button variant="danger" onClick={() => handleDelete(p.id)}>
-                  Delete
+                <Button
+                  variant="outline-danger"
+                  onClick={() => handleDelete(p.id)}
+                >
+                  <IoTrashOutline />
                 </Button>
               </td>
             </tr>

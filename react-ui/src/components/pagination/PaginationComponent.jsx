@@ -6,5 +6,5 @@ const PaginationComponent = () => {
   )
 }
 
-export default PaginationComponent
+export default PaginationComponent;
 

@@ -13,8 +13,8 @@
 ## ℹ️ General Information
 <a name="general-information"/>
 
-MarketMingle is a project designed to connect buyers with sellers. It aims to solve [specific problems] and serves the purpose of [its intended use].
-The project was created as a project assignment for [ReactJS - октомври 2023](https://softuni.bg/trainings/4238/reactjs-october-2023).
+MyStore is a clothing store project. It is designed to solve [specific problems] and serves the purpose of [its intended use].
+The project was created as a project task for [ReactJS]
 
 
 ## ⚒️ Built With

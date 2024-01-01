@@ -89,6 +89,8 @@ Another option is to make a purchase on the website.
 
   ``` 
   Admin@gmail.com
+  ```
+  ``` 
   12345678
   ```
   
@@ -97,6 +99,12 @@ Another option is to make a purchase on the website.
 limited abilities,\
 User action You can choose and the product is sent to the shopping cart,\
 
+  ``` 
+  User@gmail.com
+  ```
+  ``` 
+  87654321
+  ```
 
 
 ### It is very important to note:

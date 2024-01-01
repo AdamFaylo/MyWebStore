@@ -117,7 +117,7 @@ User action You can choose and the product is sent to the shopping cart,\
 ## 📷 Screenshots
 <a name="screenshots"/>
 
-![SS1](.[/images/image6.png](https://i.imgur.com/bgWaa1P.png))
+![SS1](https://i.imgur.com/bgWaa1P.png)
 ![SS2](./images/image5.png)
 ![SS3](./images/image4.png)
 ![SS4](./images/image3.png)

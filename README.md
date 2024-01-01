@@ -22,38 +22,63 @@ The project was created as a project task for [ReactJS]
 
 ### The following NuGet packages are used in the backend project:
 
-- ASP.NET Core: 8.0
-- AutoMapper: 12.0.1
-- AutoMapper.Extensions.Microsoft.DependencyInjection: 12.0.1
-- Microsoft.AspNetCore.Authentication.JwtBearer: 8.0.0
-- Microsoft.AspNetCore.Identity.EntityFrameworkCore: 8.0.0
-- Microsoft.AspNetCore.OpenApi: 8.0.0
-- Microsoft.AspNetCore.SignalR: 1.1.0
-- Microsoft.EntityFrameworkCore: 8.0.0
-- Microsoft.EntityFrameworkCore.Analyzers: 8.0.0
-- Microsoft.EntityFrameworkCore.Design: 8.0.0
-- Microsoft.EntityFrameworkCore.SqlServer: 8.0.0
-- Microsoft.EntityFrameworkCore.Tools: 8.0.0
-- MimeTypesMap: 1.0.8
-- Swashbuckle.AspNetCore: 6.5.0
+- Microsoft.AspNetCore.Authentication.JwtB: 6.0.20
+- Microsoft.AspNetCore.Identity.EntityFramewor: 6.0.21
+- Microsoft.AspNetCore.Mvc.NewtonsoftJson: 6.0.20
+- Microsoft.AspNetCore.Mvc.Versioning: 6.0.21
+- Microsoft.EntityFrameworkCore: 7.0.9
+- Microsoft.EntityFrameworkCore: 7.0.9
+
 
 ### The following packages are used in the frontend project: 
-- @fortawesome/fontawesome-svg-core - 6.4.2
-- @fortawesome/free-brands-svg-icons - 6.4.2
-- @fortawesome/free-regular-svg-icons - 6.4.2
-- @fortawesome/free-solid-svg-icons - 6.4.2
-- @fortawesome/react-fontawesome - 0.2.0
-- @microsoft/signalr - 8.0.0
-- axios - 1.6.1
-- js-cookie - 3.0.5
-- jwt-decode - 4.0.0
-- react - 18.2.0
-- react-dom - 18.2.0
-- react-paginate - 8.2.0
-- react-router-dom - 6.18.0
-- react-tag-input-component - 2.0.2
-- typeface-raleway - 1.1.13
-
+- @emotion/css": "^11.11.2,
+- @emotion/react": "^11.11.1,
+- @emotion/styled": "^11.11.0,
+- @fontsource/roboto": "^5.0.8,
+- @mantine/carousel": "^6.0.20,
+- @mantine/core": "^6.0.20,
+- @mantine/dates": "^6.0.20,
+- @mantine/dropzone": "^6.0.20,
+- @mantine/form": "^6.0.20,
+- @mantine/hooks": "^6.0.20,
+- @mantine/modals": "^6.0.20,
+- @mantine/notifications": "^6.0.20,
+- @mantine/nprogress": "^6.0.20,
+- @mantine/prism": "^6.0.20,
+- @mantine/spotlight": "^6.0.20,
+- @mantine/tiptap": "^6.0.20,
+- @mui/material": "^5.14.18,
+- @reduxjs/toolkit": "^1.9.5,
+- @tabler/icons": "^2.30.0,
+- @tabler/icons-react": "^2.41.0,
+- @testing-library/jest-dom": "^5.17.0,
+- @testing-library/react": "^13.4.0,
+- @testing-library/user-event": "^13.5.0,
+- @tiptap/extension-link": "^2.1.8,
+- @tiptap/react": "^2.1.8,
+- @tiptap/starter-kit": "^2.1.8,
+- @types/jest": "^27.5.2,
+- @types/node": "^16.18.39,
+- @types/react": "^18.2.18,
+- @types/react-dom": "^18.2.7,
+- "antd": "^5.8.6",
+- "axios": "^1.4.0",
+- "bootstrap": "^5.3.1",
+- "react-bootstrap": "^2.8.0",
+- "react": "^18.2.0",
+- "react-dom": "^18.2.0",
+- "react-icons": "^4.10.1",
+- "react-loader-spinner": "^5.3.4",
+- "react-redux": "^8.1.2",
+- "react-router-dom": "^6.21.1",
+- "react-scripts": "5.0.1",
+- "react-toastify": "^9.1.3",
+- "redux": "^4.2.1",
+- "redux-logger": "^3.0.6",
+- "sweetalert2": "^11.7.20",
+- "typescript": "^4.9.5",
+- "web-vitals": "^2.1.4",
+- "yup": "^1.3.2"
 
 ## 💁 How It Works
 <a name="how-it-works"/>

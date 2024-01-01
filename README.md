@@ -91,15 +91,21 @@ Another option is to make a purchase on the website.
 ### Logged-In Users:
 limited abilities,\
 User action You can choose and the product is sent to the shopping cart,\
-It is very important to note: there is an ability to send the product to the shopping cart only with logged in or registered.
+
+
+
+### It is very important to note:
+- there is an ability to send the product to the shopping cart only with logged in or registered.
 
 
 ## 🔨 Features
 <a name="features"/>
 
 - CRUD operations for listings
-- Uploading multiple images as files
-- Chat functionality
+- Ability to extend, delete and create a new product on the part of the customer
+- Ability to change price from large to small or reverse
+- Product selection by the plus and sent to the shopping cart
+- Option to click on a product and dive into the diddles
 - Dark/Light theme
 - Responsive design
 - Client-side validations

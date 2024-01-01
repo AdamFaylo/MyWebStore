@@ -83,11 +83,10 @@ The project was created as a project task for [ReactJS]
 ## 💁 How It Works
 <a name="how-it-works"/>
 
-### Guests:
-Can view the homepage,\
-browse all available listings,\
-login/register,\
-read doctor profiles.
+### Admin/:
+Permission exists for Backoffice,\
+Ability to dive into all products while being able to: add, extend and delete,\
+Another option is to make a purchase on the website,\
 
 
 ### Logged-In Users:

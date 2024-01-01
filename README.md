@@ -87,6 +87,9 @@ Permission exists for Backoffice,\
 Ability to dive into all products while being able to: add, extend and delete,\
 Another option is to make a purchase on the website.
 
+   ```Admin@gmail.com
+   ```12345678
+
 
 ### Logged-In Users:
 limited abilities,\

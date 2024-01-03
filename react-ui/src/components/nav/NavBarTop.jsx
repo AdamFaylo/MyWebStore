@@ -83,17 +83,17 @@ function NavBarTop() {
   }, [user]);
   return (
     <Navbar
-      
+      style={{ padding: "0" }}
       expand="lg"
       className={!isDark ? "light" : "dark"}
     >
-      <Container fluid style={{background: "#e5e5e5"}}>
+      <Container fluid style={{ background: "#e5e5e5" }}>
         <Navbar.Brand href="/">
           <LogoComponents />
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="navbarScroll" />
-        <Navbar.Collapse id="navbarScroll" style={{widthMax:"10rem"}}>
+        <Navbar.Collapse id="navbarScroll" style={{ widthMax: "10rem" }}>
           <Nav
             className="me-auto my-2 my-lg-0"
             style={{ maxHeight: "385px" }}

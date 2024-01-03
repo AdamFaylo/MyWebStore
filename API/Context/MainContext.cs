@@ -62,7 +62,7 @@ namespace MyProject.API.Context
 
             //Logo
             modelBuilder.Entity<LogoImage>().HasData(
-             new LogoImage { ID = 1, Logo = "https://i.imgur.com/6jdrLVk.png", Alt = "Logo vanes site" }
+             new LogoImage { ID = 1, Logo = "https://i.imgur.com/t4hi8os.png", Alt = "Logo site" }
                 );
             //Payment
             modelBuilder.Entity<Payment>().HasData(
@@ -224,14 +224,14 @@ namespace MyProject.API.Context
               new GalleryImage { ID = 4, ProductID = 4, ImageURL = "https://i.imgur.com/FMyHAER.png", Alt = "man", Title = "T-SHIRTS for man" },
               new GalleryImage { ID = 5, ProductID = 5, ImageURL = "https://i.imgur.com/1vvkkun.png", Alt = "man", Title = "T-SHIRTS for man" },
               new GalleryImage { ID = 6, ProductID = 6, ImageURL = "https://i.imgur.com/Q2Omp1q.png", Alt = "man", Title = "T-SHIRTS for man" },
-              //-------------------trousers----------------//
-              new GalleryImage { ID = 7, ProductID = 7, ImageURL = "https://i.imgur.com/oPlSrbz.jpg", Alt = "man", Title = "trousers for man" },
-              new GalleryImage { ID = 8, ProductID = 8, ImageURL = "https://i.imgur.com/0oZ7MrE.jpg", Alt = "man", Title = "trousers for man" },
-              new GalleryImage { ID = 9, ProductID = 9, ImageURL = "https://i.imgur.com/UczdMkv.jpg", Alt = "man", Title = "trousers for man" },
-              //---------------------acc-----------------//
-              new GalleryImage { ID = 10, ProductID = 10, ImageURL = "https://i.imgur.com/qpalZ7J.jpg", Alt = "man", Title = "acc for man" }, 
-              new GalleryImage { ID = 11, ProductID = 11, ImageURL = "https://i.imgur.com/Qd0hKEe.jpg", Alt = "man", Title = "acc for man" },
-              new GalleryImage { ID = 12, ProductID = 12, ImageURL = "https://i.imgur.com/vPXZfwu.jpg", Alt = "man", Title = "acc for man" },
+              //-------------------trousers----------------//*
+              new GalleryImage { ID = 7, ProductID = 7, ImageURL = "https://i.imgur.com/6HUpAq5.png", Alt = "man", Title = "trousers for man" },
+              new GalleryImage { ID = 8, ProductID = 8, ImageURL = "https://i.imgur.com/tpdPfHe.png", Alt = "man", Title = "trousers for man" },
+              new GalleryImage { ID = 9, ProductID = 9, ImageURL = "https://i.imgur.com/LJnaKkR.png", Alt = "man", Title = "trousers for man" },
+              //---------------------acc-----------------//*
+              new GalleryImage { ID = 10, ProductID = 10, ImageURL = "https://i.imgur.com/yhlgVxL.png", Alt = "man", Title = "acc for man" }, 
+              new GalleryImage { ID = 11, ProductID = 11, ImageURL = "https://i.imgur.com/f2TOHlO.png", Alt = "man", Title = "acc for man" },
+              new GalleryImage { ID = 12, ProductID = 12, ImageURL = "https://i.imgur.com/fKIG06M.png", Alt = "man", Title = "acc for man" },
 
               //--------------------------------------------------LADIES--------------------------------------------------------//
               //-------------------Shoes-------------------//*
@@ -243,13 +243,13 @@ namespace MyProject.API.Context
               new GalleryImage { ID = 17, ProductID = 17, ImageURL = "https://i.imgur.com/KLI84On.png", Alt = "woman", Title = "T-SHIRT for woman" },
               new GalleryImage { ID = 18, ProductID = 18, ImageURL = "https://i.imgur.com/N3Hw655.png", Alt = "woman", Title = "T-SHIRT for woman" },
               //--------------------trousers---------------//
-              new GalleryImage { ID = 19, ProductID = 19, ImageURL = "https://i.imgur.com/NhR4kFB.jpg", Alt = "woman_trousers", Title = "trousers for woman" },
-              new GalleryImage { ID = 20, ProductID = 20, ImageURL = "https://i.imgur.com/4xStoKp.jpg", Alt = "woman_trousers", Title = "trousers for woman" },
-              new GalleryImage { ID = 21, ProductID = 21, ImageURL = "https://i.imgur.com/n3TMOZI.jpg", Alt = "woman_trousers", Title = "trousers for woman" },
-              //-------------------acc----------------//
-              new GalleryImage { ID = 22, ProductID = 22, ImageURL = "https://i.imgur.com/KuAG5Ae.jpg", Alt = "woman_acc", Title = "acc for woman" },
-              new GalleryImage { ID = 23, ProductID = 23, ImageURL = "https://i.imgur.com/5Mp82QF.jpg", Alt = "woman_acc", Title = "acc for woman" },
-              new GalleryImage { ID = 24, ProductID = 24, ImageURL = "https://i.imgur.com/VvOHI60.jpg", Alt = "woman_acc", Title = "acc for woman" },
+              new GalleryImage { ID = 19, ProductID = 19, ImageURL = "https://i.imgur.com/9Unyl2Q.png", Alt = "woman_trousers", Title = "trousers for woman" },
+              new GalleryImage { ID = 20, ProductID = 20, ImageURL = "https://i.imgur.com/UxLMIKE.png", Alt = "woman_trousers", Title = "trousers for woman" },
+              new GalleryImage { ID = 21, ProductID = 21, ImageURL = "https://i.imgur.com/XaXUJNl.png", Alt = "woman_trousers", Title = "trousers for woman" },
+              //-------------------acc----------------//*
+              new GalleryImage { ID = 22, ProductID = 22, ImageURL = "https://i.imgur.com/THBDPax.png", Alt = "woman_acc", Title = "acc for woman" },
+              new GalleryImage { ID = 23, ProductID = 23, ImageURL = "https://i.imgur.com/vNPCxkh.png", Alt = "woman_acc", Title = "acc for woman" },
+              new GalleryImage { ID = 24, ProductID = 24, ImageURL = "https://i.imgur.com/Q3UjsjY.png", Alt = "woman_acc", Title = "acc for woman" },
 
               //------------------------------------------------KIDS-------------------------------------------------------//
               new GalleryImage { ID = 25, ProductID = 25, ImageURL = "https://i.imgur.com/wylMcYn.png", Alt = "kids", Title = "shoes for kids" },

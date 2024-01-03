@@ -12,8 +12,8 @@ using MyProject.API.Context;
 namespace MyProject.API.Migrations
 {
     [DbContext(typeof(MainContext))]
-    [Migration("20231231162021_initialseed7")]
-    partial class initialseed7
+    [Migration("20240102162307_UpdateSeed")]
+    partial class UpdateSeed
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -466,7 +466,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 1,
                             Alt = "man",
-                            ImageURL = "https://i.imgur.com/x3U6jKx.jpg",
+                            ImageURL = "https://i.imgur.com/kFFe4rc.png",
                             ProductID = 1,
                             Title = "shoes for man"
                         },
@@ -474,7 +474,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 2,
                             Alt = "man",
-                            ImageURL = "https://i.imgur.com/LnQGteX.jpg",
+                            ImageURL = "https://i.imgur.com/FSzo30R.png",
                             ProductID = 2,
                             Title = "shoes for man"
                         },
@@ -482,7 +482,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 3,
                             Alt = "man",
-                            ImageURL = "https://i.imgur.com/v3SN2Vo.jpg",
+                            ImageURL = "https://i.imgur.com/OrJ3uxz.png",
                             ProductID = 3,
                             Title = "shoes for man"
                         },
@@ -490,25 +490,25 @@ namespace MyProject.API.Migrations
                         {
                             ID = 4,
                             Alt = "man",
-                            ImageURL = "https://i.imgur.com/CVmmzhU.jpg",
+                            ImageURL = "https://i.imgur.com/FMyHAER.png",
                             ProductID = 4,
-                            Title = "shoes for man"
+                            Title = "T-SHIRTS for man"
                         },
                         new
                         {
                             ID = 5,
                             Alt = "man",
-                            ImageURL = "https://i.imgur.com/LGfzcug.jpg",
+                            ImageURL = "https://i.imgur.com/1vvkkun.png",
                             ProductID = 5,
-                            Title = "shoes for man"
+                            Title = "T-SHIRTS for man"
                         },
                         new
                         {
                             ID = 6,
                             Alt = "man",
-                            ImageURL = "https://i.imgur.com/P3XGF8p.jpg",
+                            ImageURL = "https://i.imgur.com/Q2Omp1q.png",
                             ProductID = 6,
-                            Title = "shoes for man"
+                            Title = "T-SHIRTS for man"
                         },
                         new
                         {
@@ -516,7 +516,7 @@ namespace MyProject.API.Migrations
                             Alt = "man",
                             ImageURL = "https://i.imgur.com/oPlSrbz.jpg",
                             ProductID = 7,
-                            Title = "shoes pastel color for man"
+                            Title = "trousers for man"
                         },
                         new
                         {
@@ -524,7 +524,7 @@ namespace MyProject.API.Migrations
                             Alt = "man",
                             ImageURL = "https://i.imgur.com/0oZ7MrE.jpg",
                             ProductID = 8,
-                            Title = "shoes pink for man"
+                            Title = "trousers for man"
                         },
                         new
                         {
@@ -532,23 +532,23 @@ namespace MyProject.API.Migrations
                             Alt = "man",
                             ImageURL = "https://i.imgur.com/UczdMkv.jpg",
                             ProductID = 9,
-                            Title = "shoes pink for man"
+                            Title = "trousers for man"
                         },
                         new
                         {
                             ID = 10,
                             Alt = "man",
-                            ImageURL = "https://i.imgur.com/qpalZ7J.jpg",
+                            ImageURL = "https://i.imgur.com/2KSWpFs.png",
                             ProductID = 10,
-                            Title = "shoes for man"
+                            Title = "acc for man"
                         },
                         new
                         {
                             ID = 11,
                             Alt = "man",
-                            ImageURL = "https://i.imgur.com/Qd0hKEe.jpg",
+                            ImageURL = "https://i.imgur.com/yhlgVxL.png",
                             ProductID = 11,
-                            Title = "shoes for man"
+                            Title = "acc for man"
                         },
                         new
                         {
@@ -556,13 +556,13 @@ namespace MyProject.API.Migrations
                             Alt = "man",
                             ImageURL = "https://i.imgur.com/vPXZfwu.jpg",
                             ProductID = 12,
-                            Title = "shoes for man"
+                            Title = "acc for man"
                         },
                         new
                         {
                             ID = 13,
                             Alt = "woman_shoes",
-                            ImageURL = "https://i.imgur.com/A4b2kSN.jpg",
+                            ImageURL = "https://i.imgur.com/HpT7xCj.png",
                             ProductID = 13,
                             Title = "shoes pastel color for woman"
                         },
@@ -570,7 +570,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 14,
                             Alt = "woman_shoes",
-                            ImageURL = "https://i.imgur.com/z1zF5F0.jpg",
+                            ImageURL = "https://i.imgur.com/48fArMF.png",
                             ProductID = 14,
                             Title = "shoes pink for woman"
                         },
@@ -578,7 +578,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 15,
                             Alt = "woman_shoes",
-                            ImageURL = "https://i.imgur.com/GYkO0dn.jpg",
+                            ImageURL = "https://i.imgur.com/SuXlbYo.png",
                             ProductID = 15,
                             Title = "shoes pink for woman"
                         },
@@ -586,7 +586,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 16,
                             Alt = "woman",
-                            ImageURL = "https://i.imgur.com/yKIuCZN.jpg",
+                            ImageURL = "https://i.imgur.com/nA84c5Y.png",
                             ProductID = 16,
                             Title = "T-SHIRT for woman"
                         },
@@ -594,7 +594,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 17,
                             Alt = "woman",
-                            ImageURL = "https://i.imgur.com/rgMPyCg.jpg",
+                            ImageURL = "https://i.imgur.com/KLI84On.png",
                             ProductID = 17,
                             Title = "T-SHIRT for woman"
                         },
@@ -602,7 +602,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 18,
                             Alt = "woman",
-                            ImageURL = "https://i.imgur.com/IkeJGoS.jpg",
+                            ImageURL = "https://i.imgur.com/N3Hw655.png",
                             ProductID = 18,
                             Title = "T-SHIRT for woman"
                         },
@@ -634,7 +634,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 22,
                             Alt = "woman_acc",
-                            ImageURL = "https://i.imgur.com/KuAG5Ae.jpg",
+                            ImageURL = "https://i.imgur.com/THBDPax.png",
                             ProductID = 22,
                             Title = "acc for woman"
                         },
@@ -642,23 +642,23 @@ namespace MyProject.API.Migrations
                         {
                             ID = 23,
                             Alt = "woman_acc",
-                            ImageURL = "https://i.imgur.com/5Mp82QF.jpg",
+                            ImageURL = "https://i.imgur.com/vNPCxkh.png",
                             ProductID = 23,
-                            Title = "acc pink for woman"
+                            Title = "acc for woman"
                         },
                         new
                         {
                             ID = 24,
                             Alt = "woman_acc",
-                            ImageURL = "https://i.imgur.com/VvOHI60.jpg",
+                            ImageURL = "https://i.imgur.com/Q3UjsjY.png",
                             ProductID = 24,
-                            Title = "acc pink for woman"
+                            Title = "acc for woman"
                         },
                         new
                         {
                             ID = 25,
                             Alt = "kids",
-                            ImageURL = "https://i.imgur.com/mtgc2Kl.jpg",
+                            ImageURL = "https://i.imgur.com/wylMcYn.png",
                             ProductID = 25,
                             Title = "shoes for kids"
                         },
@@ -666,7 +666,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 26,
                             Alt = "kids",
-                            ImageURL = "https://i.imgur.com/IMMWY3v.jpg",
+                            ImageURL = "https://i.imgur.com/ydaUz58.png",
                             ProductID = 26,
                             Title = "shoes for kids"
                         },
@@ -674,7 +674,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 27,
                             Alt = "kids",
-                            ImageURL = "https://i.imgur.com/bFZSTKa.jpg",
+                            ImageURL = "https://i.imgur.com/WeiJljO.png",
                             ProductID = 27,
                             Title = "shoes for kids"
                         },
@@ -682,49 +682,49 @@ namespace MyProject.API.Migrations
                         {
                             ID = 28,
                             Alt = "kids",
-                            ImageURL = "https://i.imgur.com/VXSGhtq.jpg",
+                            ImageURL = "https://i.imgur.com/pBhxbGl.png",
                             ProductID = 28,
-                            Title = "shoes for kids"
+                            Title = "T-SHIRT for kids"
                         },
                         new
                         {
                             ID = 29,
                             Alt = "kids",
-                            ImageURL = "https://i.imgur.com/ugyS15L.jpg",
+                            ImageURL = "https://i.imgur.com/UJeZ4jX.png",
                             ProductID = 29,
-                            Title = "shoes for kids"
+                            Title = "T-SHIRT for kids"
                         },
                         new
                         {
                             ID = 30,
                             Alt = "kids",
-                            ImageURL = "https://i.imgur.com/FcuvIH4.jpg",
+                            ImageURL = "https://i.imgur.com/pBhxbGl.png",
                             ProductID = 30,
-                            Title = "shoes for kids"
+                            Title = "T-SHIRT for kids"
                         },
                         new
                         {
                             ID = 31,
                             Alt = "kids",
-                            ImageURL = "https://i.imgur.com/hFBMhA1.jpg",
+                            ImageURL = "https://i.imgur.com/5sEKFeH.png",
                             ProductID = 31,
-                            Title = "shoes for kids"
+                            Title = "acc for kids"
                         },
                         new
                         {
                             ID = 32,
                             Alt = "kids",
-                            ImageURL = "https://i.imgur.com/OeC6gqG.jpg",
+                            ImageURL = "https://i.imgur.com/iaP5xXB.png",
                             ProductID = 32,
-                            Title = "shoes for kids"
+                            Title = "acc for kids"
                         },
                         new
                         {
                             ID = 33,
                             Alt = "kids",
-                            ImageURL = "https://i.imgur.com/P0vlF79.jpg",
+                            ImageURL = "https://i.imgur.com/BxlFtRr.png",
                             ProductID = 33,
-                            Title = "shoes for kids"
+                            Title = "acc for kids"
                         });
                 });
 
@@ -737,9 +737,11 @@ namespace MyProject.API.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<string>("Alt")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Logo")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
@@ -750,8 +752,8 @@ namespace MyProject.API.Migrations
                         new
                         {
                             ID = 1,
-                            Alt = "Logo vanes site",
-                            Logo = "https://i.imgur.com/6jdrLVk.png"
+                            Alt = "Logo site",
+                            Logo = "https://i.imgur.com/t4hi8os.png"
                         });
                 });
 
@@ -800,7 +802,7 @@ namespace MyProject.API.Migrations
                             CartId = 1,
                             CustomerID = 1,
                             IsPaid = true,
-                            OrderDate = new DateTime(2023, 12, 30, 18, 20, 21, 558, DateTimeKind.Local).AddTicks(7683),
+                            OrderDate = new DateTime(2024, 1, 1, 18, 23, 6, 763, DateTimeKind.Local).AddTicks(4814),
                             ShippingAddressID = 1
                         },
                         new
@@ -809,7 +811,7 @@ namespace MyProject.API.Migrations
                             CartId = 2,
                             CustomerID = 2,
                             IsPaid = false,
-                            OrderDate = new DateTime(2023, 12, 29, 18, 20, 21, 558, DateTimeKind.Local).AddTicks(7764),
+                            OrderDate = new DateTime(2023, 12, 31, 18, 23, 6, 763, DateTimeKind.Local).AddTicks(4862),
                             ShippingAddressID = 2
                         });
                 });
@@ -886,14 +888,14 @@ namespace MyProject.API.Migrations
                             ID = 1,
                             Amount = 29.90m,
                             OrderID = 1,
-                            PaymentDate = new DateTime(2023, 12, 30, 16, 20, 21, 558, DateTimeKind.Utc).AddTicks(7315)
+                            PaymentDate = new DateTime(2024, 1, 1, 16, 23, 6, 763, DateTimeKind.Utc).AddTicks(4733)
                         },
                         new
                         {
                             ID = 2,
                             Amount = 39.90m,
                             OrderID = 2,
-                            PaymentDate = new DateTime(2023, 12, 29, 16, 20, 21, 558, DateTimeKind.Utc).AddTicks(7335)
+                            PaymentDate = new DateTime(2023, 12, 31, 16, 23, 6, 763, DateTimeKind.Utc).AddTicks(4740)
                         });
                 });
 
@@ -912,6 +914,10 @@ namespace MyProject.API.Migrations
 
                     b.Property<int>("DepartmentID")
                         .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -937,6 +943,7 @@ namespace MyProject.API.Migrations
                             ID = 1,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 1,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 299.90m,
                             ProductName = "Sneakers001",
                             SubCategoryID = 1
@@ -946,6 +953,7 @@ namespace MyProject.API.Migrations
                             ID = 2,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 1,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 359.90m,
                             ProductName = "Sneakers002",
                             SubCategoryID = 1
@@ -955,6 +963,7 @@ namespace MyProject.API.Migrations
                             ID = 3,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 1,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 59.90m,
                             ProductName = "Sneakers003",
                             SubCategoryID = 1
@@ -964,6 +973,7 @@ namespace MyProject.API.Migrations
                             ID = 4,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 1,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 89.90m,
                             ProductName = "T-Shirts001",
                             SubCategoryID = 2
@@ -973,6 +983,7 @@ namespace MyProject.API.Migrations
                             ID = 5,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 1,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
                             ProductName = "T-Shirts002",
                             SubCategoryID = 2
@@ -982,6 +993,7 @@ namespace MyProject.API.Migrations
                             ID = 6,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 1,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
                             ProductName = "T-Shirts003",
                             SubCategoryID = 2
@@ -991,6 +1003,7 @@ namespace MyProject.API.Migrations
                             ID = 7,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 1,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
                             ProductName = "Pants001",
                             SubCategoryID = 3
@@ -1000,6 +1013,7 @@ namespace MyProject.API.Migrations
                             ID = 8,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 1,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
                             ProductName = "Pants002",
                             SubCategoryID = 3
@@ -1009,6 +1023,7 @@ namespace MyProject.API.Migrations
                             ID = 9,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 1,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
                             ProductName = "Pants003",
                             SubCategoryID = 3
@@ -1018,6 +1033,7 @@ namespace MyProject.API.Migrations
                             ID = 10,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 1,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 299.90m,
                             ProductName = "ACC001",
                             SubCategoryID = 4
@@ -1027,6 +1043,7 @@ namespace MyProject.API.Migrations
                             ID = 11,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 1,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 59.90m,
                             ProductName = "ACC002",
                             SubCategoryID = 4
@@ -1036,6 +1053,7 @@ namespace MyProject.API.Migrations
                             ID = 12,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 1,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 89.90m,
                             ProductName = "ACC003",
                             SubCategoryID = 4
@@ -1045,6 +1063,7 @@ namespace MyProject.API.Migrations
                             ID = 13,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 2,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 299.90m,
                             ProductName = "Sneakers001",
                             SubCategoryID = 5
@@ -1054,6 +1073,7 @@ namespace MyProject.API.Migrations
                             ID = 14,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 2,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 359.90m,
                             ProductName = "Sneakers002",
                             SubCategoryID = 5
@@ -1063,6 +1083,7 @@ namespace MyProject.API.Migrations
                             ID = 15,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 2,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 59.90m,
                             ProductName = "Sneakers003",
                             SubCategoryID = 5
@@ -1072,6 +1093,7 @@ namespace MyProject.API.Migrations
                             ID = 16,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 2,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 89.90m,
                             ProductName = "T-Shirts001",
                             SubCategoryID = 6
@@ -1081,6 +1103,7 @@ namespace MyProject.API.Migrations
                             ID = 17,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 2,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
                             ProductName = "T-Shirts002",
                             SubCategoryID = 6
@@ -1090,6 +1113,7 @@ namespace MyProject.API.Migrations
                             ID = 18,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 2,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
                             ProductName = "T-Shirts003",
                             SubCategoryID = 6
@@ -1099,6 +1123,7 @@ namespace MyProject.API.Migrations
                             ID = 19,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 2,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
                             ProductName = "Pants001",
                             SubCategoryID = 7
@@ -1108,6 +1133,7 @@ namespace MyProject.API.Migrations
                             ID = 20,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 2,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
                             ProductName = "Pants002",
                             SubCategoryID = 7
@@ -1117,6 +1143,7 @@ namespace MyProject.API.Migrations
                             ID = 21,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 2,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
                             ProductName = "Pants003",
                             SubCategoryID = 7
@@ -1126,6 +1153,7 @@ namespace MyProject.API.Migrations
                             ID = 22,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 2,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
                             ProductName = "ACC",
                             SubCategoryID = 8
@@ -1135,6 +1163,7 @@ namespace MyProject.API.Migrations
                             ID = 23,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 2,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
                             ProductName = "ACC",
                             SubCategoryID = 8
@@ -1144,6 +1173,7 @@ namespace MyProject.API.Migrations
                             ID = 24,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 2,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
                             ProductName = "ACC",
                             SubCategoryID = 8
@@ -1153,6 +1183,7 @@ namespace MyProject.API.Migrations
                             ID = 25,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 3,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 299.90m,
                             ProductName = "Sneakers001",
                             SubCategoryID = 9
@@ -1162,6 +1193,7 @@ namespace MyProject.API.Migrations
                             ID = 26,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 3,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 359.90m,
                             ProductName = "Sneakers002",
                             SubCategoryID = 9
@@ -1171,6 +1203,7 @@ namespace MyProject.API.Migrations
                             ID = 27,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 3,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 59.90m,
                             ProductName = "Sneakers003",
                             SubCategoryID = 9
@@ -1180,6 +1213,7 @@ namespace MyProject.API.Migrations
                             ID = 28,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 3,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 89.90m,
                             ProductName = "T-Shirts001",
                             SubCategoryID = 10
@@ -1189,6 +1223,7 @@ namespace MyProject.API.Migrations
                             ID = 29,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 3,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
                             ProductName = "T-Shirts002",
                             SubCategoryID = 10
@@ -1198,6 +1233,7 @@ namespace MyProject.API.Migrations
                             ID = 30,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 3,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
                             ProductName = "T-Shirts003",
                             SubCategoryID = 10
@@ -1207,6 +1243,7 @@ namespace MyProject.API.Migrations
                             ID = 31,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 3,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 299.90m,
                             ProductName = "ACC001",
                             SubCategoryID = 12
@@ -1216,6 +1253,7 @@ namespace MyProject.API.Migrations
                             ID = 32,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 3,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 59.90m,
                             ProductName = "ACC002",
                             SubCategoryID = 12
@@ -1225,6 +1263,7 @@ namespace MyProject.API.Migrations
                             ID = 33,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentID = 3,
+                            Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 89.90m,
                             ProductName = "ACC003",
                             SubCategoryID = 12
@@ -1467,18 +1506,18 @@ namespace MyProject.API.Migrations
                         new
                         {
                             ID = 1,
-                            EmailAddress = "adam@gmail.com",
+                            EmailAddress = "Admin@gmail.com",
                             FirstName = "Adam",
                             LastLogin = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LastName = "Faylo",
-                            Password = "12346578",
+                            Password = "12345678",
                             Type = 999,
                             UserName = "adam"
                         },
                         new
                         {
                             ID = 2,
-                            EmailAddress = "eran@gmail.com",
+                            EmailAddress = "User@gmail.com",
                             FirstName = "Eran",
                             LastLogin = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LastName = "BenDahan",

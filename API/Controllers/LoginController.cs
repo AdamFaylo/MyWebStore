@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using MyProject.API.Models;
 using MyProject.API.Models.Collections;
@@ -8,7 +7,6 @@ using MyProject.API.Models.Enums;
 using MyProject.API.Repositories.Abstract;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Security.Principal;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 

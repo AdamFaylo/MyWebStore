@@ -3,8 +3,6 @@ import dataReducer from "../features/product-slice";
 import userReducer from "../features/user-slice";
 import departmentReducer from "../features/departments-slice";
 import orderReducer from "../features/order-slice";
-import logoReducer from "../features/logo-slice";
-import authSlice from "../features/logo-slice";
 import themeReducer from "../features/theme-slice";
 
 const store = configureStore({
@@ -13,8 +11,6 @@ const store = configureStore({
     user: userReducer,
     departments: departmentReducer,
     orders: orderReducer,
-    logo: logoReducer,
-    auth: authSlice,
     theme: themeReducer,
   },
   middleware: (getDefaultMiddleware) =>

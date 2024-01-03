@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MyProject.API.Migrations
 {
     /// <inheritdoc />
-    public partial class initialseed3 : Migration
+    public partial class AddLogoInContext : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,36 +15,36 @@ namespace MyProject.API.Migrations
                 table: "LogoImage",
                 keyColumn: "ID",
                 keyValue: 1,
-                column: "Logo",
-                value: "https://i.imgur.com/6jdrLVk.png");
+                columns: new[] { "Alt", "Logo" },
+                values: new object[] { "Logo site", "https://i.imgur.com/t4hi8os.png" });
 
             migrationBuilder.UpdateData(
                 table: "Orders",
                 keyColumn: "OrderId",
                 keyValue: 1,
                 column: "OrderDate",
-                value: new DateTime(2023, 12, 24, 23, 30, 2, 130, DateTimeKind.Local).AddTicks(2497));
+                value: new DateTime(2023, 12, 31, 19, 44, 57, 386, DateTimeKind.Local).AddTicks(5478));
 
             migrationBuilder.UpdateData(
                 table: "Orders",
                 keyColumn: "OrderId",
                 keyValue: 2,
                 column: "OrderDate",
-                value: new DateTime(2023, 12, 23, 23, 30, 2, 130, DateTimeKind.Local).AddTicks(2537));
+                value: new DateTime(2023, 12, 30, 19, 44, 57, 386, DateTimeKind.Local).AddTicks(5534));
 
             migrationBuilder.UpdateData(
                 table: "Payment",
                 keyColumn: "ID",
                 keyValue: 1,
                 column: "PaymentDate",
-                value: new DateTime(2023, 12, 24, 21, 30, 2, 130, DateTimeKind.Utc).AddTicks(2431));
+                value: new DateTime(2023, 12, 31, 17, 44, 57, 386, DateTimeKind.Utc).AddTicks(5376));
 
             migrationBuilder.UpdateData(
                 table: "Payment",
                 keyColumn: "ID",
                 keyValue: 2,
                 column: "PaymentDate",
-                value: new DateTime(2023, 12, 23, 21, 30, 2, 130, DateTimeKind.Utc).AddTicks(2438));
+                value: new DateTime(2023, 12, 30, 17, 44, 57, 386, DateTimeKind.Utc).AddTicks(5389));
         }
 
         /// <inheritdoc />
@@ -54,36 +54,36 @@ namespace MyProject.API.Migrations
                 table: "LogoImage",
                 keyColumn: "ID",
                 keyValue: 1,
-                column: "Logo",
-                value: "https://i.imgur.com/VcU01l9.png");
+                columns: new[] { "Alt", "Logo" },
+                values: new object[] { "Logo vanes site", "https://i.imgur.com/6jdrLVk.png" });
 
             migrationBuilder.UpdateData(
                 table: "Orders",
                 keyColumn: "OrderId",
                 keyValue: 1,
                 column: "OrderDate",
-                value: new DateTime(2023, 12, 24, 7, 30, 1, 248, DateTimeKind.Local).AddTicks(1359));
+                value: new DateTime(2023, 12, 31, 18, 7, 51, 954, DateTimeKind.Local).AddTicks(6727));
 
             migrationBuilder.UpdateData(
                 table: "Orders",
                 keyColumn: "OrderId",
                 keyValue: 2,
                 column: "OrderDate",
-                value: new DateTime(2023, 12, 23, 7, 30, 1, 248, DateTimeKind.Local).AddTicks(1396));
+                value: new DateTime(2023, 12, 30, 18, 7, 51, 954, DateTimeKind.Local).AddTicks(6768));
 
             migrationBuilder.UpdateData(
                 table: "Payment",
                 keyColumn: "ID",
                 keyValue: 1,
                 column: "PaymentDate",
-                value: new DateTime(2023, 12, 24, 5, 30, 1, 248, DateTimeKind.Utc).AddTicks(1305));
+                value: new DateTime(2023, 12, 31, 16, 7, 51, 954, DateTimeKind.Utc).AddTicks(6670));
 
             migrationBuilder.UpdateData(
                 table: "Payment",
                 keyColumn: "ID",
                 keyValue: 2,
                 column: "PaymentDate",
-                value: new DateTime(2023, 12, 23, 5, 30, 1, 248, DateTimeKind.Utc).AddTicks(1312));
+                value: new DateTime(2023, 12, 30, 16, 7, 51, 954, DateTimeKind.Utc).AddTicks(6677));
         }
     }
 }

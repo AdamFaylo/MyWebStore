@@ -47,25 +47,8 @@ namespace MyProject.API.Controllers
                Password = user.Password,    
             };
 
-
-
-            // var cart = new Cart {}
-            // var user = new User {
-            // }
-            //user.Cart = cart
-            // context.Users.Add(user)
-            // context.Carts.Add(cart)
-            //context.SaveChanges()
-
-            // Before:
             var result = await _userRepo.Create(newItem);
 
-            //var result = await _userRepo.CreateWith(user, (context) =>
-            //{
-            //    var cart = new Cart();
-            //    //user.Cart = cart;
-            //    context.Cart.Add(cart);
-            //});
             return Created("user", result);
         }
 

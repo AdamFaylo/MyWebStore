@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MyProject.API.Migrations
 {
     /// <inheritdoc />
-    public partial class initialseed : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -99,8 +99,8 @@ namespace MyProject.API.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Logo = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Alt = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Logo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Alt = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -295,8 +295,9 @@ namespace MyProject.API.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AddedOn = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getDate()"),
                     DepartmentID = table.Column<int>(type: "int", nullable: false),
                     SubCategoryID = table.Column<int>(type: "int", nullable: false)
@@ -506,7 +507,7 @@ namespace MyProject.API.Migrations
             migrationBuilder.InsertData(
                 table: "LogoImage",
                 columns: new[] { "ID", "Alt", "Logo" },
-                values: new object[] { 1, "Logo vanes site", "https://i.imgur.com/VcU01l9.png" });
+                values: new object[] { 1, "Logo vanes site", "https://i.imgur.com/6jdrLVk.png" });
 
             migrationBuilder.InsertData(
                 table: "ShippingAddress",
@@ -522,8 +523,8 @@ namespace MyProject.API.Migrations
                 columns: new[] { "ID", "EmailAddress", "FirstName", "LastLogin", "LastName", "Password", "Type", "UserName" },
                 values: new object[,]
                 {
-                    { 1, "adam@gmail.com", "Adam", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Faylo", "12346578", 999, "adam" },
-                    { 2, "eran@gmail.com", "Eran", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "BenDahan", "87654321", 0, "eran" },
+                    { 1, "Admin@gmail.com", "Adam", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Faylo", "12345678", 999, "adam" },
+                    { 2, "User@gmail.com", "Eran", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "BenDahan", "87654321", 0, "eran" },
                     { 3, "roman@gmail.com", "Roman", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Coco", "55555555", 1, "rom" }
                 });
 
@@ -560,48 +561,48 @@ namespace MyProject.API.Migrations
                 columns: new[] { "OrderId", "CartId", "CustomerID", "IsPaid", "OrderDate", "ShippingAddressID", "UserID" },
                 values: new object[,]
                 {
-                    { 1, 1, 1, true, new DateTime(2023, 12, 23, 19, 26, 9, 409, DateTimeKind.Local).AddTicks(245), 1, null },
-                    { 2, 2, 2, false, new DateTime(2023, 12, 22, 19, 26, 9, 409, DateTimeKind.Local).AddTicks(288), 2, null }
+                    { 1, 1, 1, true, new DateTime(2023, 12, 31, 18, 7, 51, 954, DateTimeKind.Local).AddTicks(6727), 1, null },
+                    { 2, 2, 2, false, new DateTime(2023, 12, 30, 18, 7, 51, 954, DateTimeKind.Local).AddTicks(6768), 2, null }
                 });
 
             migrationBuilder.InsertData(
                 table: "Product",
-                columns: new[] { "ID", "DepartmentID", "Price", "ProductName", "SubCategoryID" },
+                columns: new[] { "ID", "DepartmentID", "Description", "Price", "ProductName", "SubCategoryID" },
                 values: new object[,]
                 {
-                    { 1, 1, 299.90m, "Sneakers001", 1 },
-                    { 2, 1, 359.90m, "Sneakers002", 1 },
-                    { 3, 1, 59.90m, "Sneakers003", 1 },
-                    { 4, 1, 89.90m, "T-Shirts001", 2 },
-                    { 5, 1, 29.90m, "T-Shirts002", 2 },
-                    { 6, 1, 29.90m, "T-Shirts003", 2 },
-                    { 7, 1, 29.90m, "Pants001", 3 },
-                    { 8, 1, 29.90m, "Pants002", 3 },
-                    { 9, 1, 29.90m, "Pants003", 3 },
-                    { 10, 1, 299.90m, "ACC001", 4 },
-                    { 11, 1, 59.90m, "ACC002", 4 },
-                    { 12, 1, 89.90m, "ACC003", 4 },
-                    { 13, 2, 299.90m, "Sneakers001", 5 },
-                    { 14, 2, 359.90m, "Sneakers002", 5 },
-                    { 15, 2, 59.90m, "Sneakers003", 5 },
-                    { 16, 2, 89.90m, "T-Shirts001", 6 },
-                    { 17, 2, 29.90m, "T-Shirts002", 6 },
-                    { 18, 2, 29.90m, "T-Shirts003", 6 },
-                    { 19, 2, 29.90m, "Pants001", 7 },
-                    { 20, 2, 29.90m, "Pants002", 7 },
-                    { 21, 2, 29.90m, "Pants003", 7 },
-                    { 22, 2, 29.90m, "ACC", 8 },
-                    { 23, 2, 29.90m, "ACC", 8 },
-                    { 24, 2, 29.90m, "ACC", 8 },
-                    { 25, 3, 299.90m, "Sneakers001", 9 },
-                    { 26, 3, 359.90m, "Sneakers002", 9 },
-                    { 27, 3, 59.90m, "Sneakers003", 9 },
-                    { 28, 3, 89.90m, "T-Shirts001", 10 },
-                    { 29, 3, 29.90m, "T-Shirts002", 10 },
-                    { 30, 3, 29.90m, "T-Shirts003", 10 },
-                    { 31, 3, 299.90m, "ACC001", 12 },
-                    { 32, 3, 59.90m, "ACC002", 12 },
-                    { 33, 3, 89.90m, "ACC003", 12 }
+                    { 1, 1, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 299.90m, "Sneakers001", 1 },
+                    { 2, 1, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 359.90m, "Sneakers002", 1 },
+                    { 3, 1, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 59.90m, "Sneakers003", 1 },
+                    { 4, 1, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 89.90m, "T-Shirts001", 2 },
+                    { 5, 1, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "T-Shirts002", 2 },
+                    { 6, 1, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "T-Shirts003", 2 },
+                    { 7, 1, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "Pants001", 3 },
+                    { 8, 1, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "Pants002", 3 },
+                    { 9, 1, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "Pants003", 3 },
+                    { 10, 1, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 299.90m, "ACC001", 4 },
+                    { 11, 1, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 59.90m, "ACC002", 4 },
+                    { 12, 1, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 89.90m, "ACC003", 4 },
+                    { 13, 2, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 299.90m, "Sneakers001", 5 },
+                    { 14, 2, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 359.90m, "Sneakers002", 5 },
+                    { 15, 2, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 59.90m, "Sneakers003", 5 },
+                    { 16, 2, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 89.90m, "T-Shirts001", 6 },
+                    { 17, 2, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "T-Shirts002", 6 },
+                    { 18, 2, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "T-Shirts003", 6 },
+                    { 19, 2, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "Pants001", 7 },
+                    { 20, 2, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "Pants002", 7 },
+                    { 21, 2, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "Pants003", 7 },
+                    { 22, 2, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "ACC", 8 },
+                    { 23, 2, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "ACC", 8 },
+                    { 24, 2, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "ACC", 8 },
+                    { 25, 3, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 299.90m, "Sneakers001", 9 },
+                    { 26, 3, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 359.90m, "Sneakers002", 9 },
+                    { 27, 3, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 59.90m, "Sneakers003", 9 },
+                    { 28, 3, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 89.90m, "T-Shirts001", 10 },
+                    { 29, 3, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "T-Shirts002", 10 },
+                    { 30, 3, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "T-Shirts003", 10 },
+                    { 31, 3, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 299.90m, "ACC001", 12 },
+                    { 32, 3, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 59.90m, "ACC002", 12 },
+                    { 33, 3, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 89.90m, "ACC003", 12 }
                 });
 
             migrationBuilder.InsertData(
@@ -619,39 +620,39 @@ namespace MyProject.API.Migrations
                 columns: new[] { "ID", "Alt", "ImageURL", "ProductID", "Title" },
                 values: new object[,]
                 {
-                    { 1, "man", "https://i.imgur.com/x3U6jKx.jpg", 1, "shoes for man" },
-                    { 2, "man", "https://i.imgur.com/LnQGteX.jpg", 2, "shoes for man" },
-                    { 3, "man", "https://i.imgur.com/v3SN2Vo.jpg", 3, "shoes for man" },
-                    { 4, "man", "https://i.imgur.com/CVmmzhU.jpg", 4, "shoes for man" },
-                    { 5, "man", "https://i.imgur.com/LGfzcug.jpg", 5, "shoes for man" },
-                    { 6, "man", "https://i.imgur.com/P3XGF8p.jpg", 6, "shoes for man" },
-                    { 7, "man", "https://i.imgur.com/oPlSrbz.jpg", 7, "shoes pastel color for man" },
-                    { 8, "man", "https://i.imgur.com/0oZ7MrE.jpg", 8, "shoes pink for man" },
-                    { 9, "man", "https://i.imgur.com/UczdMkv.jpg", 9, "shoes pink for man" },
-                    { 10, "man", "https://i.imgur.com/qpalZ7J.jpg", 10, "shoes for man" },
-                    { 11, "man", "https://i.imgur.com/Qd0hKEe.jpg", 11, "shoes for man" },
-                    { 12, "man", "https://i.imgur.com/vPXZfwu.jpg", 12, "shoes for man" },
-                    { 13, "woman_shoes", "https://i.imgur.com/A4b2kSN.jpg", 13, "shoes pastel color for woman" },
-                    { 14, "woman_shoes", "https://i.imgur.com/z1zF5F0.jpg", 14, "shoes pink for woman" },
-                    { 15, "woman_shoes", "https://i.imgur.com/GYkO0dn.jpg", 15, "shoes pink for woman" },
-                    { 16, "woman", "https://i.imgur.com/yKIuCZN.jpg", 16, "T-SHIRT for woman" },
-                    { 17, "woman", "https://i.imgur.com/rgMPyCg.jpg", 17, "T-SHIRT for woman" },
-                    { 18, "woman", "https://i.imgur.com/IkeJGoS.jpg", 18, "T-SHIRT for woman" },
+                    { 1, "man", "https://i.imgur.com/kFFe4rc.png", 1, "shoes for man" },
+                    { 2, "man", "https://i.imgur.com/FSzo30R.png", 2, "shoes for man" },
+                    { 3, "man", "https://i.imgur.com/OrJ3uxz.png", 3, "shoes for man" },
+                    { 4, "man", "https://i.imgur.com/FMyHAER.png", 4, "T-SHIRTS for man" },
+                    { 5, "man", "https://i.imgur.com/1vvkkun.png", 5, "T-SHIRTS for man" },
+                    { 6, "man", "https://i.imgur.com/Q2Omp1q.png", 6, "T-SHIRTS for man" },
+                    { 7, "man", "https://i.imgur.com/oPlSrbz.jpg", 7, "trousers for man" },
+                    { 8, "man", "https://i.imgur.com/0oZ7MrE.jpg", 8, "trousers for man" },
+                    { 9, "man", "https://i.imgur.com/UczdMkv.jpg", 9, "trousers for man" },
+                    { 10, "man", "https://i.imgur.com/qpalZ7J.jpg", 10, "acc for man" },
+                    { 11, "man", "https://i.imgur.com/Qd0hKEe.jpg", 11, "acc for man" },
+                    { 12, "man", "https://i.imgur.com/vPXZfwu.jpg", 12, "acc for man" },
+                    { 13, "woman_shoes", "https://i.imgur.com/HpT7xCj.png", 13, "shoes pastel color for woman" },
+                    { 14, "woman_shoes", "https://i.imgur.com/48fArMF.png", 14, "shoes pink for woman" },
+                    { 15, "woman_shoes", "https://i.imgur.com/SuXlbYo.png", 15, "shoes pink for woman" },
+                    { 16, "woman", "https://i.imgur.com/nA84c5Y.png", 16, "T-SHIRT for woman" },
+                    { 17, "woman", "https://i.imgur.com/KLI84On.png", 17, "T-SHIRT for woman" },
+                    { 18, "woman", "https://i.imgur.com/N3Hw655.png", 18, "T-SHIRT for woman" },
                     { 19, "woman_trousers", "https://i.imgur.com/NhR4kFB.jpg", 19, "trousers for woman" },
                     { 20, "woman_trousers", "https://i.imgur.com/4xStoKp.jpg", 20, "trousers for woman" },
                     { 21, "woman_trousers", "https://i.imgur.com/n3TMOZI.jpg", 21, "trousers for woman" },
                     { 22, "woman_acc", "https://i.imgur.com/KuAG5Ae.jpg", 22, "acc for woman" },
-                    { 23, "woman_acc", "https://i.imgur.com/5Mp82QF.jpg", 23, "acc pink for woman" },
-                    { 24, "woman_acc", "https://i.imgur.com/VvOHI60.jpg", 24, "acc pink for woman" },
-                    { 25, "kids", "https://i.imgur.com/mtgc2Kl.jpg", 25, "shoes for kids" },
-                    { 26, "kids", "https://i.imgur.com/IMMWY3v.jpg", 26, "shoes for kids" },
-                    { 27, "kids", "https://i.imgur.com/bFZSTKa.jpg", 27, "shoes for kids" },
-                    { 28, "kids", "https://i.imgur.com/VXSGhtq.jpg", 28, "shoes for kids" },
-                    { 29, "kids", "https://i.imgur.com/ugyS15L.jpg", 29, "shoes for kids" },
-                    { 30, "kids", "https://i.imgur.com/FcuvIH4.jpg", 30, "shoes for kids" },
-                    { 31, "kids", "https://i.imgur.com/hFBMhA1.jpg", 31, "shoes for kids" },
-                    { 32, "kids", "https://i.imgur.com/OeC6gqG.jpg", 32, "shoes for kids" },
-                    { 33, "kids", "https://i.imgur.com/P0vlF79.jpg", 33, "shoes for kids" }
+                    { 23, "woman_acc", "https://i.imgur.com/5Mp82QF.jpg", 23, "acc for woman" },
+                    { 24, "woman_acc", "https://i.imgur.com/VvOHI60.jpg", 24, "acc for woman" },
+                    { 25, "kids", "https://i.imgur.com/wylMcYn.png", 25, "shoes for kids" },
+                    { 26, "kids", "https://i.imgur.com/ydaUz58.png", 26, "shoes for kids" },
+                    { 27, "kids", "https://i.imgur.com/WeiJljO.png", 27, "shoes for kids" },
+                    { 28, "kids", "https://i.imgur.com/pBhxbGl.png", 28, "T-SHIRT for kids" },
+                    { 29, "kids", "https://i.imgur.com/UJeZ4jX.png", 29, "T-SHIRT for kids" },
+                    { 30, "kids", "https://i.imgur.com/pBhxbGl.png", 30, "T-SHIRT for kids" },
+                    { 31, "kids", "https://i.imgur.com/5sEKFeH.png", 31, "acc for kids" },
+                    { 32, "kids", "https://i.imgur.com/iaP5xXB.png", 32, "acc for kids" },
+                    { 33, "kids", "https://i.imgur.com/BxlFtRr.png", 33, "acc for kids" }
                 });
 
             migrationBuilder.InsertData(
@@ -668,8 +669,8 @@ namespace MyProject.API.Migrations
                 columns: new[] { "ID", "Amount", "OrderID", "PaymentDate" },
                 values: new object[,]
                 {
-                    { 1, 29.90m, 1, new DateTime(2023, 12, 23, 17, 26, 9, 409, DateTimeKind.Utc).AddTicks(159) },
-                    { 2, 39.90m, 2, new DateTime(2023, 12, 22, 17, 26, 9, 409, DateTimeKind.Utc).AddTicks(167) }
+                    { 1, 29.90m, 1, new DateTime(2023, 12, 31, 16, 7, 51, 954, DateTimeKind.Utc).AddTicks(6670) },
+                    { 2, 39.90m, 2, new DateTime(2023, 12, 30, 16, 7, 51, 954, DateTimeKind.Utc).AddTicks(6677) }
                 });
 
             migrationBuilder.InsertData(

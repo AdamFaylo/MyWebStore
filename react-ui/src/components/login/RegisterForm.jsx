@@ -14,7 +14,6 @@ function RegistrationForm() {
     username: "",
     emailaddress: "",
     password: "",
-    // Add more fields as needed
   });
 
   const handleChange = (e) => {
@@ -39,24 +38,23 @@ function RegistrationForm() {
         icon: "error",
         title: "Oops... There was an error!",
         text: "Something went wrong!",
-        
       }).then((result) => {
         result.isConfirmed && window.location.reload();
       });
       console.error("Registration error:", error.message);
     }
   };
+
   return (
     <OverlayContainer>
       <FormContainer>
         <h2>Register</h2>
-        <Form inline onSubmit={handleSubmit}>
+        <Form inline={true} onSubmit={handleSubmit} style={{ width: " 27rem" }}>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>First name:</Form.Label>
             <Form.Control
               type="text"
-              id="firstname"
-              name="firstname"
+              name="firstname" // Removed id="firstname"
               value={formData.firstname}
               onChange={handleChange}
               required
@@ -66,8 +64,7 @@ function RegistrationForm() {
             <Form.Label>Last name:</Form.Label>
             <Form.Control
               type="text"
-              id="lastname"
-              name="lastname"
+              name="lastname" // Removed id="lastname"
               value={formData.lastname}
               onChange={handleChange}
               required
@@ -77,8 +74,7 @@ function RegistrationForm() {
             <Form.Label>User name:</Form.Label>
             <Form.Control
               type="text"
-              id="username"
-              name="username"
+              name="username" // Removed id="username"
               value={formData.username}
               onChange={handleChange}
               required
@@ -88,8 +84,7 @@ function RegistrationForm() {
             <Form.Label>Email address:</Form.Label>
             <Form.Control
               type="email"
-              id="emailaddress"
-              name="emailaddress"
+              name="emailaddress" // Removed id="emailaddress"
               value={formData.emailaddress}
               onChange={handleChange}
               required
@@ -99,16 +94,15 @@ function RegistrationForm() {
             <Form.Label>Password:</Form.Label>
             <Form.Control
               type="password"
-              id="password"
-              name="password"
+              name="password" // Removed id="password"
               value={formData.password}
               onChange={handleChange}
-              autoComplete="current-password" // Add this line
+              autoComplete="current-password"
               required
             />
           </Form.Group>
           {/* Add more form fields for user registration */}
-          <Button variant="" type="submit">
+          <Button variant="danger" type="submit" style={{ width: "27rem" }}>
             Register
           </Button>
         </Form>

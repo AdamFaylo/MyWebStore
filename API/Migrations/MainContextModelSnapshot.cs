@@ -511,7 +511,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 7,
                             Alt = "man",
-                            ImageURL = "https://i.imgur.com/oPlSrbz.jpg",
+                            ImageURL = "https://i.imgur.com/6HUpAq5.png",
                             ProductID = 7,
                             Title = "trousers for man"
                         },
@@ -519,7 +519,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 8,
                             Alt = "man",
-                            ImageURL = "https://i.imgur.com/0oZ7MrE.jpg",
+                            ImageURL = "https://i.imgur.com/tpdPfHe.png",
                             ProductID = 8,
                             Title = "trousers for man"
                         },
@@ -527,7 +527,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 9,
                             Alt = "man",
-                            ImageURL = "https://i.imgur.com/UczdMkv.jpg",
+                            ImageURL = "https://i.imgur.com/LJnaKkR.png",
                             ProductID = 9,
                             Title = "trousers for man"
                         },
@@ -535,7 +535,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 10,
                             Alt = "man",
-                            ImageURL = "https://i.imgur.com/qpalZ7J.jpg",
+                            ImageURL = "https://i.imgur.com/yhlgVxL.png",
                             ProductID = 10,
                             Title = "acc for man"
                         },
@@ -543,7 +543,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 11,
                             Alt = "man",
-                            ImageURL = "https://i.imgur.com/Qd0hKEe.jpg",
+                            ImageURL = "https://i.imgur.com/f2TOHlO.png",
                             ProductID = 11,
                             Title = "acc for man"
                         },
@@ -551,7 +551,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 12,
                             Alt = "man",
-                            ImageURL = "https://i.imgur.com/vPXZfwu.jpg",
+                            ImageURL = "https://i.imgur.com/fKIG06M.png",
                             ProductID = 12,
                             Title = "acc for man"
                         },
@@ -607,7 +607,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 19,
                             Alt = "woman_trousers",
-                            ImageURL = "https://i.imgur.com/NhR4kFB.jpg",
+                            ImageURL = "https://i.imgur.com/9Unyl2Q.png",
                             ProductID = 19,
                             Title = "trousers for woman"
                         },
@@ -615,7 +615,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 20,
                             Alt = "woman_trousers",
-                            ImageURL = "https://i.imgur.com/4xStoKp.jpg",
+                            ImageURL = "https://i.imgur.com/UxLMIKE.png",
                             ProductID = 20,
                             Title = "trousers for woman"
                         },
@@ -623,7 +623,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 21,
                             Alt = "woman_trousers",
-                            ImageURL = "https://i.imgur.com/n3TMOZI.jpg",
+                            ImageURL = "https://i.imgur.com/XaXUJNl.png",
                             ProductID = 21,
                             Title = "trousers for woman"
                         },
@@ -631,7 +631,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 22,
                             Alt = "woman_acc",
-                            ImageURL = "https://i.imgur.com/KuAG5Ae.jpg",
+                            ImageURL = "https://i.imgur.com/THBDPax.png",
                             ProductID = 22,
                             Title = "acc for woman"
                         },
@@ -639,7 +639,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 23,
                             Alt = "woman_acc",
-                            ImageURL = "https://i.imgur.com/5Mp82QF.jpg",
+                            ImageURL = "https://i.imgur.com/vNPCxkh.png",
                             ProductID = 23,
                             Title = "acc for woman"
                         },
@@ -647,7 +647,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 24,
                             Alt = "woman_acc",
-                            ImageURL = "https://i.imgur.com/VvOHI60.jpg",
+                            ImageURL = "https://i.imgur.com/Q3UjsjY.png",
                             ProductID = 24,
                             Title = "acc for woman"
                         },
@@ -749,8 +749,8 @@ namespace MyProject.API.Migrations
                         new
                         {
                             ID = 1,
-                            Alt = "Logo vanes site",
-                            Logo = "https://i.imgur.com/6jdrLVk.png"
+                            Alt = "Logo site",
+                            Logo = "https://i.imgur.com/t4hi8os.png"
                         });
                 });
 
@@ -799,7 +799,7 @@ namespace MyProject.API.Migrations
                             CartId = 1,
                             CustomerID = 1,
                             IsPaid = true,
-                            OrderDate = new DateTime(2023, 12, 31, 17, 24, 8, 813, DateTimeKind.Local).AddTicks(1673),
+                            OrderDate = new DateTime(2024, 1, 2, 10, 8, 55, 814, DateTimeKind.Local).AddTicks(2634),
                             ShippingAddressID = 1
                         },
                         new
@@ -808,7 +808,7 @@ namespace MyProject.API.Migrations
                             CartId = 2,
                             CustomerID = 2,
                             IsPaid = false,
-                            OrderDate = new DateTime(2023, 12, 30, 17, 24, 8, 813, DateTimeKind.Local).AddTicks(1717),
+                            OrderDate = new DateTime(2024, 1, 1, 10, 8, 55, 814, DateTimeKind.Local).AddTicks(2672),
                             ShippingAddressID = 2
                         });
                 });
@@ -885,14 +885,14 @@ namespace MyProject.API.Migrations
                             ID = 1,
                             Amount = 29.90m,
                             OrderID = 1,
-                            PaymentDate = new DateTime(2023, 12, 31, 15, 24, 8, 813, DateTimeKind.Utc).AddTicks(1596)
+                            PaymentDate = new DateTime(2024, 1, 2, 8, 8, 55, 814, DateTimeKind.Utc).AddTicks(2569)
                         },
                         new
                         {
                             ID = 2,
                             Amount = 39.90m,
                             OrderID = 2,
-                            PaymentDate = new DateTime(2023, 12, 30, 15, 24, 8, 813, DateTimeKind.Utc).AddTicks(1605)
+                            PaymentDate = new DateTime(2024, 1, 1, 8, 8, 55, 814, DateTimeKind.Utc).AddTicks(2577)
                         });
                 });
 

@@ -1,24 +1,19 @@
 // src/LoginFormStyles.js
-import styled from '@emotion/styled';
-
-export const Container = styled.div`
-  display: grid;
-  justify-items: center;
-`;
+import styled from "@emotion/styled";
 
 export const OverlayContainer = styled.div`
   display: grid;
-  align-content: center;
-  height: 84vh;
-  width: 30rem; 
-  border-radios: solid 1px black;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  position: relative;
+  top: 4rem;
 `;
 
 export const FormContainer = styled.div`
   background: white;
   padding: 48px;
   border-radius: 10px;
-  border:solid black 0.5px;
+  border: solid black 0.5px;
   background-color: #f5f5f5;
 `;
 
@@ -28,17 +23,18 @@ export const StyledForm = styled.form`
 `;
 
 export const StyledInput = styled.input`
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+    padding: 6px;
+    width: 17rem;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 `;
 
 export const StyledButton = styled.button`
   padding: 10px;
   width: 100%;
   border: none;
-  border-radius: 4px ;
+  border-radius: 4px;
   background-color: #007bff;
   color: white;
   cursor: pointer;

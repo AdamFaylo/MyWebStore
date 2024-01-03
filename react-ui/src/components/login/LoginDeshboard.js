@@ -7,8 +7,14 @@ import { Anchor } from '@mantine/core';
 import { useSelector } from 'react-redux';
 
 const schema = yup.object({
-  emailaddress: yup.string().required('Email address is required'), 
-  password: yup.string().required('Password is required'),
+  emailaddress: yup
+    .string()
+    .required('Email address is required')
+    .email('Invalid email format'), // Check for valid email format
+  password: yup
+    .string()
+    .required('Password is required')
+    .min(8, 'Password must be at least 8 characters'), // Set a minimum password length
 });
 
 function LoginDashboard() {
@@ -17,12 +23,13 @@ function LoginDashboard() {
   const [error, setError] = useState('');
   const nav = useNavigate();
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await schema.validate({ emailaddress, password });
       
+      // Additional password strength checks can be added here if needed
+
       const loginData = { emailaddress, password }; 
    
       api.post('login', loginData)
@@ -40,7 +47,6 @@ function LoginDashboard() {
           console.error(ex);
         });
     } catch (validationError) {
-      console.log(validationError);
       setError(validationError.message);
     }
   };
@@ -54,11 +60,13 @@ function LoginDashboard() {
             type="email"
             placeholder="Email"
             onChange={(e) => setEmailAddress(e.target.value)} 
+            value={emailaddress}
           />
           <StyledInput
             type="password"
             placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
+            value={password}
           />
           <StyledButton type="submit">Submit</StyledButton>
           <Link to="/registerFrom">
@@ -73,4 +81,4 @@ function LoginDashboard() {
   );
 }
 
-export default LoginDashboard; 
+export default LoginDashboard;

@@ -1,10 +1,6 @@
 ﻿using API.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
-using MyProject.API.Models;
 using MyProject.API.Repositories.Abstract;
-using System;
-using System.Linq;
-using Microsoft.Extensions.Logging;
 
 namespace API.Controllers
 {

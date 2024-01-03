@@ -133,16 +133,33 @@ namespace API.Controllers
                     Price = item.Price,
                     Description = item.Description,
                     SubCategoryID = item.SubCategoryID,
-                    DepartmentID = item.DepartmentID, // Set the DepartmentID based on user's selection
+                    DepartmentID = item.DepartmentID,
                     AddedOn = DateTime.UtcNow,
                 };
 
                 // Check if the DepartmentID is valid by querying your Departments table
                 var department = _departmentRepo.FindByCondition(d => d.ID == newItem.DepartmentID).FirstOrDefault();
+
                 if (department == null)
                 {
-                    // Return a 400 Bad Request with a meaningful error message
                     return BadRequest("Invalid DepartmentID. Department does not exist.");
+                }
+
+                if (item.GalleryImage != null)
+                {
+                    newItem.GalleryImage = new List<GalleryImage>();
+
+                    foreach (var galleryImageDto in item.GalleryImage)
+                    {
+                        var galleryImage = new GalleryImage
+                        {
+                            Title = galleryImageDto.Title,
+                            ImageURL = galleryImageDto.ImageURL,
+                            Alt = galleryImageDto.Alt,
+                            ProductID = newItem.ID,
+                        };
+                        newItem.GalleryImage.Add(galleryImage);
+                    }
                 }
 
                 var result = _productRepo.Create(newItem);
@@ -162,6 +179,7 @@ namespace API.Controllers
                 });
             }
         }
+
 
         [HttpPut]
         public IActionResult Update(int id, [FromBody] ProductDTO productDto)

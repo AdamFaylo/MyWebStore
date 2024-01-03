@@ -5,7 +5,6 @@ import ProductItem from "./ProductItem";
 import { useNavigate, useParams } from "react-router-dom";
 import { useMemo } from "react";
 import SortPriceComponent from "../sort/SortPriceComponent";
-import PaginationComponent from "../pagination/PaginationComponent";
 import { Button } from "react-bootstrap";
 
 const ProductList = () => {
@@ -61,7 +60,7 @@ const ProductList = () => {
     <div css={containerStyles}>
       {user && user.type === 999 ? (
         <Button
-          style={{ position: "relative", left: "10px",width: "12rem" }}
+          style={{ position: "relative", left: "10px", width: "12rem" }}
           onClick={handlePrivateArea}
         >
           Back Office
@@ -70,10 +69,11 @@ const ProductList = () => {
       <SortPriceComponent />
       <div css={cardGridStyles}>
         {items &&
-          items.slice(0,8).map((item) => <ProductItem key={item.id} data={item} />)}
+          items
+            .map((item) => <ProductItem key={item.id} data={item} />)}
       </div>
       {/* Add the Pagination component here */}
-      <PaginationComponent />
+   
     </div>
   );
 };

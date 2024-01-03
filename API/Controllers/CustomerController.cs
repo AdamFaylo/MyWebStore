@@ -1,10 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using MyProject.API.Models;
 using MyProject.API.Repositories.Abstract;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace MyProject.API.Controllers
 {

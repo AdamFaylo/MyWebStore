@@ -13,7 +13,7 @@ namespace MyProject.API.Models
         public string Description { get; set; }
         public DateTime AddedOn { get; set; }
 
-        [ForeignKey("DepartmentID")]
+        //[ForeignKey("DepartmentID")]
         public Department Department { get; set; }
         public int DepartmentID { get; set; }
         public SubCategory SubCategory { get; set; }

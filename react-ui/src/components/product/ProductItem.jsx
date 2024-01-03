@@ -51,7 +51,7 @@ const ProductItem = ({ data }) => {
         }}
       >
         <Stack>
-          <Card style={{ width: "19rem" }}>
+          <Card style={{ width: "19rem", display: "flex" }}>
             {data.galleryImage?.map((image) => (
               <Card.Img
                 key={image.id}
@@ -63,14 +63,13 @@ const ProductItem = ({ data }) => {
             <Card.Body>
               <Card.Title>{data.name || data.productName}</Card.Title>
               <p>{data.price + " " + "$"}</p>
-              <p>{data.description}</p>
             </Card.Body>
-            
+
             <div style={BtnCart}>
               <button style={styleBtnAddCart} onClick={addToCart}>
                 <VscAdd />
               </button>
-              
+
               <button style={styleBtnRemoveCart} onClick={removeFromCart}>
                 <VscChromeMinimize />
               </button>

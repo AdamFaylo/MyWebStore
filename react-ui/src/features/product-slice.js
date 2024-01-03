@@ -7,21 +7,24 @@ const productURL = "https://localhost:7182/api/product";
 
 // // Async thunk for fetching paginated data
 export const fetchPaginationData = createAsyncThunk(
- "data/fetchPaginationData",
- async ({ page = 2, limit = 10 }, { rejectWithValue }) => {
-   try {
-     const response = await axios.get(`${productURL}?page=${page}&limit=${limit}`);
-    return response.data;
-   } catch (error) {
-    Swal.fire({
-       icon: "error",
+  "data/fetchPaginationData",
+  async ({ page = 2, limit = 10 }, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        `${productURL}?page=${page}&limit=${limit}`
+      );
+
+      return response.data;
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
         title: "Failed to fetch products",
         text: error.message,
-     });
-return rejectWithValue(error.response.data);
-   }
+      });
+      return rejectWithValue(error.response.data);
+    }
   }
- );
+);
 
 // Async thunk for fetching all data
 export const fetchData = createAsyncThunk(
@@ -29,6 +32,7 @@ export const fetchData = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get(productURL);
+     
       return response.data;
     } catch (error) {
       Swal.fire({

@@ -8,7 +8,7 @@ const ProtectedAdmin = ({ children }) => {
   }
 
   if(!user || ( user.type !== 999)) { // user is not logged or is not admin -> navivage to appropriate page
-    return<Navigate to="/loginDeshboard" />;
+    return<Navigate to="/" />;
   }
 
   return <>{children}</>

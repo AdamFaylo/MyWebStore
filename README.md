@@ -130,9 +130,9 @@ User action You can choose and the product is sent to the shopping cart,\
 ## 📷 Screenshots
 <a name="screenshots"/>
 
-(<img width="806" alt="image" src="https://github.com/AdamFaylo/MyWebStore/assets/112155899/da137339-385e-4a14-892e-61cf5db6bb4f">
+<img width="806" alt="image" src="https://github.com/AdamFaylo/MyWebStore/assets/112155899/da137339-385e-4a14-892e-61cf5db6bb4f">
 >
-.png)
+
 
 
 

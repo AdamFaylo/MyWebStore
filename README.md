@@ -134,6 +134,8 @@ User action You can choose and the product is sent to the shopping cart,\
 <img width="951" alt="image" src="https://github.com/AdamFaylo/MyWebStore/assets/112155899/91cc5675-90e1-4f04-b153-b389c79c7726">
 <img width="952" alt="image" src="https://github.com/AdamFaylo/MyWebStore/assets/112155899/51d272bf-8cdc-46cf-87fe-8af4e0cbe206">
 <img width="950" alt="image" src="https://github.com/AdamFaylo/MyWebStore/assets/112155899/5e1ad033-9d6c-4705-8da6-42f0347aaa7b">
+<img width="954" alt="image" src="https://github.com/AdamFaylo/MyWebStore/assets/112155899/55be4dcb-310c-43c7-85d7-8d6ea397d0d8">
+
 
 ## ⚙️ Setup
 <a name="setup"/>

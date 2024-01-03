@@ -12,8 +12,8 @@ using MyProject.API.Context;
 namespace MyProject.API.Migrations
 {
     [DbContext(typeof(MainContext))]
-    [Migration("20240101174457_AddLogoInContext")]
-    partial class AddLogoInContext
+    [Migration("20240103173558_UpdateSeed")]
+    partial class UpdateSeed
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -514,7 +514,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 7,
                             Alt = "man",
-                            ImageURL = "https://i.imgur.com/oPlSrbz.jpg",
+                            ImageURL = "https://i.imgur.com/6HUpAq5.png",
                             ProductID = 7,
                             Title = "trousers for man"
                         },
@@ -522,7 +522,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 8,
                             Alt = "man",
-                            ImageURL = "https://i.imgur.com/0oZ7MrE.jpg",
+                            ImageURL = "https://i.imgur.com/tpdPfHe.png",
                             ProductID = 8,
                             Title = "trousers for man"
                         },
@@ -530,7 +530,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 9,
                             Alt = "man",
-                            ImageURL = "https://i.imgur.com/UczdMkv.jpg",
+                            ImageURL = "https://i.imgur.com/LJnaKkR.png",
                             ProductID = 9,
                             Title = "trousers for man"
                         },
@@ -538,7 +538,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 10,
                             Alt = "man",
-                            ImageURL = "https://i.imgur.com/qpalZ7J.jpg",
+                            ImageURL = "https://i.imgur.com/yhlgVxL.png",
                             ProductID = 10,
                             Title = "acc for man"
                         },
@@ -546,7 +546,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 11,
                             Alt = "man",
-                            ImageURL = "https://i.imgur.com/Qd0hKEe.jpg",
+                            ImageURL = "https://i.imgur.com/f2TOHlO.png",
                             ProductID = 11,
                             Title = "acc for man"
                         },
@@ -554,7 +554,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 12,
                             Alt = "man",
-                            ImageURL = "https://i.imgur.com/vPXZfwu.jpg",
+                            ImageURL = "https://i.imgur.com/fKIG06M.png",
                             ProductID = 12,
                             Title = "acc for man"
                         },
@@ -610,7 +610,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 19,
                             Alt = "woman_trousers",
-                            ImageURL = "https://i.imgur.com/NhR4kFB.jpg",
+                            ImageURL = "https://i.imgur.com/9Unyl2Q.png",
                             ProductID = 19,
                             Title = "trousers for woman"
                         },
@@ -618,7 +618,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 20,
                             Alt = "woman_trousers",
-                            ImageURL = "https://i.imgur.com/4xStoKp.jpg",
+                            ImageURL = "https://i.imgur.com/UxLMIKE.png",
                             ProductID = 20,
                             Title = "trousers for woman"
                         },
@@ -626,7 +626,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 21,
                             Alt = "woman_trousers",
-                            ImageURL = "https://i.imgur.com/n3TMOZI.jpg",
+                            ImageURL = "https://i.imgur.com/XaXUJNl.png",
                             ProductID = 21,
                             Title = "trousers for woman"
                         },
@@ -634,7 +634,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 22,
                             Alt = "woman_acc",
-                            ImageURL = "https://i.imgur.com/KuAG5Ae.jpg",
+                            ImageURL = "https://i.imgur.com/THBDPax.png",
                             ProductID = 22,
                             Title = "acc for woman"
                         },
@@ -642,7 +642,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 23,
                             Alt = "woman_acc",
-                            ImageURL = "https://i.imgur.com/5Mp82QF.jpg",
+                            ImageURL = "https://i.imgur.com/vNPCxkh.png",
                             ProductID = 23,
                             Title = "acc for woman"
                         },
@@ -650,7 +650,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 24,
                             Alt = "woman_acc",
-                            ImageURL = "https://i.imgur.com/VvOHI60.jpg",
+                            ImageURL = "https://i.imgur.com/Q3UjsjY.png",
                             ProductID = 24,
                             Title = "acc for woman"
                         },
@@ -802,7 +802,7 @@ namespace MyProject.API.Migrations
                             CartId = 1,
                             CustomerID = 1,
                             IsPaid = true,
-                            OrderDate = new DateTime(2023, 12, 31, 19, 44, 57, 386, DateTimeKind.Local).AddTicks(5478),
+                            OrderDate = new DateTime(2024, 1, 2, 19, 35, 57, 975, DateTimeKind.Local).AddTicks(4344),
                             ShippingAddressID = 1
                         },
                         new
@@ -811,7 +811,7 @@ namespace MyProject.API.Migrations
                             CartId = 2,
                             CustomerID = 2,
                             IsPaid = false,
-                            OrderDate = new DateTime(2023, 12, 30, 19, 44, 57, 386, DateTimeKind.Local).AddTicks(5534),
+                            OrderDate = new DateTime(2024, 1, 1, 19, 35, 57, 975, DateTimeKind.Local).AddTicks(4398),
                             ShippingAddressID = 2
                         });
                 });
@@ -888,14 +888,14 @@ namespace MyProject.API.Migrations
                             ID = 1,
                             Amount = 29.90m,
                             OrderID = 1,
-                            PaymentDate = new DateTime(2023, 12, 31, 17, 44, 57, 386, DateTimeKind.Utc).AddTicks(5376)
+                            PaymentDate = new DateTime(2024, 1, 2, 17, 35, 57, 975, DateTimeKind.Utc).AddTicks(4255)
                         },
                         new
                         {
                             ID = 2,
                             Amount = 39.90m,
                             OrderID = 2,
-                            PaymentDate = new DateTime(2023, 12, 30, 17, 44, 57, 386, DateTimeKind.Utc).AddTicks(5389)
+                            PaymentDate = new DateTime(2024, 1, 1, 17, 35, 57, 975, DateTimeKind.Utc).AddTicks(4261)
                         });
                 });
 
@@ -911,6 +911,9 @@ namespace MyProject.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("getDate()");
+
+                    b.Property<int>("CategoryID")
+                        .HasColumnType("int");
 
                     b.Property<int>("DepartmentID")
                         .HasColumnType("int");
@@ -942,6 +945,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 1,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 1,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 299.90m,
@@ -952,6 +956,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 2,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 1,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 359.90m,
@@ -962,6 +967,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 3,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 1,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 59.90m,
@@ -972,6 +978,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 4,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 1,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 89.90m,
@@ -982,6 +989,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 5,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 1,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -992,6 +1000,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 6,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 1,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1002,6 +1011,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 7,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 1,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1012,6 +1022,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 8,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 1,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1022,6 +1033,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 9,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 1,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1032,6 +1044,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 10,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 1,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 299.90m,
@@ -1042,6 +1055,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 11,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 1,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 59.90m,
@@ -1052,6 +1066,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 12,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 1,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 89.90m,
@@ -1062,6 +1077,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 13,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 2,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 299.90m,
@@ -1072,6 +1088,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 14,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 2,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 359.90m,
@@ -1082,6 +1099,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 15,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 2,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 59.90m,
@@ -1092,6 +1110,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 16,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 2,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 89.90m,
@@ -1102,6 +1121,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 17,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 2,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1112,6 +1132,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 18,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 2,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1122,6 +1143,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 19,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 2,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1132,6 +1154,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 20,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 2,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1142,6 +1165,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 21,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 2,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1152,6 +1176,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 22,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 2,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1162,6 +1187,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 23,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 2,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1172,6 +1198,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 24,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 2,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1182,6 +1209,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 25,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 3,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 299.90m,
@@ -1192,6 +1220,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 26,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 3,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 359.90m,
@@ -1202,6 +1231,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 27,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 3,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 59.90m,
@@ -1212,6 +1242,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 28,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 3,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 89.90m,
@@ -1222,6 +1253,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 29,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 3,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1232,6 +1264,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 30,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 3,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1242,6 +1275,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 31,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 3,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 299.90m,
@@ -1252,6 +1286,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 32,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 3,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 59.90m,
@@ -1262,6 +1297,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 33,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 3,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 89.90m,

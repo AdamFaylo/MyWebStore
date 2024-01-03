@@ -46,6 +46,7 @@ const ProductItem = ({ data }) => {
     <>
       <div
         className="btn"
+        style={{ padding: "1rem" }}
         onClick={(e) => {
           navigate(`/products/${data.id}`);
         }}

@@ -132,6 +132,7 @@ namespace API.Controllers
                     ProductName = item.Name,
                     Price = item.Price,
                     Description = item.Description,
+                    CategoryID = item.CategoryID,
                     SubCategoryID = item.SubCategoryID,
                     DepartmentID = item.DepartmentID,
                     AddedOn = DateTime.UtcNow,

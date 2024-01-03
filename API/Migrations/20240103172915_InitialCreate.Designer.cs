@@ -12,8 +12,8 @@ using MyProject.API.Context;
 namespace MyProject.API.Migrations
 {
     [DbContext(typeof(MainContext))]
-    [Migration("20240103080856_UpdateSeed1")]
-    partial class UpdateSeed1
+    [Migration("20240103172915_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -802,7 +802,7 @@ namespace MyProject.API.Migrations
                             CartId = 1,
                             CustomerID = 1,
                             IsPaid = true,
-                            OrderDate = new DateTime(2024, 1, 2, 10, 8, 55, 814, DateTimeKind.Local).AddTicks(2634),
+                            OrderDate = new DateTime(2024, 1, 2, 19, 29, 14, 967, DateTimeKind.Local).AddTicks(4719),
                             ShippingAddressID = 1
                         },
                         new
@@ -811,7 +811,7 @@ namespace MyProject.API.Migrations
                             CartId = 2,
                             CustomerID = 2,
                             IsPaid = false,
-                            OrderDate = new DateTime(2024, 1, 1, 10, 8, 55, 814, DateTimeKind.Local).AddTicks(2672),
+                            OrderDate = new DateTime(2024, 1, 1, 19, 29, 14, 967, DateTimeKind.Local).AddTicks(4766),
                             ShippingAddressID = 2
                         });
                 });
@@ -888,14 +888,14 @@ namespace MyProject.API.Migrations
                             ID = 1,
                             Amount = 29.90m,
                             OrderID = 1,
-                            PaymentDate = new DateTime(2024, 1, 2, 8, 8, 55, 814, DateTimeKind.Utc).AddTicks(2569)
+                            PaymentDate = new DateTime(2024, 1, 2, 17, 29, 14, 967, DateTimeKind.Utc).AddTicks(4639)
                         },
                         new
                         {
                             ID = 2,
                             Amount = 39.90m,
                             OrderID = 2,
-                            PaymentDate = new DateTime(2024, 1, 1, 8, 8, 55, 814, DateTimeKind.Utc).AddTicks(2577)
+                            PaymentDate = new DateTime(2024, 1, 1, 17, 29, 14, 967, DateTimeKind.Utc).AddTicks(4646)
                         });
                 });
 

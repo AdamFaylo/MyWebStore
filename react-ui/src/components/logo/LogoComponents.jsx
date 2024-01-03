@@ -7,8 +7,6 @@ const LogoComponents = () => {
   };
 
   const styleLogo = {
-    position: "relative",
-    botton: "1rem",
     height: "5rem",
     display: "flex",
     alignItems: "center",
@@ -18,7 +16,15 @@ const LogoComponents = () => {
   return (
     <div style={stylecontainerLogo}>
       <div style={styleLogo}>
-        <div style={{ fontSize: "5rem" }}>o</div>
+        <div
+          style={{
+            fontSize: "5rem",
+            position: "relative",
+            bottom: "1rem",
+          }}
+        >
+          o
+        </div>
         <div>o</div>
       </div>
 

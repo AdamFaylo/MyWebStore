@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
-import api from "../../utils/api"; // Ensure correct import path
+import api from "../../utils/api";
+import departmentsSlice from "../../features/departments-slice";
+import { useSelector } from "react-redux";
 
 const BackOfficeForm = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const isEditMode = Boolean(id);
+
+  const departmentTree = useSelector((state) => state.departments.data);
 
   const [product, setProduct] = useState({
     productName: "",
@@ -18,8 +22,22 @@ const BackOfficeForm = () => {
     galleryImageAlt: "",
     galleryImageName: "",
     departmentID: 0,
+    categoryID: 0,
     subCategoryID: 0,
   });
+
+
+
+  const handleCategoryChange = (e) => {
+    const newCategoryId =  Number.parseInt(e.target.value);
+    setProduct({ ...product, categoryID: newCategoryId, subCategoryID: 0 });
+  };
+
+  // פונקציה לטיפול בשינוי בבחירת תת-הקטגוריה
+  const handleSubCategoryChange = (e) => {
+    const newSubCategoryId =Number.parseInt(e.target.value);
+    setProduct({ ...product, subCategoryID: newSubCategoryId });
+  };
 
   const [feedback, setFeedback] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -37,10 +55,10 @@ const BackOfficeForm = () => {
             addedOn,
             galleryImage,
             departmentID,
+            categoryID,
             subCategoryID,
           } = response.data;
           setProduct({
-            ...product,
             productName,
             price: price.toString(),
             description,
@@ -49,16 +67,32 @@ const BackOfficeForm = () => {
             galleryImageTitle: galleryImage[0] ? galleryImage[0].title : "",
             galleryImageAlt: galleryImage[0] ? galleryImage[0].alt : "",
             galleryImageName: galleryImage[0] ? galleryImage[0].name : "",
-            departmentID,
-            subCategoryID,
+            departmentID: departmentID,
+            categoryID : categoryID,
+            subCategoryID : subCategoryID,
           });
         })
         .catch((error) => {
           console.error("Error fetching product:", error);
+          setFeedback({
+            type: "danger",
+            message: "Failed to load product data",
+          });
         })
         .finally(() => setLoading(false));
     }
-  }, [id, isEditMode, product]);
+  }, [id, isEditMode]);
+
+  const handleDepartmentChange = (e) => {
+    const newDepartmentId = Number.parseInt(e.target.value);
+    setProduct({
+      ...product,
+      departmentID: newDepartmentId,
+      categoryID: 0,
+      subCategoryID: 0,
+    });
+  };
+
 
   const validateForm = () => {
     const errors = {
@@ -88,7 +122,13 @@ const BackOfficeForm = () => {
     if (!product.galleryImage.trim()) {
       errors.galleryImageError = "Gallery Image is required";
     }
-
+    if (
+      !departmentTree.some(
+        (department) => department.id === product.departmentID
+      )
+    ) {
+      return "Invalid DepartmentID. Department does not exist.";
+    }
     return errors;
   };
 
@@ -102,14 +142,16 @@ const BackOfficeForm = () => {
       errors.addedOnError ||
       errors.galleryImageError
     ) {
-      setFeedback({ type: "danger", message: "Please fill in all required fields" });
+      setFeedback({
+        type: "danger",
+        message: "Please fill in all required fields",
+      });
       return;
     }
 
     setLoading(true);
 
     const token = localStorage.getItem("mywebsite_token");
-  
 
     const productData = {
       Name: product.productName,
@@ -125,6 +167,7 @@ const BackOfficeForm = () => {
         },
       ],
       departmentID: product.departmentID,
+      categoryID: product.categoryID,
       subCategoryID: product.subCategoryID,
     };
 
@@ -163,11 +206,18 @@ const BackOfficeForm = () => {
       galleryImageAlt: "",
       galleryImageName: "",
       departmentID: 0,
+      categoryID: 0,
       subCategoryID: 0,
     });
 
     setFeedback(null);
   };
+
+  const categories = departmentTree
+    .find((department) => department.id === product.departmentID)
+    ?.categories;
+  debugger;
+  const subCatrgories = [];
 
   return (
     <div inline="true">
@@ -182,10 +232,17 @@ const BackOfficeForm = () => {
             onChange={(e) =>
               setProduct({ ...product, productName: e.target.value })
             }
-            isInvalid={feedback && feedback.type === "danger" && feedback.message.includes("Name")}
+            isInvalid={
+              feedback &&
+              feedback.type === "danger" &&
+              feedback.message.includes("Name")
+            }
           />
           <Form.Control.Feedback type="invalid">
-            {feedback && feedback.type === "danger" && feedback.message.includes("Name") && feedback.message}
+            {feedback &&
+              feedback.type === "danger" &&
+              feedback.message.includes("Name") &&
+              feedback.message}
           </Form.Control.Feedback>
         </Form.Group>
 
@@ -195,13 +252,18 @@ const BackOfficeForm = () => {
           <Form.Control
             type="text"
             value={product.price}
-            onChange={(e) =>
-              setProduct({ ...product, price: e.target.value })
+            onChange={(e) => setProduct({ ...product, price: e.target.value })}
+            isInvalid={
+              feedback &&
+              feedback.type === "danger" &&
+              feedback.message.includes("Price")
             }
-            isInvalid={feedback && feedback.type === "danger" && feedback.message.includes("Price")}
           />
           <Form.Control.Feedback type="invalid">
-            {feedback && feedback.type === "danger" && feedback.message.includes("Price") && feedback.message}
+            {feedback &&
+              feedback.type === "danger" &&
+              feedback.message.includes("Price") &&
+              feedback.message}
           </Form.Control.Feedback>
         </Form.Group>
 
@@ -214,10 +276,17 @@ const BackOfficeForm = () => {
             onChange={(e) =>
               setProduct({ ...product, description: e.target.value })
             }
-            isInvalid={feedback && feedback.type === "danger" && feedback.message.includes("Description")}
+            isInvalid={
+              feedback &&
+              feedback.type === "danger" &&
+              feedback.message.includes("Description")
+            }
           />
           <Form.Control.Feedback type="invalid">
-            {feedback && feedback.type === "danger" && feedback.message.includes("Description") && feedback.message}
+            {feedback &&
+              feedback.type === "danger" &&
+              feedback.message.includes("Description") &&
+              feedback.message}
           </Form.Control.Feedback>
         </Form.Group>
 
@@ -230,10 +299,17 @@ const BackOfficeForm = () => {
             onChange={(e) =>
               setProduct({ ...product, addedOn: e.target.value })
             }
-            isInvalid={feedback && feedback.type === "danger" && feedback.message.includes("Add-On")}
+            isInvalid={
+              feedback &&
+              feedback.type === "danger" &&
+              feedback.message.includes("Add-On")
+            }
           />
           <Form.Control.Feedback type="invalid">
-            {feedback && feedback.type === "danger" && feedback.message.includes("Add-On") && feedback.message}
+            {feedback &&
+              feedback.type === "danger" &&
+              feedback.message.includes("Add-On") &&
+              feedback.message}
           </Form.Control.Feedback>
         </Form.Group>
 
@@ -246,10 +322,17 @@ const BackOfficeForm = () => {
             onChange={(e) =>
               setProduct({ ...product, galleryImage: e.target.value })
             }
-            isInvalid={feedback && feedback.type === "danger" && feedback.message.includes("Gallery Image")}
+            isInvalid={
+              feedback &&
+              feedback.type === "danger" &&
+              feedback.message.includes("Gallery Image")
+            }
           />
           <Form.Control.Feedback type="invalid">
-            {feedback && feedback.type === "danger" && feedback.message.includes("Gallery Image") && feedback.message}
+            {feedback &&
+              feedback.type === "danger" &&
+              feedback.message.includes("Gallery Image") &&
+              feedback.message}
           </Form.Control.Feedback>
         </Form.Group>
 
@@ -288,6 +371,51 @@ const BackOfficeForm = () => {
             }
           />
         </Form.Group>
+
+        <div>
+          {/* Selector for Departments */}
+          <select
+            value={product.departmentID}
+            onChange={handleDepartmentChange}
+          >
+            <option value="">Select Department</option>
+            {departmentTree.map((department) => (
+              <option key={department.id} value={department.id}>
+                {department.name}
+              </option>
+            ))}
+          </select>
+
+          {/* Selector for Categories */}
+          <select value={product.categoryID} onChange={handleCategoryChange}>
+            <option value="">Select Category</option>
+            {departmentTree
+              .find((department) => department.id === product.departmentID)
+              ?.categories.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
+          </select>
+
+          {/* Selector for Subcategories */}
+          <select
+            value={product.subCategoryID}
+            onChange={handleSubCategoryChange}
+          >
+            <option value="">Select Subcategory</option>
+            {departmentTree
+              .find((department) => department.id === product.departmentID)
+              ?.categories.find(
+                (category) => category.id === product.categoryID
+              )
+              ?.subcategories.map((subCategory) => (
+                <option key={subCategory.id} value={subCategory.id}>
+                  {subCategory.name}
+                </option>
+              ))}
+          </select>
+        </div>
 
         {/* Buttons for Submit and Reset */}
         <Button variant="primary" type="submit" disabled={loading}>

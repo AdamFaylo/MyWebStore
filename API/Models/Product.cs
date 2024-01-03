@@ -16,6 +16,7 @@ namespace MyProject.API.Models
         //[ForeignKey("DepartmentID")]
         public Department Department { get; set; }
         public int DepartmentID { get; set; }
+        public int CategoryID { get; set; }
         public SubCategory SubCategory { get; set; }
         public int SubCategoryID { get; set; }
         public ICollection<Color> Colors { get; set; }

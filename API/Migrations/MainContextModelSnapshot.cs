@@ -799,7 +799,7 @@ namespace MyProject.API.Migrations
                             CartId = 1,
                             CustomerID = 1,
                             IsPaid = true,
-                            OrderDate = new DateTime(2024, 1, 2, 10, 8, 55, 814, DateTimeKind.Local).AddTicks(2634),
+                            OrderDate = new DateTime(2024, 1, 2, 19, 35, 57, 975, DateTimeKind.Local).AddTicks(4344),
                             ShippingAddressID = 1
                         },
                         new
@@ -808,7 +808,7 @@ namespace MyProject.API.Migrations
                             CartId = 2,
                             CustomerID = 2,
                             IsPaid = false,
-                            OrderDate = new DateTime(2024, 1, 1, 10, 8, 55, 814, DateTimeKind.Local).AddTicks(2672),
+                            OrderDate = new DateTime(2024, 1, 1, 19, 35, 57, 975, DateTimeKind.Local).AddTicks(4398),
                             ShippingAddressID = 2
                         });
                 });
@@ -885,14 +885,14 @@ namespace MyProject.API.Migrations
                             ID = 1,
                             Amount = 29.90m,
                             OrderID = 1,
-                            PaymentDate = new DateTime(2024, 1, 2, 8, 8, 55, 814, DateTimeKind.Utc).AddTicks(2569)
+                            PaymentDate = new DateTime(2024, 1, 2, 17, 35, 57, 975, DateTimeKind.Utc).AddTicks(4255)
                         },
                         new
                         {
                             ID = 2,
                             Amount = 39.90m,
                             OrderID = 2,
-                            PaymentDate = new DateTime(2024, 1, 1, 8, 8, 55, 814, DateTimeKind.Utc).AddTicks(2577)
+                            PaymentDate = new DateTime(2024, 1, 1, 17, 35, 57, 975, DateTimeKind.Utc).AddTicks(4261)
                         });
                 });
 
@@ -908,6 +908,9 @@ namespace MyProject.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("getDate()");
+
+                    b.Property<int>("CategoryID")
+                        .HasColumnType("int");
 
                     b.Property<int>("DepartmentID")
                         .HasColumnType("int");
@@ -939,6 +942,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 1,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 1,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 299.90m,
@@ -949,6 +953,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 2,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 1,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 359.90m,
@@ -959,6 +964,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 3,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 1,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 59.90m,
@@ -969,6 +975,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 4,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 1,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 89.90m,
@@ -979,6 +986,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 5,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 1,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -989,6 +997,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 6,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 1,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -999,6 +1008,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 7,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 1,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1009,6 +1019,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 8,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 1,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1019,6 +1030,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 9,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 1,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1029,6 +1041,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 10,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 1,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 299.90m,
@@ -1039,6 +1052,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 11,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 1,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 59.90m,
@@ -1049,6 +1063,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 12,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 1,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 89.90m,
@@ -1059,6 +1074,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 13,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 2,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 299.90m,
@@ -1069,6 +1085,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 14,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 2,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 359.90m,
@@ -1079,6 +1096,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 15,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 2,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 59.90m,
@@ -1089,6 +1107,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 16,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 2,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 89.90m,
@@ -1099,6 +1118,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 17,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 2,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1109,6 +1129,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 18,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 2,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1119,6 +1140,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 19,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 2,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1129,6 +1151,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 20,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 2,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1139,6 +1162,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 21,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 2,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1149,6 +1173,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 22,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 2,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1159,6 +1184,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 23,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 2,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1169,6 +1195,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 24,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 2,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1179,6 +1206,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 25,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 3,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 299.90m,
@@ -1189,6 +1217,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 26,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 3,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 359.90m,
@@ -1199,6 +1228,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 27,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 3,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 59.90m,
@@ -1209,6 +1239,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 28,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 3,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 89.90m,
@@ -1219,6 +1250,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 29,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 3,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1229,6 +1261,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 30,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 3,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1239,6 +1272,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 31,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 3,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 299.90m,
@@ -1249,6 +1283,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 32,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 3,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 59.90m,
@@ -1259,6 +1294,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 33,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 3,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 89.90m,

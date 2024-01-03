@@ -507,7 +507,7 @@ namespace MyProject.API.Migrations
             migrationBuilder.InsertData(
                 table: "LogoImage",
                 columns: new[] { "ID", "Alt", "Logo" },
-                values: new object[] { 1, "Logo vanes site", "https://i.imgur.com/6jdrLVk.png" });
+                values: new object[] { 1, "Logo site", "https://i.imgur.com/t4hi8os.png" });
 
             migrationBuilder.InsertData(
                 table: "ShippingAddress",
@@ -561,8 +561,8 @@ namespace MyProject.API.Migrations
                 columns: new[] { "OrderId", "CartId", "CustomerID", "IsPaid", "OrderDate", "ShippingAddressID", "UserID" },
                 values: new object[,]
                 {
-                    { 1, 1, 1, true, new DateTime(2023, 12, 31, 18, 7, 51, 954, DateTimeKind.Local).AddTicks(6727), 1, null },
-                    { 2, 2, 2, false, new DateTime(2023, 12, 30, 18, 7, 51, 954, DateTimeKind.Local).AddTicks(6768), 2, null }
+                    { 1, 1, 1, true, new DateTime(2024, 1, 2, 19, 29, 14, 967, DateTimeKind.Local).AddTicks(4719), 1, null },
+                    { 2, 2, 2, false, new DateTime(2024, 1, 1, 19, 29, 14, 967, DateTimeKind.Local).AddTicks(4766), 2, null }
                 });
 
             migrationBuilder.InsertData(
@@ -626,24 +626,24 @@ namespace MyProject.API.Migrations
                     { 4, "man", "https://i.imgur.com/FMyHAER.png", 4, "T-SHIRTS for man" },
                     { 5, "man", "https://i.imgur.com/1vvkkun.png", 5, "T-SHIRTS for man" },
                     { 6, "man", "https://i.imgur.com/Q2Omp1q.png", 6, "T-SHIRTS for man" },
-                    { 7, "man", "https://i.imgur.com/oPlSrbz.jpg", 7, "trousers for man" },
-                    { 8, "man", "https://i.imgur.com/0oZ7MrE.jpg", 8, "trousers for man" },
-                    { 9, "man", "https://i.imgur.com/UczdMkv.jpg", 9, "trousers for man" },
-                    { 10, "man", "https://i.imgur.com/qpalZ7J.jpg", 10, "acc for man" },
-                    { 11, "man", "https://i.imgur.com/Qd0hKEe.jpg", 11, "acc for man" },
-                    { 12, "man", "https://i.imgur.com/vPXZfwu.jpg", 12, "acc for man" },
+                    { 7, "man", "https://i.imgur.com/6HUpAq5.png", 7, "trousers for man" },
+                    { 8, "man", "https://i.imgur.com/tpdPfHe.png", 8, "trousers for man" },
+                    { 9, "man", "https://i.imgur.com/LJnaKkR.png", 9, "trousers for man" },
+                    { 10, "man", "https://i.imgur.com/yhlgVxL.png", 10, "acc for man" },
+                    { 11, "man", "https://i.imgur.com/f2TOHlO.png", 11, "acc for man" },
+                    { 12, "man", "https://i.imgur.com/fKIG06M.png", 12, "acc for man" },
                     { 13, "woman_shoes", "https://i.imgur.com/HpT7xCj.png", 13, "shoes pastel color for woman" },
                     { 14, "woman_shoes", "https://i.imgur.com/48fArMF.png", 14, "shoes pink for woman" },
                     { 15, "woman_shoes", "https://i.imgur.com/SuXlbYo.png", 15, "shoes pink for woman" },
                     { 16, "woman", "https://i.imgur.com/nA84c5Y.png", 16, "T-SHIRT for woman" },
                     { 17, "woman", "https://i.imgur.com/KLI84On.png", 17, "T-SHIRT for woman" },
                     { 18, "woman", "https://i.imgur.com/N3Hw655.png", 18, "T-SHIRT for woman" },
-                    { 19, "woman_trousers", "https://i.imgur.com/NhR4kFB.jpg", 19, "trousers for woman" },
-                    { 20, "woman_trousers", "https://i.imgur.com/4xStoKp.jpg", 20, "trousers for woman" },
-                    { 21, "woman_trousers", "https://i.imgur.com/n3TMOZI.jpg", 21, "trousers for woman" },
-                    { 22, "woman_acc", "https://i.imgur.com/KuAG5Ae.jpg", 22, "acc for woman" },
-                    { 23, "woman_acc", "https://i.imgur.com/5Mp82QF.jpg", 23, "acc for woman" },
-                    { 24, "woman_acc", "https://i.imgur.com/VvOHI60.jpg", 24, "acc for woman" },
+                    { 19, "woman_trousers", "https://i.imgur.com/9Unyl2Q.png", 19, "trousers for woman" },
+                    { 20, "woman_trousers", "https://i.imgur.com/UxLMIKE.png", 20, "trousers for woman" },
+                    { 21, "woman_trousers", "https://i.imgur.com/XaXUJNl.png", 21, "trousers for woman" },
+                    { 22, "woman_acc", "https://i.imgur.com/THBDPax.png", 22, "acc for woman" },
+                    { 23, "woman_acc", "https://i.imgur.com/vNPCxkh.png", 23, "acc for woman" },
+                    { 24, "woman_acc", "https://i.imgur.com/Q3UjsjY.png", 24, "acc for woman" },
                     { 25, "kids", "https://i.imgur.com/wylMcYn.png", 25, "shoes for kids" },
                     { 26, "kids", "https://i.imgur.com/ydaUz58.png", 26, "shoes for kids" },
                     { 27, "kids", "https://i.imgur.com/WeiJljO.png", 27, "shoes for kids" },
@@ -669,8 +669,8 @@ namespace MyProject.API.Migrations
                 columns: new[] { "ID", "Amount", "OrderID", "PaymentDate" },
                 values: new object[,]
                 {
-                    { 1, 29.90m, 1, new DateTime(2023, 12, 31, 16, 7, 51, 954, DateTimeKind.Utc).AddTicks(6670) },
-                    { 2, 39.90m, 2, new DateTime(2023, 12, 30, 16, 7, 51, 954, DateTimeKind.Utc).AddTicks(6677) }
+                    { 1, 29.90m, 1, new DateTime(2024, 1, 2, 17, 29, 14, 967, DateTimeKind.Utc).AddTicks(4639) },
+                    { 2, 39.90m, 2, new DateTime(2024, 1, 1, 17, 29, 14, 967, DateTimeKind.Utc).AddTicks(4646) }
                 });
 
             migrationBuilder.InsertData(

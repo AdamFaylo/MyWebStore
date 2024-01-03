@@ -229,7 +229,7 @@ namespace MyProject.API.Context
               new GalleryImage { ID = 8, ProductID = 8, ImageURL = "https://i.imgur.com/tpdPfHe.png", Alt = "man", Title = "trousers for man" },
               new GalleryImage { ID = 9, ProductID = 9, ImageURL = "https://i.imgur.com/LJnaKkR.png", Alt = "man", Title = "trousers for man" },
               //---------------------acc-----------------//*
-              new GalleryImage { ID = 10, ProductID = 10, ImageURL = "https://i.imgur.com/yhlgVxL.png", Alt = "man", Title = "acc for man" }, 
+              new GalleryImage { ID = 10, ProductID = 10, ImageURL = "https://i.imgur.com/yhlgVxL.png", Alt = "man", Title = "acc for man" },
               new GalleryImage { ID = 11, ProductID = 11, ImageURL = "https://i.imgur.com/f2TOHlO.png", Alt = "man", Title = "acc for man" },
               new GalleryImage { ID = 12, ProductID = 12, ImageURL = "https://i.imgur.com/fKIG06M.png", Alt = "man", Title = "acc for man" },
 

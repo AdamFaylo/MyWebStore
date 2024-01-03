@@ -2,10 +2,9 @@
 import { useSelector } from "react-redux";
 import { containerStyles, cardGridStyles } from "./ProductListStyles";
 import ProductItem from "./ProductItem";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useMemo } from "react";
 import SortPriceComponent from "../sort/SortPriceComponent";
-import { Button } from "react-bootstrap";
 
 const ProductList = () => {
   const { gender, category, subcategory } = useParams();
@@ -13,21 +12,6 @@ const ProductList = () => {
   const status = useSelector((state) => state.data.status);
   const error = useSelector((state) => state.data.error);
   const departments = useSelector((state) => state.departments.data);
-
-  const navigate = useNavigate();
-  const { user } = useSelector((state) => state.user);
-
-  const handlePrivateArea = () => {
-    if (user) {
-      if (user.type === 999) {
-        navigate("/backoffice");
-      } else {
-        navigate("/cart");
-      }
-    } else {
-      navigate("/login");
-    }
-  };
 
   const items = useMemo(() => {
     if (!departments || !gender || !category) return data;
@@ -58,14 +42,7 @@ const ProductList = () => {
 
   return (
     <div css={containerStyles}>
-      {user && user.type === 999 ? (
-        <Button
-          style={{ position: "relative", left: "10px", width: "12rem" }}
-          onClick={handlePrivateArea}
-        >
-          Back Office
-        </Button>
-      ) : null}
+   
       <SortPriceComponent />
       <div css={cardGridStyles}>
         {items &&

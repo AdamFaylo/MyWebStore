@@ -130,7 +130,7 @@ User action You can choose and the product is sent to the shopping cart,\
 ## 📷 Screenshots
 <a name="screenshots"/>
 
-<img width="806" alt="image" src="https://github.com/AdamFaylo/MyWebStore/assets/112155899/da137339-385e-4a14-892e-61cf5db6bb4f">
+<img width="952" alt="image" src="https://github.com/AdamFaylo/MyWebStore/assets/112155899/5a44d84a-00de-48f0-80bb-a0ccd43b4be6">
 <img width="951" alt="image" src="https://github.com/AdamFaylo/MyWebStore/assets/112155899/91cc5675-90e1-4f04-b153-b389c79c7726">
 <img width="952" alt="image" src="https://github.com/AdamFaylo/MyWebStore/assets/112155899/51d272bf-8cdc-46cf-87fe-8af4e0cbe206">
 <img width="950" alt="image" src="https://github.com/AdamFaylo/MyWebStore/assets/112155899/5e1ad033-9d6c-4705-8da6-42f0347aaa7b">

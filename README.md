@@ -133,9 +133,14 @@ User action You can choose and the product is sent to the shopping cart,\
 ![SS1](<img width="806" alt="image" src="https://github.com/AdamFaylo/MyWebStore/assets/112155899/da137339-385e-4a14-892e-61cf5db6bb4f">
 >
 .png)
-![SS1](<img width="804" alt="image" src="https://github.com/AdamFaylo/MyWebStore/assets/112155899/94c4c8d8-ea31-49ba-9afd-57c9a45316ed">
+![SS1](<img width="808" alt="image" src="https://github.com/AdamFaylo/MyWebStore/assets/112155899/cdef317a-5533-4727-b159-564bec949c17">
+>
 )
-![SS1](https://i.imgur.com/bgWaa1P.png)
+![SS1](![image](https://github.com/AdamFaylo/MyWebStore/assets/112155899/c796389d-3164-49a9-a035-652bfc31d7e7)
+)
+![SS1](<img width="950" alt="image" src="https://github.com/AdamFaylo/MyWebStore/assets/112155899/a88f3e44-2aa5-4632-8241-3d91a5513edf">
+)
+![SS1]()
 
 
 

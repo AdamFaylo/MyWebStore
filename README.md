@@ -132,7 +132,8 @@ User action You can choose and the product is sent to the shopping cart,\
 
 ![SS1](<img width="951" alt="image" src="https://github.com/AdamFaylo/MyWebStore/assets/112155899/5661f029-8da0-424a-be35-aa99698e2c9e">
 .png)
-![SS1](https://i.imgur.com/bgWaa1P.png)
+![SS1](<img width="804" alt="image" src="https://github.com/AdamFaylo/MyWebStore/assets/112155899/94c4c8d8-ea31-49ba-9afd-57c9a45316ed">
+)
 ![SS1](https://i.imgur.com/bgWaa1P.png)
 
 

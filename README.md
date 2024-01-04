@@ -95,7 +95,6 @@ Another option is to add to the shopping cart.
   12345678
   ```
   
-
 ### Logged-In Users:
 limited abilities,\
 User action You can choose and the product is sent to the shopping cart.
@@ -107,10 +106,17 @@ User action You can choose and the product is sent to the shopping cart.
   87654321
   ```
 
-
 ### It is very important to note:
 - there is an ability to send the product to the shopping cart only with logged in or registered.
 
+### New client:
+Create a new customer by clicking on REGISTER.
+
+### shopping basket:
+You can dive into the basket, add an existing product and delete the product permanently
+
+### BackOffice:
+Option [New Product], [Delete Product], [Edit Product].
 
 ## 🔨 Features
 <a name="features"/>
@@ -136,6 +142,8 @@ User action You can choose and the product is sent to the shopping cart.
 <img width="952" alt="image" src="https://github.com/AdamFaylo/MyWebStore/assets/112155899/51d272bf-8cdc-46cf-87fe-8af4e0cbe206">
 <img width="950" alt="image" src="https://github.com/AdamFaylo/MyWebStore/assets/112155899/5e1ad033-9d6c-4705-8da6-42f0347aaa7b">
 <img width="954" alt="image" src="https://github.com/AdamFaylo/MyWebStore/assets/112155899/55be4dcb-310c-43c7-85d7-8d6ea397d0d8">
+<img width="950" alt="image" src="https://github.com/AdamFaylo/MyWebStore/assets/112155899/1aab715a-94a5-4cb2-9d42-8883db6e34b2">
+
 
 
 ## ⚙️ Setup

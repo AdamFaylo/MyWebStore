@@ -7,7 +7,7 @@ const Protected = ({ children }) => {
     console.log("isAutheticated");
     return children;
   }
-  return <Navigate to="/loginDeshboard" />;
+  return <Navigate to="/" />;
 };
 
 export default Protected;

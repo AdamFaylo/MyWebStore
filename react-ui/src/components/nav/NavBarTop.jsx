@@ -46,7 +46,7 @@ function NavBarTop() {
               content: "Would you like to log out ?",
               onOk: () => {
                 dispatch(logOut());
-                nav("/loginDeshboard");
+                nav("/");
               },
             });
           }}

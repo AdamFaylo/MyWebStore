@@ -78,6 +78,7 @@ namespace MyProject.API.Controllers
                 var updatedCart = _cardsRepo.FindByCondition(c => c.CartId == updateDTO.CartId)
                     .Include(c => c.OrderItems)
                     .ThenInclude(orderItems => orderItems.Product)
+                    .ThenInclude(item => item.GalleryImage)
                     .FirstOrDefault();
 
                 return Ok(updatedCart);

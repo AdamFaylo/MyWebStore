@@ -210,12 +210,6 @@ const BackOfficeForm = () => {
     setFeedback(null);
   };
 
-  // const categories = departmentTree
-  //   .find((department) => department.id === product.departmentID)
-  //   ?.categories;
-  // debugger;
-  // const subCatrgories = [];
-
   return (
     <div inline="true">
       <h2>{isEditMode ? "Edit Product" : "Add New Product"}</h2>
@@ -425,7 +419,7 @@ const BackOfficeForm = () => {
         </div>
 
         {/* Buttons for Submit and Reset */}
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <div style={{ display: "flex",justifyContent:"center" }}>
           <Button variant="primary" type="submit" disabled={loading}>
             {isEditMode ? "Update" : "Save"}
           </Button>

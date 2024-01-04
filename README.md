@@ -112,11 +112,14 @@ User action You can choose and the product is sent to the shopping cart.
 ### New client:
 Create a new customer by clicking on REGISTER.
 
+
 ### shopping basket:
-You can dive into the basket, add an existing product and delete the product permanently
+You can dive into the basket, add an existing product and delete the product permanently.
 
 ### BackOffice:
 Option [New Product], [Delete Product], [Edit Product].
+
+
 
 ## 🔨 Features
 <a name="features"/>

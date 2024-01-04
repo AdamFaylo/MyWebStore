@@ -12,7 +12,7 @@ using MyProject.API.Context;
 namespace MyProject.API.Migrations
 {
     [DbContext(typeof(MainContext))]
-    [Migration("20240103172915_InitialCreate")]
+    [Migration("20240103204546_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -319,48 +319,6 @@ namespace MyProject.API.Migrations
                         {
                             ID = 9,
                             Name = "Accessories"
-                        });
-                });
-
-            modelBuilder.Entity("MyProject.API.Models.Color", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ProductID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("ProductID");
-
-                    b.ToTable("Color");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = 1,
-                            Name = "White",
-                            ProductID = 1
-                        },
-                        new
-                        {
-                            ID = 2,
-                            Name = "Black",
-                            ProductID = 2
-                        },
-                        new
-                        {
-                            ID = 3,
-                            Name = "Blue",
-                            ProductID = 2
                         });
                 });
 
@@ -728,35 +686,6 @@ namespace MyProject.API.Migrations
                         });
                 });
 
-            modelBuilder.Entity("MyProject.API.Models.LogoImage", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<string>("Alt")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Logo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("LogoImage");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = 1,
-                            Alt = "Logo site",
-                            Logo = "https://i.imgur.com/t4hi8os.png"
-                        });
-                });
-
             modelBuilder.Entity("MyProject.API.Models.Order", b =>
                 {
                     b.Property<int>("OrderId")
@@ -789,8 +718,6 @@ namespace MyProject.API.Migrations
 
                     b.HasIndex("CustomerID");
 
-                    b.HasIndex("ShippingAddressID");
-
                     b.HasIndex("UserID");
 
                     b.ToTable("Orders");
@@ -802,7 +729,7 @@ namespace MyProject.API.Migrations
                             CartId = 1,
                             CustomerID = 1,
                             IsPaid = true,
-                            OrderDate = new DateTime(2024, 1, 2, 19, 29, 14, 967, DateTimeKind.Local).AddTicks(4719),
+                            OrderDate = new DateTime(2024, 1, 2, 22, 45, 46, 600, DateTimeKind.Local).AddTicks(2341),
                             ShippingAddressID = 1
                         },
                         new
@@ -811,7 +738,7 @@ namespace MyProject.API.Migrations
                             CartId = 2,
                             CustomerID = 2,
                             IsPaid = false,
-                            OrderDate = new DateTime(2024, 1, 1, 19, 29, 14, 967, DateTimeKind.Local).AddTicks(4766),
+                            OrderDate = new DateTime(2024, 1, 1, 22, 45, 46, 600, DateTimeKind.Local).AddTicks(2389),
                             ShippingAddressID = 2
                         });
                 });
@@ -858,47 +785,6 @@ namespace MyProject.API.Migrations
                         });
                 });
 
-            modelBuilder.Entity("MyProject.API.Models.Payment", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("OrderID")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("PaymentDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("OrderID")
-                        .IsUnique();
-
-                    b.ToTable("Payment");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = 1,
-                            Amount = 29.90m,
-                            OrderID = 1,
-                            PaymentDate = new DateTime(2024, 1, 2, 17, 29, 14, 967, DateTimeKind.Utc).AddTicks(4639)
-                        },
-                        new
-                        {
-                            ID = 2,
-                            Amount = 39.90m,
-                            OrderID = 2,
-                            PaymentDate = new DateTime(2024, 1, 1, 17, 29, 14, 967, DateTimeKind.Utc).AddTicks(4646)
-                        });
-                });
-
             modelBuilder.Entity("MyProject.API.Models.Product", b =>
                 {
                     b.Property<int>("ID")
@@ -911,6 +797,9 @@ namespace MyProject.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("getDate()");
+
+                    b.Property<int>("CategoryID")
+                        .HasColumnType("int");
 
                     b.Property<int>("DepartmentID")
                         .HasColumnType("int");
@@ -942,6 +831,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 1,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 1,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 299.90m,
@@ -952,6 +842,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 2,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 1,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 359.90m,
@@ -962,6 +853,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 3,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 1,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 59.90m,
@@ -972,6 +864,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 4,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 1,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 89.90m,
@@ -982,6 +875,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 5,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 1,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -992,6 +886,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 6,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 1,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1002,6 +897,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 7,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 1,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1012,6 +908,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 8,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 1,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1022,6 +919,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 9,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 1,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1032,6 +930,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 10,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 1,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 299.90m,
@@ -1042,6 +941,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 11,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 1,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 59.90m,
@@ -1052,6 +952,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 12,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 1,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 89.90m,
@@ -1062,6 +963,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 13,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 2,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 299.90m,
@@ -1072,6 +974,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 14,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 2,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 359.90m,
@@ -1082,6 +985,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 15,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 2,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 59.90m,
@@ -1092,6 +996,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 16,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 2,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 89.90m,
@@ -1102,6 +1007,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 17,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 2,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1112,6 +1018,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 18,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 2,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1122,6 +1029,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 19,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 2,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1132,6 +1040,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 20,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 2,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1142,6 +1051,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 21,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 2,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1152,6 +1062,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 22,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 2,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1162,6 +1073,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 23,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 2,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1172,6 +1084,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 24,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 2,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1182,6 +1095,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 25,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 3,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 299.90m,
@@ -1192,6 +1106,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 26,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 3,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 359.90m,
@@ -1202,6 +1117,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 27,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 3,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 59.90m,
@@ -1212,6 +1128,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 28,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 3,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 89.90m,
@@ -1222,6 +1139,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 29,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 3,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1232,6 +1150,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 30,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 3,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 29.90m,
@@ -1242,6 +1161,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 31,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 3,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 299.90m,
@@ -1252,6 +1172,7 @@ namespace MyProject.API.Migrations
                         {
                             ID = 32,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 3,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 59.90m,
@@ -1262,106 +1183,12 @@ namespace MyProject.API.Migrations
                         {
                             ID = 33,
                             AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CategoryID = 0,
                             DepartmentID = 3,
                             Description = "Lorem, ipsum dolor sit amet consectetur adipisicing ",
                             Price = 89.90m,
                             ProductName = "ACC003",
                             SubCategoryID = 12
-                        });
-                });
-
-            modelBuilder.Entity("MyProject.API.Models.ShippingAddress", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Country")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PostalCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Region")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("ShippingAddress");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = 1,
-                            Address = "Nahal oz",
-                            City = "NewYork",
-                            Country = "Israel",
-                            PostalCode = "51819",
-                            Region = "Center"
-                        },
-                        new
-                        {
-                            ID = 2,
-                            Address = "Baryehoda",
-                            City = "Hollywood",
-                            Country = "Israel",
-                            PostalCode = "51819",
-                            Region = "Center"
-                        });
-                });
-
-            modelBuilder.Entity("MyProject.API.Models.Size", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<int>("ProductID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SizeName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("ProductID");
-
-                    b.ToTable("Sizes");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = 1,
-                            ProductID = 1,
-                            SizeName = "XS"
-                        },
-                        new
-                        {
-                            ID = 2,
-                            ProductID = 2,
-                            SizeName = "S"
-                        },
-                        new
-                        {
-                            ID = 3,
-                            ProductID = 3,
-                            SizeName = "M"
                         });
                 });
 
@@ -1600,17 +1427,6 @@ namespace MyProject.API.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("MyProject.API.Models.Color", b =>
-                {
-                    b.HasOne("MyProject.API.Models.Product", "Product")
-                        .WithMany("Colors")
-                        .HasForeignKey("ProductID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("MyProject.API.Models.GalleryImage", b =>
                 {
                     b.HasOne("MyProject.API.Models.Product", "Product")
@@ -1636,12 +1452,6 @@ namespace MyProject.API.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MyProject.API.Models.ShippingAddress", "ShippingAddress")
-                        .WithMany("Order")
-                        .HasForeignKey("ShippingAddressID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("MyProject.API.Models.User", null)
                         .WithMany("Order")
                         .HasForeignKey("UserID");
@@ -1649,8 +1459,6 @@ namespace MyProject.API.Migrations
                     b.Navigation("Cart");
 
                     b.Navigation("Customer");
-
-                    b.Navigation("ShippingAddress");
                 });
 
             modelBuilder.Entity("MyProject.API.Models.OrderItem", b =>
@@ -1672,17 +1480,6 @@ namespace MyProject.API.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("MyProject.API.Models.Payment", b =>
-                {
-                    b.HasOne("MyProject.API.Models.Order", "Order")
-                        .WithOne("Payment")
-                        .HasForeignKey("MyProject.API.Models.Payment", "OrderID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Order");
-                });
-
             modelBuilder.Entity("MyProject.API.Models.Product", b =>
                 {
                     b.HasOne("MyProject.API.Models.Department", "Department")
@@ -1700,17 +1497,6 @@ namespace MyProject.API.Migrations
                     b.Navigation("Department");
 
                     b.Navigation("SubCategory");
-                });
-
-            modelBuilder.Entity("MyProject.API.Models.Size", b =>
-                {
-                    b.HasOne("MyProject.API.Models.Product", "Product")
-                        .WithMany("Size")
-                        .HasForeignKey("ProductID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("MyProject.API.Models.SubCategory", b =>
@@ -1744,24 +1530,9 @@ namespace MyProject.API.Migrations
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("MyProject.API.Models.Order", b =>
-                {
-                    b.Navigation("Payment")
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("MyProject.API.Models.Product", b =>
                 {
-                    b.Navigation("Colors");
-
                     b.Navigation("GalleryImage");
-
-                    b.Navigation("Size");
-                });
-
-            modelBuilder.Entity("MyProject.API.Models.ShippingAddress", b =>
-                {
-                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("MyProject.API.Models.SubCategory", b =>

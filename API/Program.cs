@@ -29,19 +29,14 @@ builder.Services.AddDbContext<MainContext>(o =>
 
 
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-builder.Services.AddScoped<IColorsRepository, ColorsRepository>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<IGalleryImageRepository, GalleryImageRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
-builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
-builder.Services.AddScoped<IShippingAddressRepository, ShippingAddressRepository>();
-builder.Services.AddScoped<ISizeRepository, SizeRepository>();
 builder.Services.AddScoped<ISubCategoryRepository, SubCategoryRepository>();
 builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<ILogoImageRepository, LogoImageRepository>();
 builder.Services.AddScoped<ICartRepository, CartRepository>();
 
 

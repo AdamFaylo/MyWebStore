@@ -94,37 +94,6 @@ namespace MyProject.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "LogoImage",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Logo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Alt = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_LogoImage", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ShippingAddress",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Region = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Country = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ShippingAddress", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "User",
                 columns: table => new
                 {
@@ -300,6 +269,7 @@ namespace MyProject.API.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AddedOn = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getDate()"),
                     DepartmentID = table.Column<int>(type: "int", nullable: false),
+                    CategoryID = table.Column<int>(type: "int", nullable: false),
                     SubCategoryID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -348,36 +318,10 @@ namespace MyProject.API.Migrations
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Orders_ShippingAddress_ShippingAddressID",
-                        column: x => x.ShippingAddressID,
-                        principalTable: "ShippingAddress",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_Orders_User_UserID",
                         column: x => x.UserID,
                         principalTable: "User",
                         principalColumn: "ID");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Color",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProductID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Color", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Color_Product_ProductID",
-                        column: x => x.ProductID,
-                        principalTable: "Product",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -428,47 +372,6 @@ namespace MyProject.API.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Sizes",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SizeName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProductID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Sizes", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Sizes_Product_ProductID",
-                        column: x => x.ProductID,
-                        principalTable: "Product",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Payment",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    PaymentDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    OrderID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Payment", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Payment_Orders_OrderID",
-                        column: x => x.OrderID,
-                        principalTable: "Orders",
-                        principalColumn: "OrderId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.InsertData(
                 table: "Category",
                 columns: new[] { "ID", "Name" },
@@ -502,20 +405,6 @@ namespace MyProject.API.Migrations
                     { 1, "Man" },
                     { 2, "Ladies" },
                     { 3, "Kids" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "LogoImage",
-                columns: new[] { "ID", "Alt", "Logo" },
-                values: new object[] { 1, "Logo site", "https://i.imgur.com/t4hi8os.png" });
-
-            migrationBuilder.InsertData(
-                table: "ShippingAddress",
-                columns: new[] { "ID", "Address", "City", "Country", "PostalCode", "Region" },
-                values: new object[,]
-                {
-                    { 1, "Nahal oz", "NewYork", "Israel", "51819", "Center" },
-                    { 2, "Baryehoda", "Hollywood", "Israel", "51819", "Center" }
                 });
 
             migrationBuilder.InsertData(
@@ -561,58 +450,48 @@ namespace MyProject.API.Migrations
                 columns: new[] { "OrderId", "CartId", "CustomerID", "IsPaid", "OrderDate", "ShippingAddressID", "UserID" },
                 values: new object[,]
                 {
-                    { 1, 1, 1, true, new DateTime(2024, 1, 2, 19, 29, 14, 967, DateTimeKind.Local).AddTicks(4719), 1, null },
-                    { 2, 2, 2, false, new DateTime(2024, 1, 1, 19, 29, 14, 967, DateTimeKind.Local).AddTicks(4766), 2, null }
+                    { 1, 1, 1, true, new DateTime(2024, 1, 2, 22, 45, 46, 600, DateTimeKind.Local).AddTicks(2341), 1, null },
+                    { 2, 2, 2, false, new DateTime(2024, 1, 1, 22, 45, 46, 600, DateTimeKind.Local).AddTicks(2389), 2, null }
                 });
 
             migrationBuilder.InsertData(
                 table: "Product",
-                columns: new[] { "ID", "DepartmentID", "Description", "Price", "ProductName", "SubCategoryID" },
+                columns: new[] { "ID", "CategoryID", "DepartmentID", "Description", "Price", "ProductName", "SubCategoryID" },
                 values: new object[,]
                 {
-                    { 1, 1, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 299.90m, "Sneakers001", 1 },
-                    { 2, 1, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 359.90m, "Sneakers002", 1 },
-                    { 3, 1, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 59.90m, "Sneakers003", 1 },
-                    { 4, 1, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 89.90m, "T-Shirts001", 2 },
-                    { 5, 1, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "T-Shirts002", 2 },
-                    { 6, 1, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "T-Shirts003", 2 },
-                    { 7, 1, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "Pants001", 3 },
-                    { 8, 1, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "Pants002", 3 },
-                    { 9, 1, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "Pants003", 3 },
-                    { 10, 1, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 299.90m, "ACC001", 4 },
-                    { 11, 1, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 59.90m, "ACC002", 4 },
-                    { 12, 1, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 89.90m, "ACC003", 4 },
-                    { 13, 2, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 299.90m, "Sneakers001", 5 },
-                    { 14, 2, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 359.90m, "Sneakers002", 5 },
-                    { 15, 2, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 59.90m, "Sneakers003", 5 },
-                    { 16, 2, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 89.90m, "T-Shirts001", 6 },
-                    { 17, 2, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "T-Shirts002", 6 },
-                    { 18, 2, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "T-Shirts003", 6 },
-                    { 19, 2, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "Pants001", 7 },
-                    { 20, 2, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "Pants002", 7 },
-                    { 21, 2, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "Pants003", 7 },
-                    { 22, 2, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "ACC", 8 },
-                    { 23, 2, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "ACC", 8 },
-                    { 24, 2, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "ACC", 8 },
-                    { 25, 3, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 299.90m, "Sneakers001", 9 },
-                    { 26, 3, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 359.90m, "Sneakers002", 9 },
-                    { 27, 3, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 59.90m, "Sneakers003", 9 },
-                    { 28, 3, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 89.90m, "T-Shirts001", 10 },
-                    { 29, 3, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "T-Shirts002", 10 },
-                    { 30, 3, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "T-Shirts003", 10 },
-                    { 31, 3, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 299.90m, "ACC001", 12 },
-                    { 32, 3, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 59.90m, "ACC002", 12 },
-                    { 33, 3, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 89.90m, "ACC003", 12 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Color",
-                columns: new[] { "ID", "Name", "ProductID" },
-                values: new object[,]
-                {
-                    { 1, "White", 1 },
-                    { 2, "Black", 2 },
-                    { 3, "Blue", 2 }
+                    { 1, 0, 1, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 299.90m, "Sneakers001", 1 },
+                    { 2, 0, 1, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 359.90m, "Sneakers002", 1 },
+                    { 3, 0, 1, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 59.90m, "Sneakers003", 1 },
+                    { 4, 0, 1, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 89.90m, "T-Shirts001", 2 },
+                    { 5, 0, 1, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "T-Shirts002", 2 },
+                    { 6, 0, 1, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "T-Shirts003", 2 },
+                    { 7, 0, 1, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "Pants001", 3 },
+                    { 8, 0, 1, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "Pants002", 3 },
+                    { 9, 0, 1, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "Pants003", 3 },
+                    { 10, 0, 1, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 299.90m, "ACC001", 4 },
+                    { 11, 0, 1, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 59.90m, "ACC002", 4 },
+                    { 12, 0, 1, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 89.90m, "ACC003", 4 },
+                    { 13, 0, 2, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 299.90m, "Sneakers001", 5 },
+                    { 14, 0, 2, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 359.90m, "Sneakers002", 5 },
+                    { 15, 0, 2, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 59.90m, "Sneakers003", 5 },
+                    { 16, 0, 2, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 89.90m, "T-Shirts001", 6 },
+                    { 17, 0, 2, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "T-Shirts002", 6 },
+                    { 18, 0, 2, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "T-Shirts003", 6 },
+                    { 19, 0, 2, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "Pants001", 7 },
+                    { 20, 0, 2, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "Pants002", 7 },
+                    { 21, 0, 2, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "Pants003", 7 },
+                    { 22, 0, 2, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "ACC", 8 },
+                    { 23, 0, 2, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "ACC", 8 },
+                    { 24, 0, 2, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "ACC", 8 },
+                    { 25, 0, 3, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 299.90m, "Sneakers001", 9 },
+                    { 26, 0, 3, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 359.90m, "Sneakers002", 9 },
+                    { 27, 0, 3, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 59.90m, "Sneakers003", 9 },
+                    { 28, 0, 3, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 89.90m, "T-Shirts001", 10 },
+                    { 29, 0, 3, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "T-Shirts002", 10 },
+                    { 30, 0, 3, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 29.90m, "T-Shirts003", 10 },
+                    { 31, 0, 3, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 299.90m, "ACC001", 12 },
+                    { 32, 0, 3, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 59.90m, "ACC002", 12 },
+                    { 33, 0, 3, "Lorem, ipsum dolor sit amet consectetur adipisicing ", 89.90m, "ACC003", 12 }
                 });
 
             migrationBuilder.InsertData(
@@ -664,25 +543,6 @@ namespace MyProject.API.Migrations
                     { 2, 2, 2, 8 }
                 });
 
-            migrationBuilder.InsertData(
-                table: "Payment",
-                columns: new[] { "ID", "Amount", "OrderID", "PaymentDate" },
-                values: new object[,]
-                {
-                    { 1, 29.90m, 1, new DateTime(2024, 1, 2, 17, 29, 14, 967, DateTimeKind.Utc).AddTicks(4639) },
-                    { 2, 39.90m, 2, new DateTime(2024, 1, 1, 17, 29, 14, 967, DateTimeKind.Utc).AddTicks(4646) }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Sizes",
-                columns: new[] { "ID", "ProductID", "SizeName" },
-                values: new object[,]
-                {
-                    { 1, 1, "XS" },
-                    { 2, 2, "S" },
-                    { 3, 3, "M" }
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -729,11 +589,6 @@ namespace MyProject.API.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Color_ProductID",
-                table: "Color",
-                column: "ProductID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_OrderItem_CartID",
                 table: "OrderItem",
                 column: "CartID");
@@ -754,20 +609,9 @@ namespace MyProject.API.Migrations
                 column: "CustomerID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Orders_ShippingAddressID",
-                table: "Orders",
-                column: "ShippingAddressID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Orders_UserID",
                 table: "Orders",
                 column: "UserID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Payment_OrderID",
-                table: "Payment",
-                column: "OrderID",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Product_DepartmentID",
@@ -778,11 +622,6 @@ namespace MyProject.API.Migrations
                 name: "IX_Product_SubCategoryID",
                 table: "Product",
                 column: "SubCategoryID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Sizes_ProductID",
-                table: "Sizes",
-                column: "ProductID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SubCategory_CategoryID",
@@ -809,31 +648,19 @@ namespace MyProject.API.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Color");
-
-            migrationBuilder.DropTable(
                 name: "GalleryImage");
-
-            migrationBuilder.DropTable(
-                name: "LogoImage");
 
             migrationBuilder.DropTable(
                 name: "OrderItem");
 
             migrationBuilder.DropTable(
-                name: "Payment");
-
-            migrationBuilder.DropTable(
-                name: "Sizes");
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "Product");
@@ -843,9 +670,6 @@ namespace MyProject.API.Migrations
 
             migrationBuilder.DropTable(
                 name: "Customer");
-
-            migrationBuilder.DropTable(
-                name: "ShippingAddress");
 
             migrationBuilder.DropTable(
                 name: "Departments");

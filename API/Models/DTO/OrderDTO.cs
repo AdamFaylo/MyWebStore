@@ -9,9 +9,8 @@ namespace MyProject.API.Models.DTO
         public bool IsPaid { get; set; }
         public int CustomerID { get; set; }
         public int CartID { get; set; }
-        public ShippingAddress ShippingAddress { get; set; }
         public int ShippingAddressID { get; set; }
-        public Payment Payment { get; set; }
+  
     }
 }
 

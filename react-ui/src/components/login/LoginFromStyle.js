@@ -11,9 +11,9 @@ export const OverlayContainer = styled.div`
 
 export const FormContainer = styled.div`
   background: white;
-  padding: 48px;
-  border-radius: 10px;
-  border: solid black 0.5px;
+  padding: 38px;
+  border-radius: 2px;
+  border: solid black 0.2px;
   background-color: #f5f5f5;
 `;
 
@@ -23,24 +23,41 @@ export const StyledForm = styled.form`
 `;
 
 export const StyledInput = styled.input`
-    padding: 6px;
-    width: 17rem;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+  padding: 6px;
+  width: 17rem;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 `;
 
-export const StyledButton = styled.button`
+export const StyledButtonRegister = styled.button`
+  width: 8.2rem;
   padding: 10px;
-  width: 100%;
   border: none;
-  border-radius: 4px;
-  background-color: #007bff;
+  border-radius: 0 4px 4px 0;
+  background-color: #c4c0c0;
   color: white;
   cursor: pointer;
   &:hover {
-    background-color: #0056b3;
+    background-color: grey;
   }
+`;
+
+export const StyledButtonSignIn = styled.button`
+  padding: 10px;
+  width: 100%;
+  border: none;
+  border-radius: 4px 0 0 4px;
+  background-color: #4c75a0;
+  color: white;
+  cursor: pointer;
+  &:hover {
+    background-color: #007bff;
+  }
+`;
+
+export const ContainerBtn = styled.div`
+  display: flex;
 `;
 
 export const ErrorMessage = styled.div`

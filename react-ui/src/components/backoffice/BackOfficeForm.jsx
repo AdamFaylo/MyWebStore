@@ -213,11 +213,11 @@ const BackOfficeForm = () => {
     setFeedback(null);
   };
 
-  const categories = departmentTree
-    .find((department) => department.id === product.departmentID)
-    ?.categories;
-  debugger;
-  const subCatrgories = [];
+  // const categories = departmentTree
+  //   .find((department) => department.id === product.departmentID)
+  //   ?.categories;
+  // debugger;
+  // const subCatrgories = [];
 
   return (
     <div inline="true">
@@ -374,7 +374,7 @@ const BackOfficeForm = () => {
 
         <div>
           {/* Selector for Departments */}
-          <select
+          <Form.Select aria-label="Default select example"
             value={product.departmentID}
             onChange={handleDepartmentChange}
           >
@@ -384,10 +384,10 @@ const BackOfficeForm = () => {
                 {department.name}
               </option>
             ))}
-          </select>
+          </Form.Select>
 
           {/* Selector for Categories */}
-          <select value={product.categoryID} onChange={handleCategoryChange}>
+          <Form.Select value={product.categoryID} onChange={handleCategoryChange}>
             <option value="">Select Category</option>
             {departmentTree
               .find((department) => department.id === product.departmentID)
@@ -396,10 +396,10 @@ const BackOfficeForm = () => {
                   {category.name}
                 </option>
               ))}
-          </select>
+          </Form.Select>
 
           {/* Selector for Subcategories */}
-          <select
+          <Form.Select
             value={product.subCategoryID}
             onChange={handleSubCategoryChange}
           >
@@ -414,7 +414,7 @@ const BackOfficeForm = () => {
                   {subCategory.name}
                 </option>
               ))}
-          </select>
+          </Form.Select>
         </div>
 
         {/* Buttons for Submit and Reset */}

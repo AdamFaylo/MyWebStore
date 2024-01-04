@@ -37,15 +37,6 @@ const CartList: React.FC = () => {
     navigate(-1);
   };
 
-  // Uncomment and adjust the handler functions if necessary
-  const handleAddItem = (item: OrderItem) => {
-    dispatch(updateCartWorkaround({ itemId: item.product.id, add: true }));
-  };
-
-  const handleRemoveItem = (item: OrderItem) => {
-    dispatch(updateCartWorkaround({ itemId: item.product.id, add: false }));
-  };
-
   return (
     <div className="cart-container">
       <Button onClick={handleBack}>Back</Button>

@@ -54,10 +54,8 @@ namespace API.Controllers
                                         id = p.ID,
                                         name = p.ProductName,
                                         price = p.Price,
-                                        departmentID = p.DepartmentID,
-                                        color = p.Colors,
-                                        galleryImage = p.GalleryImage,
-                                        size = p.Size,
+                                        departmentID = p.DepartmentID,                                
+                                        galleryImage = p.GalleryImage,            
                                     })
                                 })
                             })
@@ -73,8 +71,6 @@ namespace API.Controllers
                 return StatusCode(500, "Internal server error. Please try again later.");
             }
         }
-
-
 
         [HttpGet("{id:int}")]
         public IActionResult GetByIdDepartment(int id)

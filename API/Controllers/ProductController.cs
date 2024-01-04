@@ -15,10 +15,10 @@ namespace API.Controllers
     {
         private readonly ILogger<ProductController> _logger;
         private readonly IProductRepository _productRepo;
-        private readonly IColorsRepository _colorsRepo;
+   
         private readonly IUserRepository _userRepo;
         private readonly IGalleryImageRepository _galleryImageRepo;
-        private readonly ISizeRepository _sizeRepo;
+    
         private readonly IDepartmentRepository _departmentRepo;
 
 
@@ -27,18 +27,16 @@ namespace API.Controllers
             IProductRepository productRepo,
             IUserRepository userRepo,
             ILogger<ProductController> logger,
-            IColorsRepository colorsRepo,
+         
             IGalleryImageRepository galleryImageRepo,
-            ISizeRepository sizeRepo,
+         
             IDepartmentRepository departmentRepo
         )
         {
             this._userRepo = userRepo;
             this._logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            this._productRepo = productRepo ?? throw new ArgumentNullException(nameof(productRepo));
-            this._colorsRepo = colorsRepo ?? throw new ArgumentNullException(nameof(colorsRepo));
+            this._productRepo = productRepo ?? throw new ArgumentNullException(nameof(productRepo));    
             this._galleryImageRepo = galleryImageRepo ?? throw new ArgumentNullException(nameof(galleryImageRepo));
-            this._sizeRepo = sizeRepo ?? throw new ArgumentNullException(nameof(sizeRepo));
             this._departmentRepo = departmentRepo ?? throw new ArgumentNullException(nameof(departmentRepo));
         }
 
@@ -77,8 +75,6 @@ namespace API.Controllers
                     .Include(d => d.Department)
                     .Include(s => s.SubCategory)
                     .ThenInclude(c => c.Category)
-                    .Include(p => p.Colors)
-                    .Include(p => p.Size)
 
                     .FirstOrDefault();
                 if (product == null)

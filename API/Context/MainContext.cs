@@ -14,17 +14,12 @@ namespace MyProject.API.Context
         }
 
         public DbSet<Cart> Cart { get; set; }
-        public DbSet<LogoImage> LogoImage { get; set; }
         public DbSet<Category> Category { get; set; }
-        public DbSet<Color> Color { get; set; }
         public DbSet<Customer> Customer { get; set; }
         public DbSet<GalleryImage> GalleryImage { get; set; }
         public DbSet<OrderItem> OrderItem { get; set; }
         public DbSet<Order> Orders { get; set; }
-        public DbSet<Payment> Payment { get; set; }
         public DbSet<Product> Product { get; set; }
-        public DbSet<ShippingAddress> ShippingAddress { get; set; }
-        public DbSet<Size> Sizes { get; set; }
         public DbSet<SubCategory> SubCategory { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<User> User { get; set; }
@@ -61,20 +56,7 @@ namespace MyProject.API.Context
                 );
 
             //Logo
-            modelBuilder.Entity<LogoImage>().HasData(
-             new LogoImage { ID = 1, Logo = "https://i.imgur.com/t4hi8os.png", Alt = "Logo site" }
-                );
-            //Payment
-            modelBuilder.Entity<Payment>().HasData(
-             new Payment { ID = 1, Amount = 29.90m, PaymentDate = DateTime.UtcNow.AddDays(-1), OrderID = 1 },
-             new Payment { ID = 2, Amount = 39.90m, PaymentDate = DateTime.UtcNow.AddDays(-2), OrderID = 2 }
-                );
-            //Sizes 
-            modelBuilder.Entity<Size>().HasData(
-             new Size { ID = 1, SizeName = "XS", ProductID = 1 },
-             new Size { ID = 2, SizeName = "S", ProductID = 2 },
-             new Size { ID = 3, SizeName = "M", ProductID = 3 }
-                );
+ 
             //OrderItem
             modelBuilder.Entity<OrderItem>().HasData(
              new OrderItem { ID = 1, Quantity = 2, ProductID = 1, CartID = 1 },
@@ -142,12 +124,6 @@ namespace MyProject.API.Context
                 .Property(p => p.AddedOn)
                 .HasDefaultValueSql("getDate()");
 
-            // modelBuilder.Entity<Product>()
-            //.HasOne(p => p.Department)
-            //.WithMany() // You can specify the navigation property on Department here if needed
-            //.HasForeignKey(p => p.DepartmentID)
-            //.IsRequired();
-
             //Product 
             modelBuilder.Entity<Product>().HasData(
 
@@ -200,17 +176,6 @@ namespace MyProject.API.Context
              .WithMany(g => g.GalleryImage)
              .HasForeignKey(s => s.ID);
 
-            //Colors 
-            modelBuilder.Entity<Color>().HasData(
-              new Color { ID = 1, Name = "White", ProductID = 1 },
-              new Color { ID = 2, Name = "Black", ProductID = 2 },
-              new Color { ID = 3, Name = "Blue", ProductID = 2 }
-                );
-            //ShippingAddress 
-            modelBuilder.Entity<ShippingAddress>().HasData(
-              new ShippingAddress { ID = 1, Address = "Nahal oz", City = "NewYork", Region = "Center", PostalCode = "51819", Country = "Israel" },
-              new ShippingAddress { ID = 2, Address = "Baryehoda", City = "Hollywood", Region = "Center", PostalCode = "51819", Country = "Israel" }
-             );
 
             //GalleryImage 
             modelBuilder.Entity<GalleryImage>().HasData(

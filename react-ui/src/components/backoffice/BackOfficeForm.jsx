@@ -26,16 +26,14 @@ const BackOfficeForm = () => {
     subCategoryID: 0,
   });
 
-
-
   const handleCategoryChange = (e) => {
-    const newCategoryId =  Number.parseInt(e.target.value);
+    const newCategoryId = Number.parseInt(e.target.value);
     setProduct({ ...product, categoryID: newCategoryId, subCategoryID: 0 });
   };
 
   // פונקציה לטיפול בשינוי בבחירת תת-הקטגוריה
   const handleSubCategoryChange = (e) => {
-    const newSubCategoryId =Number.parseInt(e.target.value);
+    const newSubCategoryId = Number.parseInt(e.target.value);
     setProduct({ ...product, subCategoryID: newSubCategoryId });
   };
 
@@ -68,8 +66,8 @@ const BackOfficeForm = () => {
             galleryImageAlt: galleryImage[0] ? galleryImage[0].alt : "",
             galleryImageName: galleryImage[0] ? galleryImage[0].name : "",
             departmentID: departmentID,
-            categoryID : categoryID,
-            subCategoryID : subCategoryID,
+            categoryID: categoryID,
+            subCategoryID: subCategoryID,
           });
         })
         .catch((error) => {
@@ -92,7 +90,6 @@ const BackOfficeForm = () => {
       subCategoryID: 0,
     });
   };
-
 
   const validateForm = () => {
     const errors = {
@@ -372,9 +369,16 @@ const BackOfficeForm = () => {
           />
         </Form.Group>
 
-        <div>
+        <div
+          style={{
+            display: "flex",
+            paddingTop: "1.5rem",
+            paddingBottom: "1.5rem",
+          }}
+        >
           {/* Selector for Departments */}
-          <Form.Select aria-label="Default select example"
+          <Form.Select
+            aria-label="Default select example"
             value={product.departmentID}
             onChange={handleDepartmentChange}
           >
@@ -387,7 +391,10 @@ const BackOfficeForm = () => {
           </Form.Select>
 
           {/* Selector for Categories */}
-          <Form.Select value={product.categoryID} onChange={handleCategoryChange}>
+          <Form.Select
+            value={product.categoryID}
+            onChange={handleCategoryChange}
+          >
             <option value="">Select Category</option>
             {departmentTree
               .find((department) => department.id === product.departmentID)
@@ -418,12 +425,14 @@ const BackOfficeForm = () => {
         </div>
 
         {/* Buttons for Submit and Reset */}
-        <Button variant="primary" type="submit" disabled={loading}>
-          {isEditMode ? "Update" : "Save"}
-        </Button>
-        <Button variant="secondary" type="button" onClick={handleReset}>
-          Cancel
-        </Button>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Button variant="primary" type="submit" disabled={loading}>
+            {isEditMode ? "Update" : "Save"}
+          </Button>
+          <Button variant="secondary" type="button" onClick={handleReset}>
+            Cancel
+          </Button>
+        </div>
       </Form>
       {feedback && (
         <div className={`alert alert-${feedback.type}`}>{feedback.message}</div>

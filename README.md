@@ -83,9 +83,10 @@ The project was created as a project task for [ReactJS]
 <a name="how-it-works"/>
 
 ### Logged-In Admin:
-Permission exists for Backoffice,\
-Ability to dive into all products while being able to: add, extend and delete,\
-Another option is to make a purchase on the website.
+Permission exists for Backoffice,
+Ability to dive into all products while being able to: add, expand and delete,
+Another option is to add to the shopping cart.
+
 
   ``` 
   Admin@gmail.com
@@ -94,10 +95,9 @@ Another option is to make a purchase on the website.
   12345678
   ```
   
-
 ### Logged-In Users:
 limited abilities,\
-User action You can choose and the product is sent to the shopping cart,\
+User action You can choose and the product is sent to the shopping cart.
 
   ``` 
   User@gmail.com
@@ -106,9 +106,19 @@ User action You can choose and the product is sent to the shopping cart,\
   87654321
   ```
 
-
 ### It is very important to note:
 - there is an ability to send the product to the shopping cart only with logged in or registered.
+
+### New client:
+Create a new customer by clicking on REGISTER.
+
+
+### shopping basket:
+You can dive into the basket, add an existing product and delete the product permanently.
+
+### BackOffice:
+Option [New Product], [Delete Product], [Edit Product].
+
 
 
 ## 🔨 Features
@@ -135,16 +145,18 @@ User action You can choose and the product is sent to the shopping cart,\
 <img width="952" alt="image" src="https://github.com/AdamFaylo/MyWebStore/assets/112155899/51d272bf-8cdc-46cf-87fe-8af4e0cbe206">
 <img width="950" alt="image" src="https://github.com/AdamFaylo/MyWebStore/assets/112155899/5e1ad033-9d6c-4705-8da6-42f0347aaa7b">
 <img width="954" alt="image" src="https://github.com/AdamFaylo/MyWebStore/assets/112155899/55be4dcb-310c-43c7-85d7-8d6ea397d0d8">
+<img width="950" alt="image" src="https://github.com/AdamFaylo/MyWebStore/assets/112155899/1aab715a-94a5-4cb2-9d42-8883db6e34b2">
+
 
 
 ## ⚙️ Setup
 <a name="setup"/>
 
 3. **Run Backend:**
-   1. Open the solution in Visual Studio or your preferred IDE.
+   1. Open the solution in Visual Studio or your favorite IDE.
    2. Build and run the solution.
-   3. Now when the database was created with your connection string we will need to manually apply the migrations.
-   4. Open a terminal in the *api-server* folder and run the following command:
+   3. Now that the database is created with your connection string, we'll need to manually apply the migrations.
+   4. Open a terminal in the *api* folder and run the following command:
     ```Powershell
     dotnet ef database update
     ```
@@ -152,9 +164,11 @@ User action You can choose and the product is sent to the shopping cart,\
 
   
 ### Frontend     
-1. **Open a terminal in the *react-client* folder and run the following commands:**
+1. **Open a terminal in the *react-ui* folder and run the following commands:**
    ```Powershell
    npm i
+   ```
+   ```
    npm start
    ```
 

@@ -83,9 +83,9 @@ The project was created as a project task for [ReactJS]
 <a name="how-it-works"/>
 
 ### Logged-In Admin:
-Permission exists for Backoffice,\
-Ability to dive into all products while being able to: add, extend and delete,\
-Another option is to make a purchase on the website.
+Permission exists for Backoffice,
+Ability to dive into all products while being able to: add, expand and delete,
+Another option is to add to the shopping cart.
 
   ``` 
   Admin@gmail.com
@@ -97,7 +97,7 @@ Another option is to make a purchase on the website.
 
 ### Logged-In Users:
 limited abilities,\
-User action You can choose and the product is sent to the shopping cart,\
+User action You can choose and the product is sent to the shopping cart.
 
   ``` 
   User@gmail.com
@@ -141,10 +141,10 @@ User action You can choose and the product is sent to the shopping cart,\
 <a name="setup"/>
 
 3. **Run Backend:**
-   1. Open the solution in Visual Studio or your preferred IDE.
+   1. Open the solution in Visual Studio or your favorite IDE.
    2. Build and run the solution.
-   3. Now when the database was created with your connection string we will need to manually apply the migrations.
-   4. Open a terminal in the *api-server* folder and run the following command:
+   3. Now that the database is created with your connection string, we'll need to manually apply the migrations.
+   4. Open a terminal in the *api* folder and run the following command:
     ```Powershell
     dotnet ef database update
     ```
@@ -152,7 +152,7 @@ User action You can choose and the product is sent to the shopping cart,\
 
   
 ### Frontend     
-1. **Open a terminal in the *react-client* folder and run the following commands:**
+1. **Open a terminal in the *react-ui* folder and run the following commands:**
    ```Powershell
    npm i
    npm start

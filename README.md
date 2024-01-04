@@ -87,6 +87,7 @@ Permission exists for Backoffice,
 Ability to dive into all products while being able to: add, expand and delete,
 Another option is to add to the shopping cart.
 
+
   ``` 
   Admin@gmail.com
   ```

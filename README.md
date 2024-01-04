@@ -155,6 +155,8 @@ User action You can choose and the product is sent to the shopping cart.
 1. **Open a terminal in the *react-ui* folder and run the following commands:**
    ```Powershell
    npm i
+   ```
+   ```
    npm start
    ```
 

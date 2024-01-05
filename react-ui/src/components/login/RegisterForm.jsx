@@ -49,7 +49,7 @@ function RegistrationForm() {
     <OverlayContainer>
       <FormContainer>
         <h2>Register</h2>
-        <Form inline={true} onSubmit={handleSubmit} style={{ width: " 27rem" }}>
+        <Form onSubmit={handleSubmit} style={{ width: " 27rem" }}>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>First name:</Form.Label>
             <Form.Control

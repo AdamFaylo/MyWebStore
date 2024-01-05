@@ -60,9 +60,9 @@ function LoginDashboard() {
   };
 
   return (
-    <OverlayContainer inlist={true}>
+    <OverlayContainer inlist="someStringValue">
       <FormContainer>
-        <StyledForm onSubmit={handleSubmit}>
+        <StyledForm  onSubmit={handleSubmit}>
           <h2>Login</h2>
           <StyledInput
             type="email"

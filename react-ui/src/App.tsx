@@ -14,8 +14,8 @@ import { me } from './features/user-slice';
 
 import ErrorPage from './pages/ErrorPage';
 import LoginControle from './components/login/LoginControle';
-import ProtectedAdmin from './components/ProtectedAdmin';
-import AlreadyLogged from './components/AlreadyLogged';
+import ProtectedAdmin from './components/login/ProtectedAdmin';
+import AlreadyLogged from './components/login/AlreadyLogged';
 import Cart from './pages/Cart';
 import { RootState } from './store/store';
 import RegistrationForm from './components/login/RegisterForm';

@@ -5,6 +5,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { FormContainer, OverlayContainer } from "./LoginFromStyle";
 import Swal from "sweetalert2";
+import Validation from "./register/Validation";
 
 function RegistrationForm() {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ function RegistrationForm() {
     password: "",
   });
 
+  const [errors, setErrors] = useState({});
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -23,25 +25,25 @@ function RegistrationForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      await dispatch(registerUser(formData));
+    const validationErrors = Validation(formData);
+    setErrors(validationErrors);
 
-      Swal.fire({
-        title: "Registration successful!",
-        icon: "success",
-        confirmButtonText: "Cool",
-      }).then((result) => {
-        result.isConfirmed && window.location.reload();
-      });
-    } catch (error) {
-      Swal.error({
-        icon: "error",
-        title: "Oops... There was an error!",
-        text: "Something went wrong!",
-      }).then((result) => {
-        result.isConfirmed && window.location.reload();
-      });
-      console.error("Registration error:", error.message);
+    if (Object.keys(validationErrors).length === 0) {
+      try {
+        await dispatch(registerUser(formData));
+        Swal.fire({
+          title: "Registration successful!",
+          icon: "success",
+          confirmButtonText: "Cool",
+        });
+      } catch (error) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops... There was an error!",
+          text: "Something went wrong!",
+        });
+        console.error("Registration error:", error.message);
+      }
     }
   };
 
@@ -50,47 +52,59 @@ function RegistrationForm() {
       <FormContainer>
         <h2>Register</h2>
         <Form onSubmit={handleSubmit} style={{ width: " 27rem" }}>
-          <Form.Group controlId="formBasicEmail">
+          <Form.Group controlId="formFirstName">
             <Form.Label>First name:</Form.Label>
             <Form.Control
               type="text"
               name="firstname" // Removed id="firstname"
               value={formData.firstname}
               onChange={handleChange}
-              required
+              isInvalid={!!errors.firstname}
             />
+            <Form.Control.Feedback type="invalid">
+              {errors.firstname}
+            </Form.Control.Feedback>
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Group className="mb-3" controlId="formLastName">
             <Form.Label>Last name:</Form.Label>
             <Form.Control
               type="text"
               name="lastname" // Removed id="lastname"
               value={formData.lastname}
               onChange={handleChange}
-              required
+              isInvalid={!!errors.lastname}
             />
+            <Form.Control.Feedback type="invalid">
+              {errors.lastname}
+            </Form.Control.Feedback>
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Group className="mb-3" controlId="formUserName">
             <Form.Label>User name:</Form.Label>
             <Form.Control
               type="text"
               name="username" // Removed id="username"
               value={formData.username}
               onChange={handleChange}
-              required
+              isInvalid={!!errors.username}
             />
+            <Form.Control.Feedback type="invalid">
+              {errors.username}
+            </Form.Control.Feedback>
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Group className="mb-3" controlId="formEmail">
             <Form.Label>Email address:</Form.Label>
             <Form.Control
               type="email"
               name="emailaddress" // Removed id="emailaddress"
               value={formData.emailaddress}
               onChange={handleChange}
-              required
+              isInvalid={!!errors.emailaddress}
             />
+            <Form.Control.Feedback type="invalid">
+              {errors.emailaddress}
+            </Form.Control.Feedback>
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Group className="mb-3" controlId="formPassword">
             <Form.Label>Password:</Form.Label>
             <Form.Control
               type="password"
@@ -98,8 +112,11 @@ function RegistrationForm() {
               value={formData.password}
               onChange={handleChange}
               autoComplete="current-password"
-              required
+              isInvalid={!!errors.password}
             />
+            <Form.Control.Feedback type="invalid">
+              {errors.password}
+            </Form.Control.Feedback>
           </Form.Group>
           {/* Add more form fields for user registration */}
           <Button variant="danger" type="submit" style={{ width: "27rem" }}>

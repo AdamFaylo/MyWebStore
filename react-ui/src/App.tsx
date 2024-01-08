@@ -18,7 +18,7 @@ import ProtectedAdmin from './components/login/ProtectedAdmin';
 import AlreadyLogged from './components/login/AlreadyLogged';
 import Cart from './pages/Cart';
 import { RootState } from './store/store';
-import RegistrationForm from './components/login/RegisterForm';
+import RegistrationForm from './components/login/register/RegisterForm';
 import ProductDetails from './pages/ProductDetails';
 import NavBarTop from './components/nav/NavBarTop';
 import Home from './pages/Home';

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { registerUser } from "../../features/auth-slice"; // Import your registerUser action
+import { registerUser } from "../../../features/auth-slice"; // Import your registerUser action
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { FormContainer, OverlayContainer } from "./LoginFromStyle";
+import { FormContainer, OverlayContainer } from "../LoginFromStyle";
 import Swal from "sweetalert2";
-import Validation from "./register/Validation";
+import ValidationRegister from "./ValidationRegister";
 
 function RegistrationForm() {
   const dispatch = useDispatch();
@@ -18,6 +18,7 @@ function RegistrationForm() {
   });
 
   const [errors, setErrors] = useState({});
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -25,7 +26,7 @@ function RegistrationForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const validationErrors = Validation(formData);
+    const validationErrors = ValidationRegister(formData);
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
@@ -60,6 +61,7 @@ function RegistrationForm() {
               value={formData.firstname}
               onChange={handleChange}
               isInvalid={!!errors.firstname}
+              autoComplete="firstname"
             />
             <Form.Control.Feedback type="invalid">
               {errors.firstname}
@@ -73,6 +75,7 @@ function RegistrationForm() {
               value={formData.lastname}
               onChange={handleChange}
               isInvalid={!!errors.lastname}
+              autoComplete="lastname"
             />
             <Form.Control.Feedback type="invalid">
               {errors.lastname}
@@ -86,6 +89,7 @@ function RegistrationForm() {
               value={formData.username}
               onChange={handleChange}
               isInvalid={!!errors.username}
+              autoComplete="username"
             />
             <Form.Control.Feedback type="invalid">
               {errors.username}

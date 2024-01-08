@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { registerUser } from "../../../features/auth-slice"; // Import your registerUser action
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { FormContainer, OverlayContainer } from "../LoginFromStyle";
+import { FormContainer, OverlayContainer } from "../login/LoginFromStyle";
 import Swal from "sweetalert2";
 import ValidationRegister from "./ValidationRegister";
 

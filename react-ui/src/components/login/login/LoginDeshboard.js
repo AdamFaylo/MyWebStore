@@ -74,7 +74,9 @@ function LoginDashboard() {
             value={formData.emailaddress}
             isInvalid={!!errors.emailaddress}
           />
-          {errors.emailaddress && <ErrorMessage>{errors.emailaddress}</ErrorMessage>}
+          {errors.emailaddress && (
+            <ErrorMessage>{errors.emailaddress}</ErrorMessage>
+          )}
           <StyledInput
             type="password"
             name="password" // Added name attribute

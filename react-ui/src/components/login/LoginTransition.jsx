@@ -25,6 +25,7 @@ export default function LoginTransition() {
         dispatch(setUser(user));
 
         const isAdmin = user.type === 999;
+        
         if (isAdmin) {
             Swal.fire({
                 position: "top-end",

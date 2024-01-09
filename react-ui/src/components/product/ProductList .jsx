@@ -50,8 +50,6 @@ const ProductList = () => {
           items
             .map((item) => <ProductItem key={item.id} data={item} />)}
       </div>
-      {/* Add the Pagination component here */}
-  
     </div>
   );
 };

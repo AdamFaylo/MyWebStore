@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import api from "../../utils/api";
-import departmentsSlice from "../../features/departments-slice";
 import { useSelector } from "react-redux";
 
 const BackOfficeForm = () => {

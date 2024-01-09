@@ -5,26 +5,7 @@ import Swal from "sweetalert2";
 // API URL
 const productURL = "https://localhost:7182/api/product";
 
-// // Async thunk for fetching paginated data
-export const fetchPaginationData = createAsyncThunk(
-  "data/fetchPaginationData",
-  async ({ page = 2, limit = 10 }, { rejectWithValue }) => {
-    try {
-      const response = await axios.get(
-        `${productURL}?page=${page}&limit=${limit}`
-      );
 
-      return response.data;
-    } catch (error) {
-      Swal.fire({
-        icon: "error",
-        title: "Failed to fetch products",
-        text: error.message,
-      });
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
 
 // Async thunk for fetching all data
 export const fetchData = createAsyncThunk(
@@ -32,7 +13,6 @@ export const fetchData = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get(productURL);
-     
       return response.data;
     } catch (error) {
       Swal.fire({
@@ -140,23 +120,10 @@ const dataSlice = createSlice({
       })
       .addCase(sortProductByPrice.fulfilled, (state, action) => {
         state.searchResults = action.payload;
-      })
-      .addCase(fetchPaginationData.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(fetchPaginationData.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.data = action.payload.data;
-        state.pagination.currentPage = action.payload.currentPage;
-        state.pagination.totalPages = action.payload.totalPages;
-      })
-      .addCase(fetchPaginationData.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.payload ?? "Something went wrong";
       });
   },
 });
 
 // Exporting the reducer and actions
 export default dataSlice.reducer;
-export const { dataFilter, setCurrentPage, setTotalPages } = dataSlice.actions;
+export const { dataFilter } = dataSlice.actions;

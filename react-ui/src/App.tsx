@@ -1,8 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
-import LoginDeshboard from './components/login/login/LoginDeshboard';
 import About from './pages/About';
-import Protected from './pages/Protected';
 import BackOffice from './pages/BackOffice';
 import ProductList from './components/backoffice/BackOfficeList';
 import BackOfficeForm from './components/backoffice/BackOfficeForm';

@@ -31,7 +31,6 @@ const BackOfficeForm = () => {
     setProduct({ ...product, categoryID: newCategoryId, subCategoryID: 0 });
   };
 
-  // פונקציה לטיפול בשינוי בבחירת תת-הקטגוריה
   const handleSubCategoryChange = (e) => {
     const newSubCategoryId = Number.parseInt(e.target.value);
     setProduct({ ...product, subCategoryID: newSubCategoryId });

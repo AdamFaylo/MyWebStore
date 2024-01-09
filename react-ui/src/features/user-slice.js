@@ -17,7 +17,6 @@ export const updateCart = createAsyncThunk(
   async ({ itemId, add }, thunkAPI) => {
     const updateURL = "https://localhost:7182/api/Cart/update";
     let { user } = thunkAPI.getState();
-    console.log(user);
     let itemQuantity =
       user.user.cart.orderItems.find((item) => item.product.id === itemId)
         ?.quantity ?? 0;

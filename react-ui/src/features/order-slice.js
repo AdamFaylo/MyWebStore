@@ -7,7 +7,6 @@ const API_ENDPOINT = "https://localhost:7182/api/OrderItem";
 export const fetchOrders = createAsyncThunk("orders/fetchOrders", async () => {
   try {
     const response = await axios.get(API_ENDPOINT);
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error("Error fetching orders:", error);

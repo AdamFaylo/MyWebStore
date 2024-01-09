@@ -24,9 +24,16 @@ const ProductDetails = () => {
   }
 
   return (
-    <div className="product-details-container">
+    <div
+      className="product-details-container"
+      style={{ position: "relative", top: "4rem" }}
+    >
       <h3>Details product</h3>
-      <button className="btn btn-primary" onClick={handleBack}>
+      <button
+        className="btn btn-primary"
+        style={{ width: "12rem", margin: "1rem" }}
+        onClick={handleBack}
+      >
         Back
       </button>
       <div className="product-details-content">

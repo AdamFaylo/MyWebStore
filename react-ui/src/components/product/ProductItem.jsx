@@ -41,7 +41,6 @@ const ProductItem = ({ data }) => {
     e.stopPropagation();
     dispatch(updateCart({ itemId: data.id, add: false }));
   };
-  console.log(data);
 
   return (
     <>

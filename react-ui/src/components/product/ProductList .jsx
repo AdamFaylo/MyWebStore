@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { useMemo } from "react";
 import SortPriceComponent from "../sort/SortPriceComponent";
 
+
 const ProductList = () => {
   const { gender, category, subcategory } = useParams();
   const data = useSelector((state) => state.data.searchResults);
@@ -50,7 +51,7 @@ const ProductList = () => {
             .map((item) => <ProductItem key={item.id} data={item} />)}
       </div>
       {/* Add the Pagination component here */}
-   
+  
     </div>
   );
 };

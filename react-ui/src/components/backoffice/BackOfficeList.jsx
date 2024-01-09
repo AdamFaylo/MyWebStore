@@ -30,7 +30,7 @@ const BackOfficeList = () => {
         <FaPlus /> Add new product
       </Button>
       <br />
-      <Table striped bordered>
+      <Table striped bordered style={{position:"relative",top:"1rem"}}>
         <thead>
           <tr>
             <th>ID</th>
